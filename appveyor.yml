@@ -10,7 +10,7 @@ nuget:
   account_feed: true
   project_feed: true
 
-platform: Any CPU
+platform: Mixed
 
 init:
 
