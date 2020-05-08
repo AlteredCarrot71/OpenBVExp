@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Tao.OpenGl;
@@ -27,7 +28,7 @@ namespace OpenBve {
 			internal TextureLoadMode LoadMode;
 			internal TextureWrapMode WrapModeX;
 			internal TextureWrapMode WrapModeY;
-			internal World.ColorRGB TransparentColor;
+			internal RGB TransparentColor;
 			internal byte TransparentColorUsed;
 			internal TextureTransparencyMode Transparency;
 			internal int ClipLeft;
@@ -191,12 +192,12 @@ namespace OpenBve {
 
 		// register texture
 		internal static int RegisterTexture(string FileName, TextureWrapMode WrapModeX, TextureWrapMode WrapModeY, bool DontAllowUnload) {
-			return RegisterTexture(FileName, new World.ColorRGB(0, 0, 0), 0, TextureLoadMode.Normal, WrapModeX, WrapModeY, DontAllowUnload, 0, 0, 0, 0);
+			return RegisterTexture(FileName, new RGB(0, 0, 0), 0, TextureLoadMode.Normal, WrapModeX, WrapModeY, DontAllowUnload, 0, 0, 0, 0);
 		}
-		internal static int RegisterTexture(string FileName, World.ColorRGB TransparentColor, byte TransparentColorUsed, TextureWrapMode WrapModeX, TextureWrapMode WrapModeY, bool DontAllowUnload) {
+		internal static int RegisterTexture(string FileName, RGB TransparentColor, byte TransparentColorUsed, TextureWrapMode WrapModeX, TextureWrapMode WrapModeY, bool DontAllowUnload) {
 			return RegisterTexture(FileName, TransparentColor, TransparentColorUsed, TextureLoadMode.Normal, WrapModeX, WrapModeY, DontAllowUnload, 0, 0, 0, 0);
 		}
-		internal static int RegisterTexture(string FileName, World.ColorRGB TransparentColor, byte TransparentColorUsed, TextureLoadMode LoadMode, TextureWrapMode WrapModeX, TextureWrapMode WrapModeY, bool DontAllowUnload, int ClipLeft, int ClipTop, int ClipWidth, int ClipHeight) {
+		internal static int RegisterTexture(string FileName, RGB TransparentColor, byte TransparentColorUsed, TextureLoadMode LoadMode, TextureWrapMode WrapModeX, TextureWrapMode WrapModeY, bool DontAllowUnload, int ClipLeft, int ClipTop, int ClipWidth, int ClipHeight) {
 			int i = FindTexture(FileName, TransparentColor, TransparentColorUsed, LoadMode, WrapModeX, WrapModeY, ClipLeft, ClipTop, ClipWidth, ClipHeight);
 			if (i >= 0) {
 				return i;
@@ -245,13 +246,13 @@ namespace OpenBve {
 			Textures[i].Queried = false;
 			Textures[i].OpenGlTextureIndex = a[0];
 			Textures[i].Transparency = TextureTransparencyMode.None;
-			Textures[i].TransparentColor = new World.ColorRGB(0, 0, 0);
+			Textures[i].TransparentColor = new RGB(0, 0, 0);
 			Textures[i].TransparentColorUsed = 0;
 			Textures[i].FileName = null;
 			Textures[i].Loaded = true;
 			Textures[i].DontAllowUnload = true;
 			if (Alpha) {
-				LoadTextureRGBAforData(Bitmap, new World.ColorRGB(0, 0, 0), 0, i);
+				LoadTextureRGBAforData(Bitmap, new RGB(0, 0, 0), 0, i);
 				LoadTextureRGBAforOpenGl(i);
 			} else {
 				LoadTextureRGBforData(Bitmap, i);
@@ -274,7 +275,7 @@ namespace OpenBve {
 		}
 
 		// find texture
-		private static int FindTexture(string FileName, World.ColorRGB TransparentColor, byte TransparentColorUsed, TextureLoadMode LoadMode, TextureWrapMode WrapModeX, TextureWrapMode WrapModeY, int ClipLeft, int ClipTop, int ClipWidth, int ClipHeight) {
+		private static int FindTexture(string FileName, RGB TransparentColor, byte TransparentColorUsed, TextureLoadMode LoadMode, TextureWrapMode WrapModeX, TextureWrapMode WrapModeY, int ClipLeft, int ClipTop, int ClipWidth, int ClipHeight) {
 			for (int i = 1; i < Textures.Length; i++) {
 				if (Textures[i] != null && Textures[i].FileName != null) {
 					if (string.Compare(Textures[i].FileName, FileName, StringComparison.OrdinalIgnoreCase) == 0) {
@@ -402,7 +403,7 @@ namespace OpenBve {
 		}
 
 		// load texture rgba
-		private static void LoadTextureRGBAforData(Bitmap Bitmap, World.ColorRGB TransparentColor, byte TransparentColorUsed, int TextureIndex) {
+		private static void LoadTextureRGBAforData(Bitmap Bitmap, RGB TransparentColor, byte TransparentColorUsed, int TextureIndex) {
 			try {
 				// load bytes
 				int Width, Height, Stride; byte[] Data;

@@ -1,6 +1,7 @@
 ﻿namespace Common.Colors
 {
-    public class RGBA
+	/// <summary>Represents an RGBA color with 8-bit precision per channel.</summary>
+	public class RGBA
     {
 		public byte R { get; set; }
 		public byte G { get; set; }

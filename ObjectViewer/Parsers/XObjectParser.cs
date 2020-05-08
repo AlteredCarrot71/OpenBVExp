@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using System.IO;
 using System.IO.Compression;
 
@@ -1021,9 +1022,9 @@ namespace OpenBve {
 
 		// structures
 		private struct Material {
-			internal World.ColorRGBA faceColor;
-			internal World.ColorRGB specularColor;
-			internal World.ColorRGB emissiveColor;
+			internal RGBA faceColor;
+			internal RGB specularColor;
+			internal RGB emissiveColor;
 			internal string TextureFilename;
 		}
 
@@ -1200,9 +1201,9 @@ namespace OpenBve {
 											int mn = Materials.Length;
 											Array.Resize<Material>(ref Materials, mn + nMaterials);
 											for (int k = 0; k < nMaterials; k++) {
-												Materials[mn + k].faceColor = new World.ColorRGBA(255, 255, 255, 255);
-												Materials[mn + k].specularColor = new World.ColorRGB(0, 0, 0);
-												Materials[mn + k].emissiveColor = new World.ColorRGB(0, 0, 0);
+												Materials[mn + k].faceColor = new RGBA(255, 255, 255, 255);
+												Materials[mn + k].specularColor = new RGB(0, 0, 0);
+												Materials[mn + k].emissiveColor = new RGB(0, 0, 0);
 												Materials[mn + k].TextureFilename = null;
 											}
 											int MaterialIndex = mn;
@@ -1276,7 +1277,7 @@ namespace OpenBve {
 														Interface.AddMessage(Interface.MessageType.Error, false, "alpha is expected to be in the range from 0.0 to 1.0 in faceColor in Material in MeshMaterialList in Mesh in x object file " + FileName);
 														alpha = alpha < 0.5 ? 0.0 : 1.0;
 													}
-													Materials[MaterialIndex].faceColor = new World.ColorRGBA((byte)Math.Round(255.0 * red), (byte)Math.Round(255.0 * green), (byte)Math.Round(255.0 * blue), (byte)Math.Round(255.0 * alpha));
+													Materials[MaterialIndex].faceColor = new RGBA((byte)Math.Round(255.0 * red), (byte)Math.Round(255.0 * green), (byte)Math.Round(255.0 * blue), (byte)Math.Round(255.0 * alpha));
 													// collect specular color
 													if (specularColor.Name != "ColorRGB") {
 														Interface.AddMessage(Interface.MessageType.Error, false, "specularColor is expected to be a ColorRGB in Material in MeshMaterialList in Mesh in x object file " + FileName);
@@ -1309,7 +1310,7 @@ namespace OpenBve {
 														Interface.AddMessage(Interface.MessageType.Error, false, "blue is expected to be in the range from 0.0 to 1.0 in specularColor in Material in MeshMaterialList in Mesh in x object file " + FileName);
 														blue = blue < 0.5 ? 0.0 : 1.0;
 													}
-													Materials[MaterialIndex].specularColor = new World.ColorRGB((byte)Math.Round(255.0 * red), (byte)Math.Round(255.0 * green), (byte)Math.Round(255.0 * blue));
+													Materials[MaterialIndex].specularColor = new RGB((byte)Math.Round(255.0 * red), (byte)Math.Round(255.0 * green), (byte)Math.Round(255.0 * blue));
 													// collect emissive color
 													if (emissiveColor.Name != "ColorRGB") {
 														Interface.AddMessage(Interface.MessageType.Error, false, "emissiveColor is expected to be a ColorRGBA in Material in MeshMaterialList in Mesh in x object file " + FileName);
@@ -1342,7 +1343,7 @@ namespace OpenBve {
 														Interface.AddMessage(Interface.MessageType.Error, false, "blue is expected to be in the range from 0.0 to 1.0 in emissiveColor in Material in MeshMaterialList in Mesh in x object file " + FileName);
 														blue = blue < 0.5 ? 0.0 : 1.0;
 													}
-													Materials[MaterialIndex].emissiveColor = new World.ColorRGB((byte)Math.Round(255.0 * red), (byte)Math.Round(255.0 * green), (byte)Math.Round(255.0 * blue));
+													Materials[MaterialIndex].emissiveColor = new RGB((byte)Math.Round(255.0 * red), (byte)Math.Round(255.0 * green), (byte)Math.Round(255.0 * blue));
 													// collect additional templates
 													for (int l = 4; l < h.Data.Length; l++) {
 														Structure e = h.Data[l] as Structure;
@@ -1544,9 +1545,9 @@ namespace OpenBve {
 							// default material
 							if (Materials.Length == 0) {
 								Materials = new Material[1];
-								Materials[0].faceColor = new World.ColorRGBA(255, 255, 255, 255);
-								Materials[0].emissiveColor = new World.ColorRGB(0, 0, 0);
-								Materials[0].specularColor = new World.ColorRGB(0, 0, 0);
+								Materials[0].faceColor = new RGBA(255, 255, 255, 255);
+								Materials[0].emissiveColor = new RGB(0, 0, 0);
+								Materials[0].specularColor = new RGB(0, 0, 0);
 								Materials[0].TextureFilename = null;
 								for (int j = 0; j < nFaces; j++) {
 									FaceMaterials[j] = 0;
@@ -1586,7 +1587,7 @@ namespace OpenBve {
 											}
 										}
 									}
-									int tday = TextureManager.RegisterTexture(Materials[j].TextureFilename, new World.ColorRGB(0, 0, 0), 1, TextureManager.TextureLoadMode.Normal, WrapX, WrapY, LoadMode != ObjectManager.ObjectLoadMode.Normal, 0, 0, 0, 0);
+									int tday = TextureManager.RegisterTexture(Materials[j].TextureFilename, new RGB(0, 0, 0), 1, TextureManager.TextureLoadMode.Normal, WrapX, WrapY, LoadMode != ObjectManager.ObjectLoadMode.Normal, 0, 0, 0, 0);
 									Object.Mesh.Materials[mm + j].DaytimeTextureIndex = tday;
 									transparent = true;
 								} else {
@@ -1595,7 +1596,7 @@ namespace OpenBve {
 								}
 								Object.Mesh.Materials[mm + j].Flags = (byte)((transparent ? World.MeshMaterial.TransparentColorMask : 0) | (emissive ? World.MeshMaterial.EmissiveColorMask : 0));
 								Object.Mesh.Materials[mm + j].Color = Materials[j].faceColor;
-								Object.Mesh.Materials[mm + j].TransparentColor = new World.ColorRGB(0, 0, 0);
+								Object.Mesh.Materials[mm + j].TransparentColor = new RGB(0, 0, 0);
 								Object.Mesh.Materials[mm + j].EmissiveColor = Materials[j].emissiveColor;
 								Object.Mesh.Materials[mm + j].NighttimeTextureIndex = -1;
 								Object.Mesh.Materials[mm + j].BlendMode = World.MeshMaterialBlendMode.Normal;

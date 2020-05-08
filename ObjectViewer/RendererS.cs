@@ -4,7 +4,7 @@
 // ║ This file cannot be used in the openBVE main program.       ║
 // ║ The file from the openBVE main program cannot be used here. ║
 // ╚═════════════════════════════════════════════════════════════╝
-
+using Common.Colors;
 using System;
 using Tao.OpenGl;
 
@@ -73,8 +73,8 @@ namespace OpenBve {
 
 		// options
 		internal static bool OptionLighting = true;
-		internal static World.ColorRGB OptionAmbientColor = new World.ColorRGB(160, 160, 160);
-		internal static World.ColorRGB OptionDiffuseColor = new World.ColorRGB(159, 159, 159);
+		internal static RGB OptionAmbientColor = new RGB(160, 160, 160);
+		internal static RGB OptionDiffuseColor = new RGB(159, 159, 159);
 		internal static World.Vector3Df OptionLightPosition = new World.Vector3Df(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
 		internal static float OptionLightingResultingAmount = 1.0f;
 		internal static bool OptionFauxNighttime = true;
@@ -136,8 +136,8 @@ namespace OpenBve {
 			OverlayListDistance = new double[256];
 			OverlayListCount = 0;
 			OptionLighting = true;
-			OptionAmbientColor = new World.ColorRGB(160, 160, 160);
-			OptionDiffuseColor = new World.ColorRGB(160, 160, 160);
+			OptionAmbientColor = new RGB(160, 160, 160);
+			OptionDiffuseColor = new RGB(160, 160, 160);
 			OptionLightPosition = new World.Vector3Df(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
 			OptionLightingResultingAmount = 1.0f;
 			Gl.glDisable(Gl.GL_FOG); FogEnabled = false;
