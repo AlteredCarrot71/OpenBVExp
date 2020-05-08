@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("RouteViewer")]
 [assembly: AssemblyProduct("RouteViewer")]
-[assembly: AssemblyCopyright("(Public Domain) http://trainsimframework.org/")]
+[assembly: AssemblyCopyright("The openBVE Project")]
 [assembly: ComVisible(true)]
-[assembly: Guid("bd68500e-8db6-4394-8fec-6adcde64c213")]
-[assembly: AssemblyVersion("1.4.3.1")]
-[assembly: AssemblyFileVersion("1.4.3.1")]
+[assembly: Guid("33119601-FEF4-4F3F-89C6-74817D749272")]
+[assembly: AssemblyVersion("1.4.5.0")]
+[assembly: AssemblyFileVersion("1.4.5.0")]

@@ -8,4 +8,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("The openBVE Project")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
-[assembly: AssemblyVersion("0.0.0.0")]
+[assembly: AssemblyVersion("1.4.5.0")]
+[assembly: AssemblyFileVersion("1.4.5.0")]
+[assembly: Guid("D1F42D75-C9C5-4584-9476-76EDCAC41F88")]
