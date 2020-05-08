@@ -32,7 +32,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouteViewer", "RouteViewer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainEditor", "TrainEditor\TrainEditor.csproj", "{912A4369-C2D7-4A23-A3C5-42FED3E950D4}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common", "Common\Common.shproj", "{02B1D9FE-7FCE-461E-B4E7-28030D86FDED}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Common\Common.projitems*{02b1d9fe-7fce-461e-b4e7-28030d86fded}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed = Debug|Mixed
 		Release|Mixed = Release|Mixed
