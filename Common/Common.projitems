@@ -9,5 +9,7 @@
     <Import_RootNamespace>Common</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\RGB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\RGBA.cs" />
   </ItemGroup>
 </Project>
