@@ -1,24 +1,25 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 
 namespace OpenBve {
 	internal static class CsvB3dObjectParser {
 
 		// structures
 		private class Material {
-			internal World.ColorRGBA Color;
-			internal World.ColorRGB EmissiveColor;
+			internal RGBA Color;
+			internal RGB EmissiveColor;
 			internal bool EmissiveColorUsed;
-			internal World.ColorRGB TransparentColor;
+			internal RGB TransparentColor;
 			internal bool TransparentColorUsed;
 			internal string DaytimeTexture;
 			internal string NighttimeTexture;
 			internal World.MeshMaterialBlendMode BlendMode;
 			internal ushort GlowAttenuationData;
 			internal Material() {
-				this.Color = new World.ColorRGBA(255, 255, 255, 255);
-				this.EmissiveColor = new World.ColorRGB(0, 0, 0);
+				this.Color = new RGBA(255, 255, 255, 255);
+				this.EmissiveColor = new RGB(0, 0, 0);
 				this.EmissiveColorUsed = false;
-				this.TransparentColor = new World.ColorRGB(0, 0, 0);
+				this.TransparentColor = new RGB(0, 0, 0);
 				this.TransparentColorUsed = false;
 				this.DaytimeTexture = null;
 				this.NighttimeTexture = null;
@@ -477,7 +478,7 @@ namespace OpenBve {
 								Array.Resize<Material>(ref Builder.Materials, m << 1);
 								for (int j = m; j < Builder.Materials.Length; j++) {
 									Builder.Materials[j] = new Material(Builder.Materials[j - m]);
-									Builder.Materials[j].Color = new World.ColorRGBA((byte)r, (byte)g, (byte)b, (byte)a);
+									Builder.Materials[j].Color = new RGBA((byte)r, (byte)g, (byte)b, (byte)a);
 									Builder.Materials[j].BlendMode = Builder.Materials[0].BlendMode;
 									Builder.Materials[j].GlowAttenuationData = Builder.Materials[0].GlowAttenuationData;
 									Builder.Materials[j].DaytimeTexture = Builder.Materials[0].DaytimeTexture;
@@ -526,7 +527,7 @@ namespace OpenBve {
 								Array.Resize<Material>(ref Builder.Materials, m << 1);
 								for (int j = m; j < Builder.Materials.Length; j++) {
 									Builder.Materials[j] = new Material(Builder.Materials[j - m]);
-									Builder.Materials[j].EmissiveColor = new World.ColorRGB((byte)r, (byte)g, (byte)b);
+									Builder.Materials[j].EmissiveColor = new RGB((byte)r, (byte)g, (byte)b);
 									Builder.Materials[j].EmissiveColorUsed = true;
 									Builder.Materials[j].BlendMode = Builder.Materials[0].BlendMode;
 									Builder.Materials[j].GlowAttenuationData = Builder.Materials[0].GlowAttenuationData;
@@ -573,7 +574,7 @@ namespace OpenBve {
 									b = b < 0 ? 0 : 255;
 								}
 								for (int j = 0; j < Builder.Materials.Length; j++) {
-									Builder.Materials[j].TransparentColor = new World.ColorRGB((byte)r, (byte)g, (byte)b);
+									Builder.Materials[j].TransparentColor = new RGB((byte)r, (byte)g, (byte)b);
 									Builder.Materials[j].TransparentColorUsed = true;
 								}
 							} break;
