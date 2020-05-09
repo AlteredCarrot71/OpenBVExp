@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Common.Geometry;
 using TrainsimApi.Vectors;
 
 namespace CsvB3dDecoder {
@@ -19,7 +19,7 @@ namespace CsvB3dDecoder {
 		internal MeshBuilderVertex(Vector3d position) {
 			this.Position = position;
 			this.Normal = Vector3d.Zero;
-			this.Texture = Vector2d.Zero;
+			this.Texture = Vector2d.Null;
 		}
 		
 		internal MeshBuilderVertex(Vector3d position, Vector3d normal, Vector2d texture) {

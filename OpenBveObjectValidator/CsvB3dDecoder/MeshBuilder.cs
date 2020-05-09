@@ -1,4 +1,5 @@
 ﻿using Common.Colors;
+using Common.Geometry;
 using System;
 using System.Collections.Generic;
 using TrainsimApi.Vectors;
@@ -133,8 +134,8 @@ namespace CsvB3dDecoder
 			for (int i = 0; i < count; i++) {
 				Vector3d positionUpper = new Vector3d(planarDirection.X * upper,  0.5 * height, planarDirection.Z * upper);
 				Vector3d positionLower = new Vector3d(planarDirection.X * lower, -0.5 * height, planarDirection.Z * lower);
-				this.Vertices.Add(new MeshBuilderVertex(positionUpper, slopedDirectionUpper, Vector2d.Zero));
-				this.Vertices.Add(new MeshBuilderVertex(positionLower, slopedDirectionLower, Vector2d.Zero));
+				this.Vertices.Add(new MeshBuilderVertex(positionUpper, slopedDirectionUpper, Vector2d.Null));
+				this.Vertices.Add(new MeshBuilderVertex(positionLower, slopedDirectionLower, Vector2d.Null));
 				planarDirection      = Vector3d.RotateXZ(planarDirection,      rotateVector);
 				slopedDirectionUpper = Vector3d.RotateXZ(slopedDirectionUpper, rotateVector);
 				slopedDirectionLower = Vector3d.RotateXZ(slopedDirectionLower, rotateVector);

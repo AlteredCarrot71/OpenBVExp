@@ -1,21 +1,18 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 using System.Runtime.InteropServices;
 
-namespace TrainsimApi.Vectors {
-
+namespace TrainsimApi.Vectors 
+{
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	public struct Vector2f : IComparable<Vector2f>, IEquatable<Vector2f> {
-		
-		
+	public struct Vector2f : IComparable<Vector2f>, IEquatable<Vector2f> 
+	{
 		// --- members ---
-		
 		public float X;
 		
 		public float Y;
 		
-		
 		// --- constructors ---
-		
 		public Vector2f(float angle) {
 			this.X = (float)Math.Cos(angle);
 			this.Y = (float)Math.Sin(angle);
@@ -26,9 +23,7 @@ namespace TrainsimApi.Vectors {
 			this.Y = y;
 		}
 		
-		
 		// --- readonly fields ---
-		
 		public static readonly Vector2f Zero  = new Vector2f( 0.0f,  0.0f);
 		
 		public static readonly Vector2f Left  = new Vector2f(-1.0f,  0.0f);
@@ -41,9 +36,7 @@ namespace TrainsimApi.Vectors {
 		
 		public static readonly Vector2f One   = new Vector2f( 1.0f,  1.0f);
 
-		
 		// --- operators ---
-		
 		public static Vector2f operator +(Vector2f a, Vector2f b) {
 			return new Vector2f(a.X + b.X, a.Y + b.Y);
 		}
@@ -107,10 +100,18 @@ namespace TrainsimApi.Vectors {
 			if (a.Y != b.Y) return true;
 			return false;
 		}
-		
-		
+
+		public static implicit operator Vector2d(Vector2f vector)
+		{
+			return new Vector2d(vector.X, vector.Y);
+		}
+
+		public static explicit operator Vector2f(Vector2d vector)
+		{
+			return new Vector2f((float)vector.X, (float)vector.Y);
+		}
+
 		// --- static functions (mathematical) ---
-		
 		public static float Abs(Vector2f vector) {
 			return (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
 		}
@@ -133,9 +134,7 @@ namespace TrainsimApi.Vectors {
 			return new Vector2f(-a.Y, a.X);
 		}
 		
-		
 		// --- static functions (geometrical) ---
-		
 		public static Vector2f Normalize(Vector2f vector) {
 			return Vector2f.Sign(vector);
 		}
@@ -150,9 +149,7 @@ namespace TrainsimApi.Vectors {
 			return vector.X * orientation.X + vector.Y * orientation.Y;
 		}
 		
-		
 		// --- static functions (interpolation) ---
-		
 		public static Vector2f Lerp(Vector2f a, Vector2f b, float t) {
 			return (1.0f - t) * a + t * b;
 		}
@@ -164,16 +161,12 @@ namespace TrainsimApi.Vectors {
 			return (1.0f - tx) * p0 + (t3 - 2.0f * t2 + t) * m0 + tx * p1 + (t3 - t2) * m1;
 		}
 		
-		
 		// --- instance functions ---
-		
 		public bool IsZero() {
 			return this.X == 0.0f & this.Y == 0.0;
 		}
 		
-		
 		// --- overrides and interface implementations ---
-		
 		public int CompareTo(Vector2f other) {
 			if (this.X < other.X) return -1;
 			if (this.X > other.X) return  1;
@@ -208,6 +201,5 @@ namespace TrainsimApi.Vectors {
 		public override string ToString() {
 			return '{' + this.X.ToString() + ',' + this.Y.ToString() + '}';
 		}
-		
 	}
 }

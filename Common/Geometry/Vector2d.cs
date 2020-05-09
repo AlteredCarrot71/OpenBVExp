@@ -3,7 +3,7 @@
 namespace Common.Geometry
 {
 	/// <summary>Represents a two-dimensional vector.</summary>
-	public struct Vector2d
+	public struct Vector2d : IComparable<Vector2d>, IEquatable<Vector2d>
 	{
 		// --- members ---
 		/// <summary>The x-coordinate.</summary>
@@ -13,6 +13,14 @@ namespace Common.Geometry
 		public double Y;
 
 		// --- constructors ---
+		/// <summary>Creates a new two-dimensional vector.</summary>
+		/// <param name="angle">The angle of the vector.</param>
+		public Vector2d(double angle)
+		{
+			this.X = Math.Cos(angle);
+			this.Y = Math.Sin(angle);
+		}
+
 		/// <summary>Creates a new two-dimensional vector.</summary>
 		/// <param name="x">The x-coordinate.</param>
 		/// <param name="y">The y-coordinate.</param>
@@ -313,6 +321,18 @@ namespace Common.Geometry
 			return new Vector2d(x, y);
 		}
 
+		/// <summary>Rotates a vector by a specified vector.</summary>
+		/// <param name="vector">The vector.</param>
+		/// <param name="angle">The angle vector.</param>
+		/// <returns>The rotated vector.</returns>
+		public static Vector2d Rotate(Vector2d vector, Vector2d angle)
+		{
+			double x = angle.X * vector.X - angle.Y * vector.Y;
+			double y = angle.Y * vector.X + angle.X * vector.Y;
+			return new Vector2d(x, y);
+
+		}
+
 		/// <summary>Rotates a vector by a specified angle.</summary>
 		/// <param name="vector">The vector.</param>
 		/// <param name="cosineOfAngle">The cosine of the angle.</param>
@@ -363,5 +383,47 @@ namespace Common.Geometry
 
 		/// <summary>Represents a vector pointing down.</summary>
 		public static readonly Vector2d Down = new Vector2d(0.0, 1.0);
+
+		// --- overrides and interface implementations ---
+		public int CompareTo(Vector2d other)
+		{
+			if (this.X < other.X) return -1;
+			if (this.X > other.X) return 1;
+			if (this.Y < other.Y) return -1;
+			if (this.Y > other.Y) return 1;
+			return 0;
+		}
+
+		public bool Equals(Vector2d other)
+		{
+			if (this.X != other.X) return false;
+			if (this.Y != other.Y) return false;
+			return true;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (!(obj is Vector2d)) return false;
+			Vector2d other = (Vector2d)obj;
+			if (this.X != other.X) return false;
+			if (this.Y != other.Y) return false;
+			return true;
+		}
+
+		public override int GetHashCode()
+		{
+			int hashCode = 0;
+			unchecked
+			{
+				hashCode += 1000000007 * X.GetHashCode();
+				hashCode += 1000000009 * Y.GetHashCode();
+			}
+			return hashCode;
+		}
+
+		public override string ToString()
+		{
+			return '{' + this.X.ToString() + ',' + this.Y.ToString() + '}';
+		}
 	}
 }

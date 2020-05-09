@@ -1,31 +1,26 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 
-namespace TrainsimApi.Vectors {
-	public struct Orientation2d : IComparable<Orientation2d>, IEquatable<Orientation2d> {
-		
-		
+namespace TrainsimApi.Vectors 
+{
+	public struct Orientation2d : IComparable<Orientation2d>, IEquatable<Orientation2d> 
+	{
 		// --- members ---
-		
 		public Vector2d X;
 		
 		public Vector2d Y;
 		
-		
 		// --- constructors ---
-		
-		public Orientation2d(Vector2d x, Vector2d y) {
+		public Orientation2d(Vector2d x, Vector2d y) 
+		{
 			this.X = x;
 			this.Y = y;
 		}
 		
-		
 		// --- read-only fields ---
-		
 		public static readonly Orientation2d Default = new Orientation2d(Vector2d.Right, Vector2d.Up);
 		
-		
 		// --- operators ---
-		
 		public static Orientation2d operator +(Orientation2d a, Orientation2d b) {
 			return new Orientation2d(a.X + b.X, a.Y + b.Y);
 		}
@@ -122,15 +117,6 @@ namespace TrainsimApi.Vectors {
 			return false;
 		}
 		
-		public static implicit operator Orientation2d(Orientation2f orientation) {
-			return new Orientation2d(orientation.X, orientation.Y);
-		}
-		
-		public static explicit operator Orientation2f(Orientation2d orientation) {
-			return new Orientation2f((Vector2f)orientation.X, (Vector2f)orientation.Y);
-		}
-		
-		
 		// --- static functions ---
 
 		public static Orientation2d Normalize(Orientation2d orientation) {
@@ -145,18 +131,6 @@ namespace TrainsimApi.Vectors {
 			double xx = (sum.Y + sum.X) / t;
 			double xy = (sum.Y - sum.X) / t;
 			return new Orientation2d(new Vector2d(xx, xy), new Vector2d(-xy, xx));
-		}
-		
-		public static Orientation2d Rotate(Orientation2d orientation, Vector2d angle) {
-			Vector2d x = Vector2d.Rotate(orientation.X, angle);
-			Vector2d y = Vector2d.Cross(x);
-			return new Orientation2d(x, y);
-		}
-		
-		public static Orientation2d Rotate(Orientation2d orientation, Orientation2d relative) {
-			Vector2d x = relative.X.X * orientation.X + relative.Y.X * orientation.Y;
-			Vector2d y = Vector2d.Cross(x);
-			return new Orientation2d(x, y);
 		}
 		
 		public static Orientation2d Nlerp(Orientation2d p0, Orientation2d p1, double t) {
@@ -201,7 +175,5 @@ namespace TrainsimApi.Vectors {
 		public override string ToString() {
 			return '{' + this.X.ToString() + ',' + this.Y.ToString() + '}';
 		}
-
-		
 	}
 }

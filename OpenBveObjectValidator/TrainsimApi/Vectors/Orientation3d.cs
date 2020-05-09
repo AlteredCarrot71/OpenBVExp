@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 
 namespace TrainsimApi.Vectors {
 	public struct Orientation3d : IComparable<Orientation3d>, IEquatable<Orientation3d> {
