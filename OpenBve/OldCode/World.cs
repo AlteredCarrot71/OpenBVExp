@@ -1,4 +1,5 @@
 ﻿using Common.Colors;
+using Common.Geometry;
 using System;
 using OpenBveApi.Math;
 
@@ -7,16 +8,6 @@ namespace OpenBve
 	internal static class World 
 	{
 		// vectors
-		/// <summary>Represents a 2D vector of System.Double coordinates.</summary>
-		/// <remarks>This structure is outdated. Use OpenBveApi.Math.Vector2 instead.</remarks>
-		internal struct Vector2D {
-			internal double X;
-			internal double Y;
-			internal Vector2D(double X, double Y) {
-				this.X = X;
-				this.Y = Y;
-			}
-		}
 		/// <summary>Represents a 2D vector of System.Single coordinates.</summary>
 		internal struct Vector2Df {
 			internal float X;
@@ -62,7 +53,7 @@ namespace OpenBve
 		/// <summary>Returns a normalized vector based on a 2D vector in the XZ plane and an additional Y-coordinate.</summary>
 		/// <param name="Vector">The vector in the XZ-plane. The X and Y components in Vector represent the X- and Z-coordinates, respectively.</param>
 		/// <param name="Y">The Y-coordinate.</param>
-		internal static Vector3 GetVector3(Vector2D Vector, double Y) {
+		internal static Vector3 GetVector3(Vector2d Vector, double Y) {
 			double t = 1.0 / Math.Sqrt(Vector.X * Vector.X + Vector.Y * Vector.Y + Y * Y);
 			return new Vector3(t * Vector.X, t * Y, t * Vector.Y);
 		}
@@ -436,7 +427,7 @@ namespace OpenBve
 		// mouse grab
 		internal static bool MouseGrabEnabled = false;
 		internal static bool MouseGrabIgnoreOnce = false;
-		internal static Vector2D MouseGrabTarget = new Vector2D(0.0, 0.0);
+		internal static Vector2d MouseGrabTarget = new Vector2d(0.0, 0.0);
 		internal static void UpdateMouseGrab(double TimeElapsed) {
 			if (MouseGrabEnabled) {
 				double factor;
@@ -447,7 +438,7 @@ namespace OpenBve
 				}
 				CameraAlignmentDirection.Yaw += factor * MouseGrabTarget.X;
 				CameraAlignmentDirection.Pitch -= factor * MouseGrabTarget.Y;
-				MouseGrabTarget = new Vector2D(0.0, 0.0);
+				MouseGrabTarget = new Vector2d(0.0, 0.0);
 			}
 		}
 		
@@ -579,7 +570,7 @@ namespace OpenBve
 		internal static bool PerformCameraRestrictionTest() {
 			if (World.CameraRestriction == CameraRestrictionMode.On) {
 				Vector3[] p = new Vector3[] { CameraRestrictionBottomLeft, CameraRestrictionTopRight };
-				Vector2D[] r = new Vector2D[2];
+				Vector2d[] r = new Vector2d[2];
 				for (int j = 0; j < 2; j++) {
 					// determine relative world coordinates
 					World.Rotate(ref p[j].X, ref p[j].Y, ref p[j].Z, World.AbsoluteCameraDirection.X, World.AbsoluteCameraDirection.Y, World.AbsoluteCameraDirection.Z, World.AbsoluteCameraUp.X, World.AbsoluteCameraUp.Y, World.AbsoluteCameraUp.Z, World.AbsoluteCameraSide.X, World.AbsoluteCameraSide.Y, World.AbsoluteCameraSide.Z);
@@ -1145,7 +1136,7 @@ namespace OpenBve
 			double z = (cosa + oc * dz * dz) * (double)pz + (oc * dx * dz - sina * dy) * (double)px + (oc * dy * dz + sina * dx) * (double)py;
 			px = (float)x; py = (float)y; pz = (float)z;
 		}
-		internal static void Rotate(ref Vector2D Vector, double cosa, double sina) {
+		internal static void Rotate(ref Vector2d Vector, double cosa, double sina) {
 			double u = Vector.X * cosa - Vector.Y * sina;
 			double v = Vector.X * sina + Vector.Y * cosa;
 			Vector.X = u;
@@ -1191,7 +1182,7 @@ namespace OpenBve
 			Vector.X = (float)u;
 			Vector.Z = (float)v;
 		}
-		internal static void RotateUpDown(ref Vector3 Vector, Vector2D Direction, double cosa, double sina) {
+		internal static void RotateUpDown(ref Vector3 Vector, Vector2d Direction, double cosa, double sina) {
 			double dx = Direction.X, dy = Direction.Y;
 			double x = Vector.X, y = Vector.Y, z = Vector.Z;
 			double u = dy * x - dx * z;

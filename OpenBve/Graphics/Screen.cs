@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 using System.Windows.Forms;
 using Tao.OpenGl;
 using Tao.Sdl;
@@ -128,7 +129,7 @@ namespace OpenBve {
 			if (World.MouseGrabEnabled) {
 				Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
 			}
-			World.MouseGrabTarget = new World.Vector2D(0.0, 0.0);
+			World.MouseGrabTarget = new Vector2d(0.0, 0.0);
 			World.MouseGrabIgnoreOnce = true;
 			World.InitializeCameraRestriction();
 			if (Renderer.OptionBackfaceCulling) {

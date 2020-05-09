@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 using OpenBveApi.Math;
 
 namespace OpenBveApi.Objects {
@@ -34,7 +35,7 @@ namespace OpenBveApi.Objects {
 		/// <summary>The list of unique spatial coordinates.</summary>
 		public Vector3[] SpatialCoordinates;
 		/// <summary>The list of unique texture coordinates.</summary>
-		public Vector2[] TextureCoordinates;
+		public Vector2d[] TextureCoordinates;
 		/// <summary>The list of unique normals.</summary>
 		public Vector3[] Normals;
 		/// <summary>The faces stored in this mesh.</summary>
@@ -210,7 +211,7 @@ namespace OpenBveApi.Objects {
 				}
 			}
 			if (length != this.TextureCoordinates.Length) {
-				Array.Resize<Vector2>(ref this.TextureCoordinates, length);
+				Array.Resize<Vector2d>(ref this.TextureCoordinates, length);
 			}
 		}
 		/// <summary>Removes all duplicate and unused normals.</summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 using System.Windows.Forms;
 using OpenBveApi.Math;
 using Tao.OpenGl;
@@ -574,7 +575,7 @@ namespace OpenBve {
 							// mouse grab
 							World.MouseGrabEnabled = !World.MouseGrabEnabled;
 							if (World.MouseGrabEnabled) {
-								World.MouseGrabTarget = new World.Vector2D(0.0, 0.0);
+								World.MouseGrabTarget = new Vector2d(0.0, 0.0);
 								Sdl.SDL_WM_GrabInput(Sdl.SDL_GRAB_ON);
 								Game.AddMessage(Interface.GetInterfaceString("notification_mousegrab_on"), Game.MessageDependency.None, Interface.GameMode.Expert, Game.MessageColor.Blue, Game.SecondsSinceMidnight + 5.0);
 							} else {
@@ -588,7 +589,7 @@ namespace OpenBve {
 						if (World.MouseGrabIgnoreOnce) {
 							World.MouseGrabIgnoreOnce = false;
 						} else if (World.MouseGrabEnabled) {
-							World.MouseGrabTarget = new World.Vector2D((double)Event.motion.xrel, (double)Event.motion.yrel);
+							World.MouseGrabTarget = new Vector2d((double)Event.motion.xrel, (double)Event.motion.yrel);
 						}
 						break;
 				}

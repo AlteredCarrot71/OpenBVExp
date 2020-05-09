@@ -128,9 +128,6 @@
     <Compile Include="Textures.Functions.cs">
       <DependentUpon>Textures.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vector2.cs">
-      <DependentUpon>Math.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vector3.cs">
       <DependentUpon>Math.cs</DependentUpon>
     </Compile>
