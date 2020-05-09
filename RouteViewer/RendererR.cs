@@ -5,12 +5,13 @@
 // ║ The file from the openBVE main program cannot be used here. ║
 // ╚═════════════════════════════════════════════════════════════╝
 using Common.Colors;
+using Common.Geometry;
 using System;
 using Tao.OpenGl;
 
 namespace OpenBve {
-	internal static class Renderer {
-
+	internal static class Renderer 
+	{
 		// screen (output window)
 		internal static int ScreenWidth;
 		internal static int ScreenHeight;
@@ -879,13 +880,13 @@ namespace OpenBve {
 			Faces[4] = new int[] { 6, 7, 3, 2 };
 			Faces[5] = new int[] { 6, 2, 1, 5 };
 			if (OpenGlTextureIndex != 0) {
-				World.Vector2D[][] t = new World.Vector2D[6][];
-				t[0] = new World.Vector2D[] { new World.Vector2D(1.0, 0.0), new World.Vector2D(1.0, 1.0), new World.Vector2D(0.0, 1.0), new World.Vector2D(0.0, 0.0) };
-				t[1] = new World.Vector2D[] { new World.Vector2D(0.0, 0.0), new World.Vector2D(1.0, 0.0), new World.Vector2D(1.0, 1.0), new World.Vector2D(0.0, 1.0) };
-				t[2] = new World.Vector2D[] { new World.Vector2D(1.0, 1.0), new World.Vector2D(0.0, 1.0), new World.Vector2D(0.0, 0.0), new World.Vector2D(1.0, 0.0) };
-				t[3] = new World.Vector2D[] { new World.Vector2D(1.0, 1.0), new World.Vector2D(0.0, 1.0), new World.Vector2D(0.0, 0.0), new World.Vector2D(1.0, 0.0) };
-				t[4] = new World.Vector2D[] { new World.Vector2D(0.0, 1.0), new World.Vector2D(0.0, 0.0), new World.Vector2D(1.0, 0.0), new World.Vector2D(1.0, 1.0) };
-				t[5] = new World.Vector2D[] { new World.Vector2D(0.0, 1.0), new World.Vector2D(0.0, 0.0), new World.Vector2D(1.0, 0.0), new World.Vector2D(1.0, 1.0) };
+				Vector2d[][] t = new Vector2d[6][];
+				t[0] = new Vector2d[] { new Vector2d(1.0, 0.0), new Vector2d(1.0, 1.0), new Vector2d(0.0, 1.0), new Vector2d(0.0, 0.0) };
+				t[1] = new Vector2d[] { new Vector2d(0.0, 0.0), new Vector2d(1.0, 0.0), new Vector2d(1.0, 1.0), new Vector2d(0.0, 1.0) };
+				t[2] = new Vector2d[] { new Vector2d(1.0, 1.0), new Vector2d(0.0, 1.0), new Vector2d(0.0, 0.0), new Vector2d(1.0, 0.0) };
+				t[3] = new Vector2d[] { new Vector2d(1.0, 1.0), new Vector2d(0.0, 1.0), new Vector2d(0.0, 0.0), new Vector2d(1.0, 0.0) };
+				t[4] = new Vector2d[] { new Vector2d(0.0, 1.0), new Vector2d(0.0, 0.0), new Vector2d(1.0, 0.0), new Vector2d(1.0, 1.0) };
+				t[5] = new Vector2d[] { new Vector2d(0.0, 1.0), new Vector2d(0.0, 0.0), new Vector2d(1.0, 0.0), new Vector2d(1.0, 1.0) };
 				for (int i = 0; i < 6; i++) {
 					Gl.glBegin(Gl.GL_QUADS);
 					Gl.glColor3d(1.0, 1.0, 1.0);

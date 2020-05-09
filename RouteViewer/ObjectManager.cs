@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 
 namespace OpenBve {
 	internal static class ObjectManager {
@@ -92,8 +93,8 @@ namespace OpenBve {
 			internal Damping RotateXDamping;
 			internal Damping RotateYDamping;
 			internal Damping RotateZDamping;
-			internal World.Vector2D TextureShiftXDirection;
-			internal World.Vector2D TextureShiftYDirection;
+			internal Vector2d TextureShiftXDirection;
+			internal Vector2d TextureShiftYDirection;
 			internal FunctionScripts.FunctionScript TextureShiftXFunction;
 			internal FunctionScripts.FunctionScript TextureShiftYFunction;
 			internal bool LEDClockwiseWinding;

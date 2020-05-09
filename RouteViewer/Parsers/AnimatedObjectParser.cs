@@ -1,3 +1,4 @@
+using Common.Geometry;
 using System;
 
 namespace OpenBve {
@@ -139,8 +140,8 @@ namespace OpenBve {
 								Result.Objects[ObjectCount].RotateXDirection = new World.Vector3D(1.0, 0.0, 0.0);
 								Result.Objects[ObjectCount].RotateYDirection = new World.Vector3D(0.0, 1.0, 0.0);
 								Result.Objects[ObjectCount].RotateZDirection = new World.Vector3D(0.0, 0.0, 1.0);
-								Result.Objects[ObjectCount].TextureShiftXDirection = new World.Vector2D(1.0, 0.0);
-								Result.Objects[ObjectCount].TextureShiftYDirection = new World.Vector2D(0.0, 1.0);
+								Result.Objects[ObjectCount].TextureShiftXDirection = new Vector2d(1.0, 0.0);
+								Result.Objects[ObjectCount].TextureShiftYDirection = new Vector2d(0.0, 1.0);
 								Result.Objects[ObjectCount].RefreshRate = 0.0;
 								Result.Objects[ObjectCount].ObjectIndex = -1;
 								World.Vector3D Position = new World.Vector3D(0.0, 0.0, 0.0);
@@ -391,10 +392,10 @@ namespace OpenBve {
 															} else {
 																switch (a.ToLowerInvariant()) {
 																	case "textureshiftxdirection":
-																		Result.Objects[ObjectCount].TextureShiftXDirection = new World.Vector2D(x, y);
+																		Result.Objects[ObjectCount].TextureShiftXDirection = new Vector2d(x, y);
 																		break;
 																	case "textureshiftydirection":
-																		Result.Objects[ObjectCount].TextureShiftYDirection = new World.Vector2D(x, y);
+																		Result.Objects[ObjectCount].TextureShiftYDirection = new Vector2d(x, y);
 																		break;
 																}
 															}

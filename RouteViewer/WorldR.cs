@@ -5,21 +5,13 @@
 // ║ The file from the openBVE main program cannot be used here. ║
 // ╚═════════════════════════════════════════════════════════════╝
 using Common.Colors;
+using Common.Geometry;
 using System;
 
 namespace OpenBve {
-	public static class World {
-
+	public static class World 
+	{
 		// vectors
-		/// <summary>Represents a 2D vector of System.Double coordinates.</summary>
-		public struct Vector2D {
-			public double X;
-			public double Y;
-			public Vector2D(double X, double Y) {
-				this.X = X;
-				this.Y = Y;
-			}
-		}
 		/// <summary>Represents a 2D vector of System.Single coordinates.</summary>
 		public struct Vector2Df {
 			public float X;
@@ -42,7 +34,7 @@ namespace OpenBve {
 			/// <summary>Returns a normalized vector based on a 2D vector in the XZ plane and an additional Y-coordinate.</summary>
 			/// <param name="Vector">The vector in the XZ-plane. The X and Y components in Vector represent the X- and Z-coordinates, respectively.</param>
 			/// <param name="Y">The Y-coordinate.</param>
-			public Vector3D(Vector2D Vector, double Y) {
+			public Vector3D(Vector2d Vector, double Y) {
 				double t = 1.0 / Math.Sqrt(Vector.X * Vector.X + Vector.Y * Vector.Y + Y * Y);
 				this.X = t * Vector.X;
 				this.Y = t * Y;
@@ -620,7 +612,7 @@ namespace OpenBve {
 			double z = (cosa + oc * dz * dz) * (double)pz + (oc * dx * dz - sina * dy) * (double)px + (oc * dy * dz + sina * dx) * (double)py;
 			px = (float)x; py = (float)y; pz = (float)z;
 		}
-		internal static void Rotate(ref Vector2D Vector, double cosa, double sina) {
+		internal static void Rotate(ref Vector2d Vector, double cosa, double sina) {
 			double u = Vector.X * cosa - Vector.Y * sina;
 			double v = Vector.X * sina + Vector.Y * cosa;
 			Vector.X = u;
@@ -666,7 +658,7 @@ namespace OpenBve {
 			Vector.X = (float)u;
 			Vector.Z = (float)v;
 		}
-		internal static void RotateUpDown(ref Vector3D Vector, Vector2D Direction, double cosa, double sina) {
+		internal static void RotateUpDown(ref Vector3D Vector, Vector2d Direction, double cosa, double sina) {
 			double dx = Direction.X, dy = Direction.Y;
 			double x = Vector.X, y = Vector.Y, z = Vector.Z;
 			double u = dy * x - dx * z;

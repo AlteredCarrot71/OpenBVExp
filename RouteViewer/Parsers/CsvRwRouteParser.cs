@@ -1,4 +1,5 @@
 ﻿using Common.Colors;
+using Common.Geometry;
 using System;
 using System.Globalization;
 
@@ -4859,7 +4860,7 @@ namespace OpenBve {
 			}
 			// create objects and track
 			World.Vector3D Position = new World.Vector3D(0.0, 0.0, 0.0);
-			World.Vector2D Direction = new World.Vector2D(0.0, 1.0);
+			Vector2d Direction = new Vector2d(0.0, 1.0);
 			TrackManager.CurrentTrack = new TrackManager.Track();
 			TrackManager.CurrentTrack.Elements = new TrackManager.TrackElement[] { };
 			double CurrentSpeedLimit = double.PositiveInfinity;
@@ -5198,7 +5199,7 @@ namespace OpenBve {
 							double dh;
 							if (i < Data.Blocks.Length - 1 && Data.Blocks[i + 1].Rail.Length > j) {
 								// take orientation of upcoming block into account
-								World.Vector2D Direction2 = Direction;
+								Vector2d Direction2 = Direction;
 								World.Vector3D Position2 = Position;
 								Position2.X += Direction.X * c;
 								Position2.Y += h;
