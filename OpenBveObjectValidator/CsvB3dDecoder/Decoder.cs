@@ -402,7 +402,7 @@ namespace CsvB3dDecoder
 									TryGetInt32FromArgument(0, "red",   0, 255, 0, true, lineInfo, out r);
 									TryGetInt32FromArgument(1, "green", 0, 255, 0, true, lineInfo, out g);
 									TryGetInt32FromArgument(2, "blue",  0, 255, 0, true, lineInfo, out b);
-									currentMeshBuilder.TransparentColor = new RGB((byte)r, (byte)g, (byte)b);
+									currentMeshBuilder.TransparentColor = new RGBb((byte)r, (byte)g, (byte)b);
 									currentMeshBuilder.TransparentColorUsed = true;
 								}
 								break;

@@ -40,7 +40,7 @@
 		/// <summary>Creates a new color.</summary>
 		/// <param name="color">The solid color.</param>
 		/// <param name="a">The alpha component.</param>
-		public RGBAf(RGB color, float a)
+		public RGBAf(RGBb color, float a)
 		{
 			this.R = color.R;
 			this.G = color.G;
@@ -50,7 +50,7 @@
 		/// <summary>Creates a new color.</summary>
 		/// <param name="color">The solid color.</param>
 		/// <remarks>The alpha component is set to full opacity.</remarks>
-		public RGBAf(RGB color)
+		public RGBAf(RGBb color)
 		{
 			this.R = color.R;
 			this.G = color.G;
@@ -97,7 +97,7 @@
 		/// <summary>Performs a widening conversion from Color96 to Color128.</summary>
 		/// <param name="value">The Color96 value.</param>
 		/// <returns>The Color128 value.</returns>
-		public static implicit operator RGBAf(RGB value)
+		public static implicit operator RGBAf(RGBb value)
 		{
 			return new RGBAf(value.R, value.G, value.B);
 		}

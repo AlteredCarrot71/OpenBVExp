@@ -135,8 +135,8 @@ namespace OpenBve
 
 		// options
 		internal static bool OptionLighting = true;
-		internal static RGB OptionAmbientColor = new RGB(160, 160, 160);
-		internal static RGB OptionDiffuseColor = new RGB(160, 160, 160);
+		internal static RGBb OptionAmbientColor = new RGBb(160, 160, 160);
+		internal static RGBb OptionDiffuseColor = new RGBb(160, 160, 160);
 		internal static World.Vector3Df OptionLightPosition = new World.Vector3Df(0.223606797749979f, 0.86602540378444f, -0.447213595499958f);
 		internal static float OptionLightingResultingAmount = 1.0f;
 		internal static bool OptionNormals = false;
@@ -171,8 +171,8 @@ namespace OpenBve
 			OverlayOpaque = new ObjectList();
 			OverlayAlpha = new ObjectList();
 			OptionLighting = true;
-			OptionAmbientColor = new RGB(160, 160, 160);
-			OptionDiffuseColor = new RGB(160, 160, 160);
+			OptionAmbientColor = new RGBb(160, 160, 160);
+			OptionDiffuseColor = new RGBb(160, 160, 160);
 			OptionLightPosition = new World.Vector3Df(0.223606797749979f, 0.86602540378444f, -0.447213595499958f);
 			OptionLightingResultingAmount = 1.0f;
 			OptionClock = false;
@@ -2600,7 +2600,7 @@ namespace OpenBve
 		}
 
 		// get color
-		private static void CreateBackColor(RGBA Original, Game.MessageColor SystemColor, out float R, out float G, out float B, out float A) {
+		private static void CreateBackColor(RGBAb Original, Game.MessageColor SystemColor, out float R, out float G, out float B, out float A) {
 			if (Original.R == 0 & Original.G == 0 & Original.B == 0) {
 				switch (SystemColor) {
 					case Game.MessageColor.Black:
@@ -2638,7 +2638,7 @@ namespace OpenBve
 			}
 			A = inv255 * (float)Original.A;
 		}
-		private static void CreateTextColor(RGBA Original, Game.MessageColor SystemColor, out float R, out float G, out float B, out float A) {
+		private static void CreateTextColor(RGBAb Original, Game.MessageColor SystemColor, out float R, out float G, out float B, out float A) {
 			if (Original.R == 0 & Original.G == 0 & Original.B == 0) {
 				switch (SystemColor) {
 					case Game.MessageColor.Black:

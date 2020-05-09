@@ -179,7 +179,7 @@ namespace OpenBve {
 		}
 
 		// try parse hex color
-		internal static bool TryParseHexColor(string Expression, out RGB Color) {
+		internal static bool TryParseHexColor(string Expression, out RGBb Color) {
 			if (Expression.StartsWith("#")) {
 				string a = Expression.Substring(1).TrimStart();
 				int x; if (int.TryParse(a, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out x)) {
@@ -187,22 +187,22 @@ namespace OpenBve {
 					int g = (x >> 8) & 0xFF;
 					int b = x & 0xFF;
 					if (r >= 0 & r <= 255 & g >= 0 & g <= 255 & b >= 0 & b <= 255) {
-						Color = new RGB((byte)r, (byte)g, (byte)b);
+						Color = new RGBb((byte)r, (byte)g, (byte)b);
 						return true;
 					} else {
-						Color = new RGB(0, 0, 255);
+						Color = new RGBb(0, 0, 255);
 						return false;
 					}
 				} else {
-					Color = new RGB(0, 0, 255);
+					Color = new RGBb(0, 0, 255);
 					return false;
 				}
 			} else {
-				Color = new RGB(0, 0, 255);
+				Color = new RGBb(0, 0, 255);
 				return false;
 			}
 		}
-		internal static bool TryParseHexColor(string Expression, out RGBA Color) {
+		internal static bool TryParseHexColor(string Expression, out RGBAb Color) {
 			if (Expression.StartsWith("#")) {
 				string a = Expression.Substring(1).TrimStart();
 				int x; if (int.TryParse(a, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out x)) {
@@ -210,18 +210,18 @@ namespace OpenBve {
 					int g = (x >> 8) & 0xFF;
 					int b = x & 0xFF;
 					if (r >= 0 & r <= 255 & g >= 0 & g <= 255 & b >= 0 & b <= 255) {
-						Color = new RGBA((byte)r, (byte)g, (byte)b, 255);
+						Color = new RGBAb((byte)r, (byte)g, (byte)b, 255);
 						return true;
 					} else {
-						Color = new RGBA(0, 0, 255, 255);
+						Color = new RGBAb(0, 0, 255, 255);
 						return false;
 					}
 				} else {
-					Color = new RGBA(0, 0, 255, 255);
+					Color = new RGBAb(0, 0, 255, 255);
 					return false;
 				}
 			} else {
-				Color = new RGBA(0, 0, 255, 255);
+				Color = new RGBAb(0, 0, 255, 255);
 				return false;
 			}
 		}

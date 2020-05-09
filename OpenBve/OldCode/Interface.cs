@@ -1789,9 +1789,9 @@ namespace OpenBve {
 			internal HudImage BottomLeft;
 			internal HudImage BottomMiddle;
 			internal HudImage BottomRight;
-			internal RGBA BackgroundColor;
-			internal RGBA OverlayColor;
-			internal RGBA TextColor;
+			internal RGBAb BackgroundColor;
+			internal RGBAb OverlayColor;
+			internal RGBAb TextColor;
 			internal HudVectorF TextPosition;
 			internal HudVector TextAlignment;
 			internal Fonts.OpenGlFont Font;
@@ -1808,9 +1808,9 @@ namespace OpenBve {
 				this.Position.Y = 0.0f;
 				this.Alignment.X = -1;
 				this.Alignment.Y = -1;
-				this.BackgroundColor = new RGBA(255, 255, 255, 255);
-				this.OverlayColor = new RGBA(255, 255, 255, 255);
-				this.TextColor = new RGBA(255, 255, 255, 255);
+				this.BackgroundColor = new RGBAb(255, 255, 255, 255);
+				this.OverlayColor = new RGBAb(255, 255, 255, 255);
+				this.TextColor = new RGBAb(255, 255, 255, 255);
 				this.TextPosition.X = 0.0f;
 				this.TextPosition.Y = 0.0f;
 				this.TextAlignment.X = -1;
@@ -2010,7 +2010,7 @@ namespace OpenBve {
 													g = g < 0 ? 0 : g > 255 ? 255 : g;
 													b = b < 0 ? 0 : b > 255 ? 255 : b;
 													a = a < 0 ? 0 : a > 255 ? 255 : a;
-													CurrentHudElements[Length - 1].BackgroundColor = new RGBA((byte)r, (byte)g, (byte)b, (byte)a);
+													CurrentHudElements[Length - 1].BackgroundColor = new RGBAb((byte)r, (byte)g, (byte)b, (byte)a);
 												} break;
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -2031,7 +2031,7 @@ namespace OpenBve {
 													g = g < 0 ? 0 : g > 255 ? 255 : g;
 													b = b < 0 ? 0 : b > 255 ? 255 : b;
 													a = a < 0 ? 0 : a > 255 ? 255 : a;
-													CurrentHudElements[Length - 1].OverlayColor = new RGBA((byte)r, (byte)g, (byte)b, (byte)a);
+													CurrentHudElements[Length - 1].OverlayColor = new RGBAb((byte)r, (byte)g, (byte)b, (byte)a);
 												} break;
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -2052,7 +2052,7 @@ namespace OpenBve {
 													g = g < 0 ? 0 : g > 255 ? 255 : g;
 													b = b < 0 ? 0 : b > 255 ? 255 : b;
 													a = a < 0 ? 0 : a > 255 ? 255 : a;
-													CurrentHudElements[Length - 1].TextColor = new RGBA((byte)r, (byte)g, (byte)b, (byte)a);
+													CurrentHudElements[Length - 1].TextColor = new RGBAb((byte)r, (byte)g, (byte)b, (byte)a);
 												} break;
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -2295,7 +2295,7 @@ namespace OpenBve {
 		}
 
 		// try parse hex color
-		internal static bool TryParseHexColor(string Expression, out RGB Color) {
+		internal static bool TryParseHexColor(string Expression, out RGBb Color) {
 			if (Expression.StartsWith("#")) {
 				string a = Expression.Substring(1).TrimStart();
 				int x; if (int.TryParse(a, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out x)) {
@@ -2303,22 +2303,22 @@ namespace OpenBve {
 					int g = (x >> 8) & 0xFF;
 					int b = x & 0xFF;
 					if (r >= 0 & r <= 255 & g >= 0 & g <= 255 & b >= 0 & b <= 255) {
-						Color = new RGB((byte)r, (byte)g, (byte)b);
+						Color = new RGBb((byte)r, (byte)g, (byte)b);
 						return true;
 					} else {
-						Color = new RGB(0, 0, 255);
+						Color = new RGBb(0, 0, 255);
 						return false;
 					}
 				} else {
-					Color = new RGB(0, 0, 255);
+					Color = new RGBb(0, 0, 255);
 					return false;
 				}
 			} else {
-				Color = new RGB(0, 0, 255);
+				Color = new RGBb(0, 0, 255);
 				return false;
 			}
 		}
-		internal static bool TryParseHexColor(string Expression, out RGBA Color) {
+		internal static bool TryParseHexColor(string Expression, out RGBAb Color) {
 			if (Expression.StartsWith("#")) {
 				string a = Expression.Substring(1).TrimStart();
 				int x; if (int.TryParse(a, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out x)) {
@@ -2326,18 +2326,18 @@ namespace OpenBve {
 					int g = (x >> 8) & 0xFF;
 					int b = x & 0xFF;
 					if (r >= 0 & r <= 255 & g >= 0 & g <= 255 & b >= 0 & b <= 255) {
-						Color = new RGBA((byte)r, (byte)g, (byte)b, 255);
+						Color = new RGBAb((byte)r, (byte)g, (byte)b, 255);
 						return true;
 					} else {
-						Color = new RGBA(0, 0, 255, 255);
+						Color = new RGBAb(0, 0, 255, 255);
 						return false;
 					}
 				} else {
-					Color = new RGBA(0, 0, 255, 255);
+					Color = new RGBAb(0, 0, 255, 255);
 					return false;
 				}
 			} else {
-				Color = new RGBA(0, 0, 255, 255);
+				Color = new RGBAb(0, 0, 255, 255);
 				return false;
 			}
 		}

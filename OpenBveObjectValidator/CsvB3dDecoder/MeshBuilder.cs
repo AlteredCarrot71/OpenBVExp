@@ -16,7 +16,7 @@ namespace CsvB3dDecoder
 		
 		internal bool TransparentColorUsed;
 		
-		internal RGB TransparentColor;
+		internal RGBb TransparentColor;
 		
 		// --- constructors ---
 		
@@ -24,7 +24,7 @@ namespace CsvB3dDecoder
 			this.Vertices = new List<MeshBuilderVertex>();
 			this.Faces = new List<MeshBuilderFace>();
 			this.DaytimeTexture = null;
-			this.TransparentColor = RGB.Black;
+			this.TransparentColor = RGBb.Black;
 			this.TransparentColorUsed = false;
 		}
 		

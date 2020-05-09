@@ -12,8 +12,8 @@ namespace Plugin {
 		/// <summary>Gets a color from the specified integer.</summary>
 		/// <param name="color">The color comprised of 5 red bits in the most significant bits, 6 green bits, and 5 blue bits in the least significant bits.</param>
 		/// <returns></returns>
-		private static RGBA GetColor(ushort color) {
-			return new RGBA(
+		private static RGBAb GetColor(ushort color) {
+			return new RGBAb(
 				(byte)((color >> 11) << 3),
 				(byte)(((color >> 5) & 0x3F) << 2),
 				(byte)((color & 0x1F) << 3),
@@ -25,8 +25,8 @@ namespace Plugin {
 		/// <param name="a">The first color.</param>
 		/// <param name="b">The second color.</param>
 		/// <returns>The mixed color.</returns>
-		private static RGBA GetInterpolatedColor11(RGBA a, RGBA b) {
-			return new RGBA(
+		private static RGBAb GetInterpolatedColor11(RGBAb a, RGBAb b) {
+			return new RGBAb(
 				(byte)((uint)a.R + (uint)b.R >> 1),
 				(byte)((uint)a.G + (uint)b.G >> 1),
 				(byte)((uint)a.B + (uint)b.B >> 1),
@@ -38,8 +38,8 @@ namespace Plugin {
 		/// <param name="a">The first color.</param>
 		/// <param name="b">The second color.</param>
 		/// <returns>The mixed color.</returns>
-		private static RGBA GetInterpolatedColor12(RGBA a, RGBA b) {
-			return new RGBA(
+		private static RGBAb GetInterpolatedColor12(RGBAb a, RGBAb b) {
+			return new RGBAb(
 				(byte)(((uint)a.R + 2 * (uint)b.R) / 3),
 				(byte)(((uint)a.G + 2 * (uint)b.G) / 3),
 				(byte)(((uint)a.B + 2 * (uint)b.B) / 3),
@@ -51,8 +51,8 @@ namespace Plugin {
 		/// <param name="a">The first color.</param>
 		/// <param name="b">The second color.</param>
 		/// <returns>The mixed color.</returns>
-		private static RGBA GetInterpolatedColor21(RGBA a, RGBA b) {
-			return new RGBA(
+		private static RGBAb GetInterpolatedColor21(RGBAb a, RGBAb b) {
+			return new RGBAb(
 				(byte)((2 * (uint)a.R + (uint)b.R) / 3),
 				(byte)((2 * (uint)a.G + (uint)b.G) / 3),
 				(byte)((2 * (uint)a.B + (uint)b.B) / 3),
@@ -344,8 +344,8 @@ namespace Plugin {
 						int offsetIncrementY = 12 * width;
 						int offsetIncrementX = -16 * width + 16;
 						int offsetIncrementDy = 4 * width - 16;
-						RGBA[] colors = new RGBA[4];
-						RGBA black = channels == 4 ? RGBA.Transparent : RGBA.Black;
+						RGBAb[] colors = new RGBAb[4];
+						RGBAb black = channels == 4 ? RGBAb.Transparent : RGBAb.Black;
 						for (int y = 0; y < height; y += 4) {
 							for (int x = 0; x < width; x += 4) {
 								ushort entry0 = reader.ReadUInt16();

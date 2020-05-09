@@ -73,8 +73,8 @@ namespace OpenBve {
 
 		// options
 		internal static bool OptionLighting = true;
-		internal static RGB OptionAmbientColor = new RGB(160, 160, 160);
-		internal static RGB OptionDiffuseColor = new RGB(159, 159, 159);
+		internal static RGBb OptionAmbientColor = new RGBb(160, 160, 160);
+		internal static RGBb OptionDiffuseColor = new RGBb(159, 159, 159);
 		internal static World.Vector3Df OptionLightPosition = new World.Vector3Df(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
 		internal static float OptionLightingResultingAmount = 1.0f;
 		internal static bool OptionFauxNighttime = true;
@@ -136,8 +136,8 @@ namespace OpenBve {
 			OverlayListDistance = new double[256];
 			OverlayListCount = 0;
 			OptionLighting = true;
-			OptionAmbientColor = new RGB(160, 160, 160);
-			OptionDiffuseColor = new RGB(160, 160, 160);
+			OptionAmbientColor = new RGBb(160, 160, 160);
+			OptionDiffuseColor = new RGBb(160, 160, 160);
 			OptionLightPosition = new World.Vector3Df(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
 			OptionLightingResultingAmount = 1.0f;
 			Gl.glDisable(Gl.GL_FOG); FogEnabled = false;

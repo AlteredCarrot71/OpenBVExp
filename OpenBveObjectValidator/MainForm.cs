@@ -34,14 +34,14 @@ namespace OpenBveObjectValidator
 			private string File;
 			private Bitmap Bitmap;
 			private bool TransparentColorUsed;
-			private RGB TransparentColor;
+			private RGBb TransparentColor;
 			public MyTexture(Bitmap bitmap) {
 				this.File = null;
 				this.Bitmap = bitmap;
 				this.TransparentColorUsed = false;
-				this.TransparentColor = RGB.Black;
+				this.TransparentColor = RGBb.Black;
 			}
-			public MyTexture(string file, RGB transparentColor) {
+			public MyTexture(string file, RGBb transparentColor) {
 				this.File = file;
 				this.Bitmap = null;
 				this.TransparentColorUsed = true;
@@ -51,7 +51,7 @@ namespace OpenBveObjectValidator
 				this.File = file;
 				this.Bitmap = null;
 				this.TransparentColorUsed = false;
-				this.TransparentColor = RGB.Black;
+				this.TransparentColor = RGBb.Black;
 			}
 			public override int GetHashCode() {
 				int hashCode = 0;
@@ -102,7 +102,7 @@ namespace OpenBveObjectValidator
 				this.Textures.Add(new MyTexture(bitmap));
 				return this.Textures[this.Textures.Count - 1];
 			}
-			public override Texture Add(string file, RGB transparentColor) {
+			public override Texture Add(string file, RGBb transparentColor) {
 				MyTexture t = new MyTexture(file, transparentColor);
 				for (int i = 0; i < this.Textures.Count; i++) {
 					if (this.Textures[i].Equals(t)) {

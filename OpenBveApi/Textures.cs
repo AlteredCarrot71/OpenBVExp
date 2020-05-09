@@ -279,7 +279,7 @@ namespace OpenBveApi.Textures
 		/// <summary>The region in the texture to be extracted, or a null reference for the entire texture.</summary>
 		private TextureClipRegion MyClipRegion;
 		/// <summary>The color in the texture that should become transparent, or a null reference for no transparent color.</summary>
-		private Nullable<RGB> MyTransparentColor;
+		private Nullable<RGBb> MyTransparentColor;
 		// --- properties ---
 		/// <summary>Gets the region in the texture to be extracted, or a null reference for the entire texture.</summary>
 		public TextureClipRegion ClipRegion {
@@ -288,7 +288,7 @@ namespace OpenBveApi.Textures
 			}
 		}
 		/// <summary>Gets the color in the texture that should become transparent, or a null reference for no transparent color.</summary>
-		public RGB? TransparentColor {
+		public RGBb? TransparentColor {
 			get {
 				return this.MyTransparentColor;
 			}
@@ -297,7 +297,7 @@ namespace OpenBveApi.Textures
 		/// <summary>Creates new texture parameters.</summary>
 		/// <param name="clipRegion">The region in the texture to be extracted, or a null reference for the entire texture.</param>
 		/// <param name="transparentColor">The color in the texture that should become transparent, or a null reference for no transparent color.</param>
-		public TextureParameters(TextureClipRegion clipRegion, Nullable<RGB> transparentColor) {
+		public TextureParameters(TextureClipRegion clipRegion, Nullable<RGBb> transparentColor) {
 			this.MyClipRegion = clipRegion;
 			this.MyTransparentColor = transparentColor;
 		}

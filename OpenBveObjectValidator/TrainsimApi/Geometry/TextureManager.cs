@@ -7,7 +7,7 @@ namespace TrainsimApi.Geometry {
 		// --- functions ---
 		public abstract Texture Add(string file);
 		
-		public abstract Texture Add(string file, RGB transparentColor);
+		public abstract Texture Add(string file, RGBb transparentColor);
 		
 		public abstract Texture Add(Bitmap bitmap);
 	}
