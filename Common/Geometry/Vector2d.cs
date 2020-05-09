@@ -327,10 +327,9 @@ namespace Common.Geometry
 		/// <returns>The rotated vector.</returns>
 		public static Vector2d Rotate(Vector2d vector, Vector2d angle)
 		{
-			double x = angle.X * vector.X - angle.Y * vector.Y;
-			double y = angle.Y * vector.X + angle.X * vector.Y;
+			double x = (angle.X * vector.X) - (angle.Y * vector.Y);
+			double y = (angle.Y * vector.X) + (angle.X * vector.Y);
 			return new Vector2d(x, y);
-
 		}
 
 		/// <summary>Rotates a vector by a specified angle.</summary>
