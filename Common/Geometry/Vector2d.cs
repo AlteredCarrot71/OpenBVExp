@@ -191,7 +191,7 @@ namespace Common.Geometry
 		/// <exception cref="System.DivideByZeroException">Raised when the vector is a null vector.</exception>
 		public void Normalize()
 		{
-			double norm = this.X * this.X + this.Y * this.Y;
+			double norm = (this.X * this.X) + (this.Y * this.Y);
 			if (norm == 0.0)
 			{
 				throw new DivideByZeroException();
@@ -225,8 +225,8 @@ namespace Common.Geometry
 		/// <param name="sineOfAngle">The sine of the angle.</param>
 		public void Rotate(double cosineOfAngle, double sineOfAngle)
 		{
-			double x = cosineOfAngle * this.X - sineOfAngle * this.Y;
-			double y = sineOfAngle * this.X + cosineOfAngle * this.Y;
+			double x = (cosineOfAngle * this.X) - (sineOfAngle * this.Y);
+			double y = (sineOfAngle * this.X) + (cosineOfAngle * this.Y);
 			this = new Vector2d(x, y);
 		}
 
@@ -253,14 +253,14 @@ namespace Common.Geometry
 		/// <returns>The euclidean norm.</returns>
 		public double Norm()
 		{
-			return System.Math.Sqrt(this.X * this.X + this.Y * this.Y);
+			return System.Math.Sqrt((this.X * this.X) + (this.Y * this.Y));
 		}
 
 		/// <summary>Gets the square of the euclidean norm.</summary>
 		/// <returns>The square of the euclidean norm.</returns>
 		public double NormSquared()
 		{
-			return this.X * this.X + this.Y * this.Y;
+			return (this.X * this.X) + (this.Y * this.Y);
 		}
 
 		// --- static functions ---
@@ -270,7 +270,7 @@ namespace Common.Geometry
 		/// <returns>The dot product of the two vectors.</returns>
 		public static double Dot(Vector2d a, Vector2d b)
 		{
-			return a.X * b.X + a.Y * b.Y;
+			return (a.X * b.X) + (a.Y * b.Y);
 		}
 
 		/// <summary>Normalizes a vector.</summary>
@@ -279,7 +279,7 @@ namespace Common.Geometry
 		/// <exception cref="System.DivideByZeroException">Raised when the vector is a null vector.</exception>
 		public static Vector2d Normalize(Vector2d vector)
 		{
-			double norm = vector.X * vector.X + vector.Y * vector.Y;
+			double norm = (vector.X * vector.X) + (vector.Y * vector.Y);
 			if (norm == 0.0)
 			{
 				throw new DivideByZeroException();
@@ -320,8 +320,8 @@ namespace Common.Geometry
 		/// <returns>The rotated vector.</returns>
 		public static Vector2d Rotate(Vector2d vector, double cosineOfAngle, double sineOfAngle)
 		{
-			double x = cosineOfAngle * vector.X - sineOfAngle * vector.Y;
-			double y = sineOfAngle * vector.X + cosineOfAngle * vector.Y;
+			double x = (cosineOfAngle * vector.X) - (sineOfAngle * vector.Y);
+			double y = (sineOfAngle * vector.X) + (cosineOfAngle * vector.Y);
 			return new Vector2d(x, y);
 		}
 
@@ -337,7 +337,7 @@ namespace Common.Geometry
 		/// <returns>The euclidean norm.</returns>
 		public static double Norm(Vector2d vector)
 		{
-			return System.Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
+			return System.Math.Sqrt((vector.X * vector.X) + (vector.Y * vector.Y));
 		}
 
 		/// <summary>Gets the square of the euclidean norm of the specified vector.</summary>
@@ -345,7 +345,7 @@ namespace Common.Geometry
 		/// <returns>The square of the euclidean norm.</returns>
 		public static double NormSquared(Vector2d vector)
 		{
-			return vector.X * vector.X + vector.Y * vector.Y;
+			return (vector.X * vector.X) + (vector.Y * vector.Y);
 		}
 
 		// --- read-only fields ---
