@@ -3,11 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace TrainsimApi.Vectors {
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	public struct Vector3d : IComparable<Vector3d>, IEquatable<Vector3d> {
-		
-		
+	public struct Vector3d : IComparable<Vector3d>, IEquatable<Vector3d> 
+	{
 		// --- members ---
-		
 		public double X;
 		
 		public double Y;
@@ -16,16 +14,13 @@ namespace TrainsimApi.Vectors {
 		
 		
 		// --- constructors ---
-		
 		public Vector3d(double x, double y, double z) {
 			this.X = x;
 			this.Y = y;
 			this.Z = z;
 		}
 		
-		
 		// --- readonly fields (vectors) ---
-		
 		public static readonly Vector3d Zero     = new Vector3d( 0.0,  0.0,  0.0);
 		
 		public static readonly Vector3d Left     = new Vector3d(-1.0,  0.0,  0.0);
@@ -42,28 +37,7 @@ namespace TrainsimApi.Vectors {
 		
 		public static readonly Vector3d One      = new Vector3d( 1.0,  1.0,  1.0);
 		
-		
-		// --- readonly fields (colors) ---
-		
-		public static readonly Vector3d Black    = new Vector3d( 0.0,  0.0,  0.0);
-		
-		public static readonly Vector3d Red      = new Vector3d( 1.0,  0.0,  0.0);
-		
-		public static readonly Vector3d Green    = new Vector3d( 0.0,  1.0,  0.0);
-		
-		public static readonly Vector3d Blue     = new Vector3d( 0.0,  0.0,  1.0);
-		
-		public static readonly Vector3d Cyan     = new Vector3d( 0.0,  1.0,  1.0);
-		
-		public static readonly Vector3d Magenta  = new Vector3d( 1.0,  0.0,  1.0);
-		
-		public static readonly Vector3d Yellow   = new Vector3d( 1.0,  1.0,  0.0);
-		
-		public static readonly Vector3d White    = new Vector3d( 1.0,  1.0,  1.0);
-		
-		
 		// --- operators ---
-		
 		public static Vector3d operator +(Vector3d a, Vector3d b) {
 			return new Vector3d(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
 		}
@@ -283,7 +257,5 @@ namespace TrainsimApi.Vectors {
 		public override string ToString() {
 			return '{' + this.X.ToString() + ',' + this.Y.ToString() + ',' + this.Z.ToString() + '}';
 		}
-		
-		
 	}
 }

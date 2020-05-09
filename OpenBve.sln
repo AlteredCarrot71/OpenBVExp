@@ -38,6 +38,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Common\Common.projitems*{02b1d9fe-7fce-461e-b4e7-28030d86fded}*SharedItemsImports = 13
 		Common\Common.projitems*{27134980-4415-4375-a564-40a9014dfa5f}*SharedItemsImports = 4
+		Common\Common.projitems*{83a693fd-ffd4-455e-b65d-f899e8cbbe30}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed = Debug|Mixed

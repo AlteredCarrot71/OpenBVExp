@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Text;
-
 using TrainsimApi;
 using TrainsimApi.Codecs;
 using TrainsimApi.Geometry;
 using TrainsimApi.Vectors;
 
-namespace CsvB3dDecoder {
-	public partial class Decoder : MeshDecoder {
-		
-		
+namespace CsvB3dDecoder 
+{
+	public partial class Decoder : MeshDecoder 
+	{
 		// --- public functions ---
-		
-		public override bool CanLoad(string file) {
+		public override bool CanLoad(string file) 
+		{
 			if (file.EndsWith(".b3d", StringComparison.OrdinalIgnoreCase)) {
 				return true;
 			} else if (file.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)) {
@@ -305,7 +304,7 @@ namespace CsvB3dDecoder {
 									TryGetDoubleFromArgument(1, "green", 0.0, 255.0, 255.0, true, lineInfo, out g);
 									TryGetDoubleFromArgument(2, "blue",  0.0, 255.0, 255.0, true, lineInfo, out b);
 									TryGetDoubleFromArgument(3, "alpha", 0.0, 255.0, 255.0, true, lineInfo, out a);
-									Vector3f color = new Vector3f((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f);
+									RGBf color = new RGBf((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f);
 									for (int i = 0; i < currentMeshBuilder.Faces.Count; i++) {
 										currentMeshBuilder.Faces[i].ReflectiveColor = color;
 										currentMeshBuilder.Faces[i].Alpha = (float)a / 255.0f;
@@ -324,7 +323,7 @@ namespace CsvB3dDecoder {
 									TryGetDoubleFromArgument(0, "red",   0.0, 255.0, 0.0, true, lineInfo, out r);
 									TryGetDoubleFromArgument(1, "green", 0.0, 255.0, 0.0, true, lineInfo, out g);
 									TryGetDoubleFromArgument(2, "blue",  0.0, 255.0, 0.0, true, lineInfo, out b);
-									Vector3f color = new Vector3f((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f);
+									RGBf color = new RGBf((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f);
 									for (int i = 0; i < currentMeshBuilder.Faces.Count; i++) {
 										currentMeshBuilder.Faces[i].EmissiveColor = color;
 									}
@@ -403,7 +402,7 @@ namespace CsvB3dDecoder {
 									TryGetInt32FromArgument(0, "red",   0, 255, 0, true, lineInfo, out r);
 									TryGetInt32FromArgument(1, "green", 0, 255, 0, true, lineInfo, out g);
 									TryGetInt32FromArgument(2, "blue",  0, 255, 0, true, lineInfo, out b);
-									currentMeshBuilder.TransparentColor = new Vector3b((byte)r, (byte)g, (byte)b);
+									currentMeshBuilder.TransparentColor = new RGB((byte)r, (byte)g, (byte)b);
 									currentMeshBuilder.TransparentColorUsed = true;
 								}
 								break;
@@ -512,7 +511,5 @@ namespace CsvB3dDecoder {
 			}
 			return new Mesh(vertices.ToArray(), materials.ToArray(), faces.ToArray());
 		}
-
-		
 	}
 }

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using System.Collections.Generic;
 using TrainsimApi.Vectors;
 
-namespace CsvB3dDecoder {
-	internal class MeshBuilder {
-		
-		
+namespace CsvB3dDecoder 
+{
+	internal class MeshBuilder 
+	{
 		// --- members --
-		
 		internal List<MeshBuilderVertex> Vertices;
 		
 		internal List<MeshBuilderFace> Faces;
@@ -16,8 +16,7 @@ namespace CsvB3dDecoder {
 		
 		internal bool TransparentColorUsed;
 		
-		internal Vector3b TransparentColor;
-		
+		internal RGB TransparentColor;
 		
 		// --- constructors ---
 		
@@ -25,7 +24,7 @@ namespace CsvB3dDecoder {
 			this.Vertices = new List<MeshBuilderVertex>();
 			this.Faces = new List<MeshBuilderFace>();
 			this.DaytimeTexture = null;
-			this.TransparentColor = Vector3b.Black;
+			this.TransparentColor = RGB.Black;
 			this.TransparentColorUsed = false;
 		}
 		
@@ -193,7 +192,5 @@ namespace CsvB3dDecoder {
 			}
 			
 		}
-		
-		
 	}
 }

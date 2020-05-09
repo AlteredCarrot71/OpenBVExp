@@ -137,5 +137,6 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <Import Project="..\Common\Common.projitems" Label="Shared" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

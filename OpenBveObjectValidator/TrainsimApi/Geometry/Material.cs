@@ -1,15 +1,14 @@
-﻿using System;
-using TrainsimApi.Vectors;
+﻿using Common.Colors;
+using System;
 
-namespace TrainsimApi.Geometry {
-	public class Material : IEquatable<Material> {
-		
-		
+namespace TrainsimApi.Geometry 
+{
+	public class Material : IEquatable<Material> 
+	{
 		// --- members ---
+		public RGBf EmissiveColor;
 		
-		public Vector3f EmissiveColor;
-		
-		public Vector3f ReflectiveColor;
+		public RGBf ReflectiveColor;
 		
 		public float SpecularExponent;
 
@@ -17,12 +16,10 @@ namespace TrainsimApi.Geometry {
 		
 		public Texture Texture;
 		
-		
 		// --- constructors ---
-		
 		public Material() {
-			this.EmissiveColor = Vector3f.Black;
-			this.ReflectiveColor = Vector3f.White;
+			this.EmissiveColor = RGBf.Black;
+			this.ReflectiveColor = RGBf.White;
 			this.SpecularExponent = 1.0f;
 			this.Alpha = 1.0f;
 			this.Texture = null;
@@ -75,7 +72,5 @@ namespace TrainsimApi.Geometry {
 			}
 			return hashCode;
 		}
-
-		
 	}
 }

@@ -1,54 +1,49 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using TrainsimApi.Vectors;
 
 namespace TrainsimApi.Geometry {
-	public class Vertex : IComparable<Vertex>, IEquatable<Vertex> {
-		
-		
+	public class Vertex : IComparable<Vertex>, IEquatable<Vertex> 
+	{
 		// --- members ---
-		
 		public Vector3f Position;
 		
 		public Vector3f Normal;
 		
 		public Vector2f Texture;
 		
-		public Vector3f Color;
-		
+		public RGBf Color;
 		
 		// --- constructors ---
-		
 		public Vertex(Vector3f position) {
 			this.Position = position;
 			this.Normal = Vector3f.Zero;
 			this.Texture = Vector2f.Zero;
-			this.Color = Vector3f.White;
+			this.Color = RGBf.White;
 		}
 		
 		public Vertex(Vector3f position, Vector3f normal) {
 			this.Position = position;
 			this.Normal = normal;
 			this.Texture = Vector2f.Zero;
-			this.Color = Vector3f.White;
+			this.Color = RGBf.White;
 		}
 		
 		public Vertex(Vector3f position, Vector3f normal, Vector2f texture) {
 			this.Position = position;
 			this.Normal = normal;
 			this.Texture = texture;
-			this.Color = Vector3f.White;
+			this.Color = RGBf.White;
 		}
 		
-		public Vertex(Vector3f position, Vector3f normal, Vector2f texture, Vector3f color) {
+		public Vertex(Vector3f position, Vector3f normal, Vector2f texture, RGBf color) {
 			this.Position = position;
 			this.Normal = normal;
 			this.Texture = texture;
 			this.Color = color;
 		}
 		
-		
 		// --- operators ---
-		
 		public static bool operator ==(Vertex a, Vertex b) {
 			if (object.ReferenceEquals(a, b)) return true;
 			if (object.ReferenceEquals(a, null)) return false;
@@ -64,9 +59,7 @@ namespace TrainsimApi.Geometry {
 			return !(a == b);
 		}
 		
-		
 		// --- overrides and interface implementations ---
-		
 		public int CompareTo(Vertex other) {
 			if (object.ReferenceEquals(this, other)) return 0;
 			if (object.ReferenceEquals(other, null)) return 1;
@@ -77,7 +70,12 @@ namespace TrainsimApi.Geometry {
 			if (value != 0) return value;
 			value = this.Texture.CompareTo(other.Texture);
 			if (value != 0) return value;
-			value = this.Color.CompareTo(other.Color);
+			if (this.Color.R < other.Color.R) value = -1;
+			if (this.Color.R > other.Color.R) value = 1;
+			if (this.Color.G < other.Color.G) value = -1;
+			if (this.Color.G > other.Color.G) value = 1;
+			if (this.Color.B < other.Color.B) value = -1;
+			if (this.Color.B > other.Color.B) value = 1;
 			if (value != 0) return value;
 			return 0;
 		}
@@ -101,7 +99,5 @@ namespace TrainsimApi.Geometry {
 			}
 			return hashCode;
 		}
-
-		
 	}
 }

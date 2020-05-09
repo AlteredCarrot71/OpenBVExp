@@ -3,48 +3,23 @@ using System.Runtime.InteropServices;
 
 namespace TrainsimApi.Vectors {
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	public struct Vector3b : IComparable<Vector3b>, IEquatable<Vector3b> {
-		
-		
+	public struct Vector3b : IComparable<Vector3b>, IEquatable<Vector3b> 
+	{
 		// --- members ---
-		
 		public byte X;
 		
 		public byte Y;
 		
 		public byte Z;
 		
-		
 		// --- constructors ---
-		
 		public Vector3b(byte x, byte y, byte z) {
 			this.X = x;
 			this.Y = y;
 			this.Z = z;
 		}
 		
-		
-		// --- readonly fields (colors) ---
-		
-		public static readonly Vector3b Black    = new Vector3b(  0,   0,   0);
-		
-		public static readonly Vector3b Red      = new Vector3b(255,   0,   0);
-		
-		public static readonly Vector3b Green    = new Vector3b(  0, 255,   0);
-		
-		public static readonly Vector3b Blue     = new Vector3b(  0,   0, 255);
-		
-		public static readonly Vector3b Cyan     = new Vector3b(  0, 255, 255);
-		
-		public static readonly Vector3b Magenta  = new Vector3b(255,   0, 255);
-		
-		public static readonly Vector3b Yellow   = new Vector3b(255, 255,   0);
-		
-		public static readonly Vector3b White    = new Vector3b(255, 255, 255);
-		
-		
 		// --- operators ---
-		
 		public static bool operator ==(Vector3b a, Vector3b b) {
 			if (a.X != b.X) return false;
 			if (a.Y != b.Y) return false;
@@ -101,7 +76,5 @@ namespace TrainsimApi.Vectors {
 		public override string ToString() {
 			return '{' + this.X.ToString() + ',' + this.Y.ToString() + ',' + this.Z.ToString() + '}';
 		}
-		
-		
 	}
 }

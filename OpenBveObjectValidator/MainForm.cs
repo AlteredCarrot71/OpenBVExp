@@ -1,26 +1,24 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using TrainsimApi.Codecs;
 using TrainsimApi.Geometry;
-using TrainsimApi.Vectors;
 
-namespace OpenBveObjectValidator {
-	public partial class MainForm : Form {
+namespace OpenBveObjectValidator 
+{
+	public partial class MainForm : Form 
+	{
 		public MainForm() {
 			InitializeComponent();
 		}
 		
-		
 		// --- classes ---
-		
 		private class FileData {
 			internal string FullPath;
 			internal string ErrorMessage;
@@ -36,14 +34,14 @@ namespace OpenBveObjectValidator {
 			private string File;
 			private Bitmap Bitmap;
 			private bool TransparentColorUsed;
-			private Vector3b TransparentColor;
+			private RGB TransparentColor;
 			public MyTexture(Bitmap bitmap) {
 				this.File = null;
 				this.Bitmap = bitmap;
 				this.TransparentColorUsed = false;
-				this.TransparentColor = Vector3b.Black;
+				this.TransparentColor = RGB.Black;
 			}
-			public MyTexture(string file, Vector3b transparentColor) {
+			public MyTexture(string file, RGB transparentColor) {
 				this.File = file;
 				this.Bitmap = null;
 				this.TransparentColorUsed = true;
@@ -53,7 +51,7 @@ namespace OpenBveObjectValidator {
 				this.File = file;
 				this.Bitmap = null;
 				this.TransparentColorUsed = false;
-				this.TransparentColor = Vector3b.Black;
+				this.TransparentColor = RGB.Black;
 			}
 			public override int GetHashCode() {
 				int hashCode = 0;
@@ -104,7 +102,7 @@ namespace OpenBveObjectValidator {
 				this.Textures.Add(new MyTexture(bitmap));
 				return this.Textures[this.Textures.Count - 1];
 			}
-			public override Texture Add(string file, Vector3b transparentColor) {
+			public override Texture Add(string file, RGB transparentColor) {
 				MyTexture t = new MyTexture(file, transparentColor);
 				for (int i = 0; i < this.Textures.Count; i++) {
 					if (this.Textures[i].Equals(t)) {
@@ -326,7 +324,5 @@ namespace OpenBveObjectValidator {
 			                                     	}
 			                                     }));
 		}
-		
-		
 	}
 }

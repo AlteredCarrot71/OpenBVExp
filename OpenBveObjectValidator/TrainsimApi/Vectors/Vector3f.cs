@@ -3,29 +3,24 @@ using System.Runtime.InteropServices;
 
 namespace TrainsimApi.Vectors {
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
-	public struct Vector3f : IComparable<Vector3f>, IEquatable<Vector3f> {
-		
-		
+	public struct Vector3f : IComparable<Vector3f>, IEquatable<Vector3f> 
+	{
 		// --- members ---
-		
 		public float X;
 		
 		public float Y;
 		
 		public float Z;
 		
-		
 		// --- constructors ---
-		
-		public Vector3f(float x, float y, float z) {
+		public Vector3f(float x, float y, float z) 
+		{
 			this.X = x;
 			this.Y = y;
 			this.Z = z;
 		}
-
 		
 		// --- readonly fields (vectors) ---
-		
 		public static readonly Vector3f Zero     = new Vector3f( 0.0f,  0.0f,  0.0f);
 		
 		public static readonly Vector3f Left     = new Vector3f(-1.0f,  0.0f,  0.0f);
@@ -42,28 +37,7 @@ namespace TrainsimApi.Vectors {
 		
 		public static readonly Vector3f One      = new Vector3f( 1.0f,  1.0f,  1.0f);
 		
-		
-		// --- readonly fields (colors) ---
-		
-		public static readonly Vector3f Black    = new Vector3f( 0.0f,  0.0f,  0.0f);
-		
-		public static readonly Vector3f Red      = new Vector3f( 1.0f,  0.0f,  0.0f);
-		
-		public static readonly Vector3f Green    = new Vector3f( 0.0f,  1.0f,  0.0f);
-		
-		public static readonly Vector3f Blue     = new Vector3f( 0.0f,  0.0f,  1.0f);
-		
-		public static readonly Vector3f Cyan     = new Vector3f( 0.0f,  1.0f,  1.0f);
-		
-		public static readonly Vector3f Magenta  = new Vector3f( 1.0f,  0.0f,  1.0f);
-		
-		public static readonly Vector3f Yellow   = new Vector3f( 1.0f,  1.0f,  0.0f);
-		
-		public static readonly Vector3f White    = new Vector3f( 1.0f,  1.0f,  1.0f);
-		
-		
 		// --- operators ---
-		
 		public static Vector3f operator +(Vector3f a, Vector3f b) {
 			return new Vector3f(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
 		}
@@ -159,9 +133,7 @@ namespace TrainsimApi.Vectors {
 			);
 		}
 		
-		
 		// --- static functions (geometrical) ---
-		
 		public static Vector3f Normalize(Vector3f vector) {
 			return Vector3f.Sign(vector);
 		}
@@ -224,7 +196,6 @@ namespace TrainsimApi.Vectors {
 		
 		
 		// --- instance functions ---
-		
 		public bool IsZero() {
 			return this.X == 0.0f & this.Y == 0.0f & this.Z == 0.0;
 		}
@@ -233,9 +204,7 @@ namespace TrainsimApi.Vectors {
 			return Vector3f.Normalize(this);
 		}
 		
-		
 		// --- overrides and interface implementations ---
-		
 		public int CompareTo(Vector3f other) {
 			if (this.X < other.X) return -1;
 			if (this.X > other.X) return  1;
@@ -275,7 +244,5 @@ namespace TrainsimApi.Vectors {
 		public override string ToString() {
 			return '{' + this.X.ToString() + ',' + this.Y.ToString() + ',' + this.Z.ToString() + '}';
 		}
-		
-		
 	}
 }
