@@ -199,11 +199,7 @@ namespace OpenBveObjectValidator
 				FileData data = item.Tag as FileData;
 				if (data != null) {
 					data.ErrorMessage = null;
-					#if !DEBUG
-					Task.Factory.StartNew(() => ValidateData(data));
-					#else
 					ValidateData(data);
-					#endif
 				}
 			}
 		}
