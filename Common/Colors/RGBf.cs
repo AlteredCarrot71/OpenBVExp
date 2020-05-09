@@ -1,21 +1,21 @@
 ﻿namespace Common.Colors
 {
-	/// <summary>Represents an RGB color with 8-bit precision per channel.</summary>
-	public struct RGB
+	/// <summary>Represents a 96-bit color with red, green and blue channels at 32 bits each.</summary>
+	public struct RGBf
 	{
 		// --- members ---
 		/// <summary>The red component.</summary>
-		public byte R;
+		public float R;
 		/// <summary>The green component.</summary>
-		public byte G;
+		public float G;
 		/// <summary>The blue component.</summary>
-		public byte B;
+		public float B;
 		// --- constructors ---
 		/// <summary>Creates a new color.</summary>
 		/// <param name="r">The red component.</param>
 		/// <param name="g">The green component.</param>
 		/// <param name="b">The blue component.</param>
-		public RGB(byte r, byte g, byte b)
+		public RGBf(float r, float g, float b)
 		{
 			this.R = r;
 			this.G = g;
@@ -26,7 +26,7 @@
 		/// <param name="a">The first color.</param>
 		/// <param name="b">The second color.</param>
 		/// <returns>Whether the two colors are equal.</returns>
-		public static bool operator ==(RGB a, RGB b)
+		public static bool operator ==(RGBf a, RGBf b)
 		{
 			return a.R == b.R & a.G == b.G & a.B == b.B;
 		}
@@ -34,26 +34,26 @@
 		/// <param name="a">The first color.</param>
 		/// <param name="b">The second color.</param>
 		/// <returns>Whether the two colors are unequal.</returns>
-		public static bool operator !=(RGB a, RGB b)
+		public static bool operator !=(RGBf a, RGBf b)
 		{
 			return a.R != b.R | a.G != b.G | a.B != b.B;
 		}
 		// --- read-only fields ---
 		/// <summary>Represents a black color.</summary>
-		public static readonly RGB Black = new RGB(0, 0, 0);
+		public static readonly RGBf Black = new RGBf(0.0f, 0.0f, 0.0f);
 		/// <summary>Represents a red color.</summary>
-		public static readonly RGB Red = new RGB(255, 0, 0);
+		public static readonly RGBf Red = new RGBf(1.0f, 0.0f, 0.0f);
 		/// <summary>Represents a green color.</summary>
-		public static readonly RGB Green = new RGB(0, 255, 0);
+		public static readonly RGBf Green = new RGBf(0.0f, 1.0f, 0.0f);
 		/// <summary>Represents a blue color.</summary>
-		public static readonly RGB Blue = new RGB(0, 0, 255);
+		public static readonly RGBf Blue = new RGBf(0.0f, 0.0f, 1.0f);
 		/// <summary>Represents a cyan color.</summary>
-		public static readonly RGB Cyan = new RGB(0, 255, 255);
+		public static readonly RGBf Cyan = new RGBf(0.0f, 1.0f, 1.0f);
 		/// <summary>Represents a magenta color.</summary>
-		public static readonly RGB Magenta = new RGB(255, 0, 255);
+		public static readonly RGBf Magenta = new RGBf(1.0f, 0.0f, 1.0f);
 		/// <summary>Represents a yellow color.</summary>
-		public static readonly RGB Yellow = new RGB(255, 255, 0);
+		public static readonly RGBf Yellow = new RGBf(1.0f, 1.0f, 0.0f);
 		/// <summary>Represents a white color.</summary>
-		public static readonly RGB White = new RGB(255, 255, 255);
+		public static readonly RGBf White = new RGBf(1.0f, 1.0f, 1.0f);
 	}
 }

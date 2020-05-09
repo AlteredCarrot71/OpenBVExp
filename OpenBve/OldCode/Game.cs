@@ -1,5 +1,5 @@
-﻿using System;
-using OpenBveApi.Colors;
+﻿using Common.Colors;
+using System;
 using OpenBveApi.Math;
 
 namespace OpenBve {
@@ -14,9 +14,9 @@ namespace OpenBve {
 		internal struct Fog {
 			internal float Start;
 			internal float End;
-			internal Color24 Color;
+			internal RGB Color;
 			internal double TrackPosition;
-			internal Fog(float Start, float End, Color24 Color, double TrackPosition) {
+			internal Fog(float Start, float End, RGB Color, double TrackPosition) {
 				this.Start = Start;
 				this.End = End;
 				this.Color = Color;
@@ -25,9 +25,9 @@ namespace OpenBve {
 		}
 		internal static float NoFogStart = 800.0f; // must not be 600 or below
 		internal static float NoFogEnd = 1600.0f;
-		internal static Fog PreviousFog = new Fog(NoFogStart, NoFogEnd, new Color24(128, 128, 128), 0.0);
-		internal static Fog CurrentFog = new Fog(NoFogStart, NoFogEnd, new Color24(128, 128, 128), 0.5);
-		internal static Fog NextFog = new Fog(NoFogStart, NoFogEnd, new Color24(128, 128, 128), 1.0);
+		internal static Fog PreviousFog = new Fog(NoFogStart, NoFogEnd, new RGB(128, 128, 128), 0.0);
+		internal static Fog CurrentFog = new Fog(NoFogStart, NoFogEnd, new RGB(128, 128, 128), 0.5);
+		internal static Fog NextFog = new Fog(NoFogStart, NoFogEnd, new RGB(128, 128, 128), 1.0);
 		
 		// route constants
 		internal static string RouteComment = "";
@@ -255,9 +255,9 @@ namespace OpenBve {
 			TrainStart = TrainStartMode.EmergencyBrakesNoAts;
 			NoFogStart = (float)Math.Max(1.33333333333333 * Interface.CurrentOptions.ViewingDistance, 800.0);
 			NoFogEnd = (float)Math.Max(2.66666666666667 * Interface.CurrentOptions.ViewingDistance, 1600.0);
-			PreviousFog = new Fog(NoFogStart, NoFogEnd, new Color24(128, 128, 128), 0.0);
-			CurrentFog = new Fog(NoFogStart, NoFogEnd, new Color24(128, 128, 128), 0.5);
-			NextFog = new Fog(NoFogStart, NoFogEnd, new Color24(128, 128, 128), 1.0);
+			PreviousFog = new Fog(NoFogStart, NoFogEnd, new RGB(128, 128, 128), 0.0);
+			CurrentFog = new Fog(NoFogStart, NoFogEnd, new RGB(128, 128, 128), 0.5);
+			NextFog = new Fog(NoFogStart, NoFogEnd, new RGB(128, 128, 128), 1.0);
 			InfoTotalTriangles = 0;
 			InfoTotalTriangleStrip = 0;
 			InfoTotalQuads = 0;

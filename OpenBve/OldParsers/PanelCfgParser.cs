@@ -1,5 +1,5 @@
-﻿using System;
-using OpenBveApi.Colors;
+﻿using Common.Colors;
+using System;
 using OpenBveApi.Math;
 
 namespace OpenBve {
@@ -112,12 +112,12 @@ namespace OpenBve {
 					Interface.AddMessage(Interface.MessageType.Error, true, "The panel image could not be found in " + FileName);
 				} else {
 					Textures.Texture t;
-					Textures.RegisterTexture(PanelBackground, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t);
+					Textures.RegisterTexture(PanelBackground, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t);
 					Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
 					double w = (double)t.Width;
 					double h = (double)t.Height;
 					SemiHeight = FullHeight - h;
-					CreateElement(Train, 0, SemiHeight, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+					CreateElement(Train, 0, SemiHeight, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 				}
 			}
 			// parse lines for rest
@@ -139,7 +139,7 @@ namespace OpenBve {
 							case "圧力計":
 								{
 									int Type = 0;
-									Color32[] NeedleColor = new Color32[] { new Color32(0, 0, 0, 255), new Color32(0, 0, 0, 255) };
+									RGBA[] NeedleColor = new RGBA[] { new RGBA(0, 0, 0, 255), new RGBA(0, 0, 0, 255) };
 									int[] NeedleType = new int[] { 0, 0 };
 									double CenterX = 0.0, CenterY = 0.0, Radius = 16.0;
 									string Background = null, Cover = null;
@@ -221,7 +221,7 @@ namespace OpenBve {
 														Interface.AddMessage(Interface.MessageType.Error, false, "BlueValue is required to be within the range from 0 to 255 in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 														b = b < 0 ? 0 : 255;
 													}
-													NeedleColor[k] = new Color32((byte)r, (byte)g, (byte)b, 255);
+													NeedleColor[k] = new RGBA((byte)r, (byte)g, (byte)b, 255);
 													break;
 												case "center":
 												case "中心":
@@ -315,20 +315,20 @@ namespace OpenBve {
 									// background
 									if (Background != null) {
 										Textures.Texture t;
-										Textures.RegisterTexture(Background, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t);
+										Textures.RegisterTexture(Background, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
 										double w = (double)t.Width;
 										double h = (double)t.Height;
-										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 3.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 3.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 									}
 									// cover
 									if (Cover != null) {
 										Textures.Texture t;
-										Textures.RegisterTexture(Cover, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t);
+										Textures.RegisterTexture(Cover, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
 										double w = (double)t.Width;
 										double h = (double)t.Height;
-										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 6.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 6.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 									}
 									if (Type == 0) {
 										// needles
@@ -417,7 +417,7 @@ namespace OpenBve {
 							case "速度計":
 								{
 									int Type = 0;
-									Color32 Needle = new Color32(255, 255, 255, 255);
+									RGBA Needle = new RGBA(255, 255, 255, 255);
 									bool NeedleOverridden = false;
 									double CenterX = 0.0, CenterY = 0.0, Radius = 16.0;
 									string Background = null, Cover = null, Atc = null;
@@ -476,7 +476,7 @@ namespace OpenBve {
 															Interface.AddMessage(Interface.MessageType.Error, false, "BlueValue is required to be within the range from 0 to 255 in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															b = b < 0 ? 0 : 255;
 														}
-														Needle = new Color32((byte)r, (byte)g, (byte)b, 255);
+														Needle = new RGBA((byte)r, (byte)g, (byte)b, 255);
 														NeedleOverridden = true;
 													} break;
 												case "cover":
@@ -537,20 +537,20 @@ namespace OpenBve {
 									if (Background != null) {
 										// background/led
 										Textures.Texture t;
-										Textures.RegisterTexture(Background, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t);
+										Textures.RegisterTexture(Background, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
 										double w = (double)t.Width;
 										double h = (double)t.Height;
-										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 3.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 3.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 									}
 									if (Cover != null) {
 										// cover
 										Textures.Texture t;
-										Textures.RegisterTexture(Cover, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t);
+										Textures.RegisterTexture(Cover, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
 										double w = (double)t.Width;
 										double h = (double)t.Height;
-										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 6.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 6.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 									}
 									if (Atc != null) {
 										// atc
@@ -582,12 +582,12 @@ namespace OpenBve {
 												double x = CenterX - 0.5 * h + Math.Sin(a) * AtcRadius;
 												double y = CenterY - 0.5 * h - Math.Cos(a) * AtcRadius + SemiHeight;
 												Textures.Texture t;
-												Textures.RegisterTexture(Atc, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(j * h, 0, h, h), Color24.Blue), out t);
+												Textures.RegisterTexture(Atc, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(j * h, 0, h, h), RGB.Blue), out t);
 												Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
 												if (j == 0) {
-													k = CreateElement(Train, x, y, (double)h, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 4.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+													k = CreateElement(Train, x, y, (double)h, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 4.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 												} else {
-													CreateElement(Train, x, y, (double)h, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 4.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), true);
+													CreateElement(Train, x, y, (double)h, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 4.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), true);
 												}
 											}
 											Train.Cars[Train.DriverCar].CarSections[0].Elements[k].StateFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation("271 pluginstate");
@@ -611,7 +611,7 @@ namespace OpenBve {
 										Train.Cars[Train.DriverCar].CarSections[0].Elements[j].RotateZFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation("speedometer abs " + c1.ToString(Culture) + " " + c0.ToString(Culture) + " fma");
 									} else if (Type == 1) {
 										// led
-										if (!NeedleOverridden) Needle = new Color32(0, 0, 0, 255);
+										if (!NeedleOverridden) Needle = new RGBA(0, 0, 0, 255);
 										int j = CreateElement(Train, CenterX - Radius, CenterY + SemiHeight - Radius, 2.0 * Radius, 2.0 * Radius, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 5.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, null, Needle, false);
 										double x0 = Train.Cars[Train.DriverCar].CarSections[0].Elements[j].States[0].Object.Mesh.Vertices[0].Coordinates.X;
 										double y0 = Train.Cars[Train.DriverCar].CarSections[0].Elements[j].States[0].Object.Mesh.Vertices[0].Coordinates.Y;
@@ -737,16 +737,16 @@ namespace OpenBve {
 											int n = h / Height;
 											Textures.Texture[] t = new Textures.Texture[n];
 											for (int j = 0; j < n; j++) {
-												Textures.RegisterTexture(Number, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(w - Width, j * Height, Width, Height), Color24.Blue), out t[j]);
+												Textures.RegisterTexture(Number, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(w - Width, j * Height, Width, Height), RGB.Blue), out t[j]);
 												//TextureManager.UseTexture(t[j], TextureManager.UseMode.Normal);
 											}
 											{ // hundreds
 												int k = -1;
 												for (int j = 0; j < n; j++) {
 													if (j == 0) {
-														k = CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new Color32(255, 255, 255, 255), false);
+														k = CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new RGBA(255, 255, 255, 255), false);
 													} else {
-														CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new Color32(255, 255, 255, 255), true);
+														CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new RGBA(255, 255, 255, 255), true);
 													}
 												}
 												Train.Cars[Train.DriverCar].CarSections[0].Elements[k].StateFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation("speedometer abs " + UnitFactor.ToString(Culture) + " * ~ 100 >= <> 100 quotient 10 mod 10 ?");
@@ -755,9 +755,9 @@ namespace OpenBve {
 												int k = -1;
 												for (int j = 0; j < n; j++) {
 													if (j == 0) {
-														k = CreateElement(Train, CornerX + (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new Color32(255, 255, 255, 255), false);
+														k = CreateElement(Train, CornerX + (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new RGBA(255, 255, 255, 255), false);
 													} else {
-														CreateElement(Train, CornerX + (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new Color32(255, 255, 255, 255), true);
+														CreateElement(Train, CornerX + (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new RGBA(255, 255, 255, 255), true);
 													}
 												}
 												Train.Cars[Train.DriverCar].CarSections[0].Elements[k].StateFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation("speedometer abs " + UnitFactor.ToString(Culture) + " * ~ 10 >= <> 10 quotient 10 mod 10 ?");
@@ -766,9 +766,9 @@ namespace OpenBve {
 												int k = -1;
 												for (int j = 0; j < n; j++) {
 													if (j == 0) {
-														k = CreateElement(Train, CornerX + 2.0 * (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new Color32(255, 255, 255, 255), false);
+														k = CreateElement(Train, CornerX + 2.0 * (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new RGBA(255, 255, 255, 255), false);
 													} else {
-														CreateElement(Train, CornerX + 2.0 * (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new Color32(255, 255, 255, 255), true);
+														CreateElement(Train, CornerX + 2.0 * (double)Width, CornerY + SemiHeight, (double)Width, (double)Height, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 7.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t[j], new RGBA(255, 255, 255, 255), true);
 													}
 												}
 												Train.Cars[Train.DriverCar].CarSections[0].Elements[k].StateFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation("speedometer abs " + UnitFactor.ToString(Culture) + " * floor 10 mod");
@@ -828,16 +828,16 @@ namespace OpenBve {
 									} i--;
 									if (TurnOn != null & TurnOff != null) {
 										Textures.Texture t0, t1;
-										Textures.RegisterTexture(TurnOn, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t0);
-										Textures.RegisterTexture(TurnOff, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t1);
+										Textures.RegisterTexture(TurnOn, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t0);
+										Textures.RegisterTexture(TurnOff, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t1);
 										Textures.LoadTexture(t0, Textures.OpenGlTextureWrapMode.ClampClamp);
 										Textures.LoadTexture(t1, Textures.OpenGlTextureWrapMode.ClampClamp);
 										double w = (double)t0.Width;
 										double h = (double)t0.Height;
-										int j = CreateElement(Train, CornerX, CornerY + SemiHeight, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 2.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t0, new Color32(255, 255, 255, 255), false);
+										int j = CreateElement(Train, CornerX, CornerY + SemiHeight, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 2.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t0, new RGBA(255, 255, 255, 255), false);
 										w = (double)t1.Width;
 										h = (double)t1.Height;
-										CreateElement(Train, CornerX, CornerY + SemiHeight, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 2.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t1, new Color32(255, 255, 255, 255), true);
+										CreateElement(Train, CornerX, CornerY + SemiHeight, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 2.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t1, new RGBA(255, 255, 255, 255), true);
 										Train.Cars[Train.DriverCar].CarSections[0].Elements[j].StateFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation("doors 0 !=");
 									}
 								} break;
@@ -845,7 +845,7 @@ namespace OpenBve {
 							case "watch":
 							case "時計":
 								{
-									Color32 Needle = new Color32(0, 0, 0, 255);
+									RGBA Needle = new RGBA(0, 0, 0, 255);
 									double CenterX = 0.0, CenterY = 0.0, Radius = 16.0;
 									string Background = null;
 									i++; while (i < Lines.Length && !(Lines[i].StartsWith("[", StringComparison.Ordinal) & Lines[i].EndsWith("]", StringComparison.Ordinal))) {
@@ -893,7 +893,7 @@ namespace OpenBve {
 															Interface.AddMessage(Interface.MessageType.Error, false, "BlueValue is required to be within the range from 0 to 255 in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															b = b < 0 ? 0 : 255;
 														}
-														Needle = new Color32((byte)r, (byte)g, (byte)b, 255);
+														Needle = new RGBA((byte)r, (byte)g, (byte)b, 255);
 													} break;
 												case "center":
 												case "中心":
@@ -915,11 +915,11 @@ namespace OpenBve {
 									} i--;
 									if (Background != null) {
 										Textures.Texture t;
-										Textures.RegisterTexture(Background, new OpenBveApi.Textures.TextureParameters(null, Color24.Blue), out t);
+										Textures.RegisterTexture(Background, new OpenBveApi.Textures.TextureParameters(null, RGB.Blue), out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
 										double w = (double)t.Width;
 										double h = (double)t.Height;
-										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 3.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+										CreateElement(Train, CenterX - 0.5 * w, CenterY + SemiHeight - 0.5 * h, w, h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - 3.0 * StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 									}
 									string Folder = Program.FileSystem.GetDataFolder("Compatibility");
 									{ // hour
@@ -1023,12 +1023,12 @@ namespace OpenBve {
 											for (int j = 0; j < n; j++) {
 												Textures.Texture t;
 												OpenBveApi.Textures.TextureClipRegion clip = new OpenBveApi.Textures.TextureClipRegion(j * Width, 0, Width, h);
-												Textures.RegisterTexture(Image, new OpenBveApi.Textures.TextureParameters(clip, Color24.Blue), out t);
+												Textures.RegisterTexture(Image, new OpenBveApi.Textures.TextureParameters(clip, RGB.Blue), out t);
 												//TextureManager.UseTexture(t, TextureManager.UseMode.Normal);
 												if (j == 0) {
-													k = CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), false);
+													k = CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), false);
 												} else {
-													CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new Color32(255, 255, 255, 255), true);
+													CreateElement(Train, CornerX, CornerY + SemiHeight, (double)Width, (double)h, FullWidth, FullHeight, WorldLeft, WorldTop, WorldWidth, WorldHeight, WorldZ + EyeDistance - StackDistance, Train.Cars[Train.DriverCar].DriverX, Train.Cars[Train.DriverCar].DriverY, Train.Cars[Train.DriverCar].DriverZ, t, new RGBA(255, 255, 255, 255), true);
 												}
 											}
 											if (Train.Cars[Train.DriverCar].Specs.BrakeType == TrainManager.CarBrakeType.AutomaticAirBrake) {
@@ -1081,7 +1081,7 @@ namespace OpenBve {
 		}
 
 		// create element
-		private static int CreateElement(TrainManager.Train Train, double Left, double Top, double Width, double Height, double FullWidth, double FullHeight, double WorldLeft, double WorldTop, double WorldWidth, double WorldHeight, double WorldZ, double DriverX, double DriverY, double DriverZ, Textures.Texture Texture, Color32 Color, bool AddStateToLastElement) {
+		private static int CreateElement(TrainManager.Train Train, double Left, double Top, double Width, double Height, double FullWidth, double FullHeight, double WorldLeft, double WorldTop, double WorldWidth, double WorldHeight, double WorldZ, double DriverX, double DriverY, double DriverZ, Textures.Texture Texture, RGBA Color, bool AddStateToLastElement) {
 			// create object
 			ObjectManager.StaticObject Object = new ObjectManager.StaticObject();
 			Vector3[] v = new Vector3[4];
@@ -1100,7 +1100,7 @@ namespace OpenBve {
 			Object.Mesh.Materials = new World.MeshMaterial[1];
 			Object.Mesh.Materials[0].Flags = Texture != null ? (byte)World.MeshMaterial.TransparentColorMask : (byte)0;
 			Object.Mesh.Materials[0].Color = Color;
-			Object.Mesh.Materials[0].TransparentColor = new Color24(0, 0, 255);
+			Object.Mesh.Materials[0].TransparentColor = new RGB(0, 0, 255);
 			Object.Mesh.Materials[0].DaytimeTexture = Texture;
 			Object.Mesh.Materials[0].NighttimeTexture = null;
 			Object.Dynamic = true;

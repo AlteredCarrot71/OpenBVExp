@@ -1,5 +1,5 @@
-﻿using System;
-using OpenBveApi.Colors;
+﻿using Common.Colors;
+using System;
 using OpenBveApi.Math;
 
 namespace OpenBve {
@@ -35,7 +35,7 @@ namespace OpenBve {
 			double PanelBitmapWidth = 1024.0, PanelBitmapHeight = 1024.0;
 			string PanelDaytimeImage = null;
 			string PanelNighttimeImage = null;
-			Color24 PanelTransparentColor = new Color24(0, 0, 255);
+			RGB PanelTransparentColor = new RGB(0, 0, 255);
 			// parse lines for panel
 			for (int i = 0; i < Lines.Length; i++) {
 				if (Lines[i].Length > 0) {
@@ -161,20 +161,20 @@ namespace OpenBve {
 					PanelDaytimeImage = null;
 				} else {
 					Textures.Texture tday;
-					Textures.RegisterTexture(PanelDaytimeImage, new OpenBveApi.Textures.TextureParameters(null, new Color24(PanelTransparentColor.R, PanelTransparentColor.G, PanelTransparentColor.B)), out tday);
+					Textures.RegisterTexture(PanelDaytimeImage, new OpenBveApi.Textures.TextureParameters(null, new RGB(PanelTransparentColor.R, PanelTransparentColor.G, PanelTransparentColor.B)), out tday);
 					Textures.Texture tnight = null;
 					if (PanelNighttimeImage != null) {
 						if (!System.IO.File.Exists(PanelNighttimeImage)) {
 							Interface.AddMessage(Interface.MessageType.Error, true, "The nighttime panel bitmap could not be found in " + FileName);
 							PanelNighttimeImage = null;
 						} else {
-							Textures.RegisterTexture(PanelNighttimeImage, new OpenBveApi.Textures.TextureParameters(null, new Color24(PanelTransparentColor.R, PanelTransparentColor.G, PanelTransparentColor.B)), out tnight);
+							Textures.RegisterTexture(PanelNighttimeImage, new OpenBveApi.Textures.TextureParameters(null, new RGB(PanelTransparentColor.R, PanelTransparentColor.G, PanelTransparentColor.B)), out tnight);
 						}
 					}
 					Textures.LoadTexture(tday, Textures.OpenGlTextureWrapMode.ClampClamp);
 					PanelBitmapWidth = (double)tday.Width;
 					PanelBitmapHeight = (double)tday.Height;
-					CreateElement(Train, 0.0, 0.0, PanelBitmapWidth, PanelBitmapHeight, 0.5, 0.5, 0.0, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, tday, tnight, new Color32(255, 255, 255, 255), false);
+					CreateElement(Train, 0.0, 0.0, PanelBitmapWidth, PanelBitmapHeight, 0.5, 0.5, 0.0, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, tday, tnight, new RGBA(255, 255, 255, 255), false);
 				}
 			}
 			// parse lines for rest
@@ -195,7 +195,7 @@ namespace OpenBve {
 									string Subject = "true";
 									double LocationX = 0.0, LocationY = 0.0;
 									string DaytimeImage = null, NighttimeImage = null;
-									Color24 TransparentColor = new Color24(0, 0, 255);
+									RGB TransparentColor = new RGB(0, 0, 255);
 									int Layer = 0;
 									i++; while (i < Lines.Length && !(Lines[i].StartsWith("[", StringComparison.Ordinal) & Lines[i].EndsWith("]", StringComparison.Ordinal))) {
 										int j = Lines[i].IndexOf('=');
@@ -261,15 +261,15 @@ namespace OpenBve {
 									// create element
 									if (DaytimeImage != null) {
 										Textures.Texture tday;
-										Textures.RegisterTexture(DaytimeImage, new OpenBveApi.Textures.TextureParameters(null, new Color24(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tday);
+										Textures.RegisterTexture(DaytimeImage, new OpenBveApi.Textures.TextureParameters(null, new RGB(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tday);
 										Textures.Texture tnight = null;
 										if (NighttimeImage != null) {
-											Textures.RegisterTexture(NighttimeImage, new OpenBveApi.Textures.TextureParameters(null, new Color24(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tnight);
+											Textures.RegisterTexture(NighttimeImage, new OpenBveApi.Textures.TextureParameters(null, new RGB(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tnight);
 										}
 										Textures.LoadTexture(tday, Textures.OpenGlTextureWrapMode.ClampClamp);
 										int w = tday.Width;
 										int h = tday.Height;
-										int j = CreateElement(Train, LocationX, LocationY, w, h, 0.5, 0.5, (double)Layer * StackDistance, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, tday, tnight, new Color32(255, 255, 255, 255), false);
+										int j = CreateElement(Train, LocationX, LocationY, w, h, 0.5, 0.5, (double)Layer * StackDistance, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, tday, tnight, new RGBA(255, 255, 255, 255), false);
 										string f = GetStackLanguageFromSubject(Train, Subject, Section + " in " + FileName);
 										Train.Cars[Train.DriverCar].CarSections[0].Elements[j].StateFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation(f + " 1 == --");
 									}
@@ -280,8 +280,8 @@ namespace OpenBve {
 									string Subject = "true";
 									double LocationX = 0.0, LocationY = 0.0;
 									string DaytimeImage = null, NighttimeImage = null;
-									Color32 Color = new Color32(255, 255, 255, 255);
-									Color24 TransparentColor = new Color24(0, 0, 255);
+									RGBA Color = new RGBA(255, 255, 255, 255);
+									RGB TransparentColor = new RGB(0, 0, 255);
 									double OriginX = -1.0, OriginY = -1.0;
 									bool OriginDefined = false;
 									double Layer = 0.0, Radius = 0.0;
@@ -413,10 +413,10 @@ namespace OpenBve {
 									// create element
 									if (DaytimeImage != null) {
 										Textures.Texture tday;
-										Textures.RegisterTexture(DaytimeImage, new OpenBveApi.Textures.TextureParameters(null, new Color24(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tday);
+										Textures.RegisterTexture(DaytimeImage, new OpenBveApi.Textures.TextureParameters(null, new RGB(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tday);
 										Textures.Texture tnight = null;
 										if (NighttimeImage != null) {
-											Textures.RegisterTexture(NighttimeImage, new OpenBveApi.Textures.TextureParameters(null, new Color24(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tnight);
+											Textures.RegisterTexture(NighttimeImage, new OpenBveApi.Textures.TextureParameters(null, new RGB(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tnight);
 										}
 										Textures.LoadTexture(tday, Textures.OpenGlTextureWrapMode.ClampClamp);
 										double w = (double)tday.Width;
@@ -466,7 +466,7 @@ namespace OpenBve {
 									string Subject = "true";
 									double LocationX = 0.0, LocationY = 0.0;
 									string DaytimeImage = null, NighttimeImage = null;
-									Color24 TransparentColor = new Color24(0, 0, 255);
+									RGB TransparentColor = new RGB(0, 0, 255);
 									double Layer = 0.0; int Interval = 0;
 									i++; while (i < Lines.Length && !(Lines[i].StartsWith("[", StringComparison.Ordinal) & Lines[i].EndsWith("]", StringComparison.Ordinal))) {
 										int j = Lines[i].IndexOf('=');
@@ -547,7 +547,7 @@ namespace OpenBve {
 											Textures.Texture[] tday = new Textures.Texture[nday];
 											Textures.Texture[] tnight;
 											for (int k = 0; k < nday; k++) {
-												Textures.RegisterTexture(DaytimeImage, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(0, k * Interval, wday, Interval), new Color24(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tday[k]);
+												Textures.RegisterTexture(DaytimeImage, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(0, k * Interval, wday, Interval), new RGB(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tday[k]);
 											}
 											if (NighttimeImage != null) {
 												int wnight, hnight;
@@ -556,7 +556,7 @@ namespace OpenBve {
 												if (nnight > nday) nnight = nday;
 												tnight = new Textures.Texture[nday];
 												for (int k = 0; k < nnight; k++) {
-													Textures.RegisterTexture(NighttimeImage, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(0, k * Interval, wday, Interval), new Color24(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tnight[k]);
+													Textures.RegisterTexture(NighttimeImage, new OpenBveApi.Textures.TextureParameters(new OpenBveApi.Textures.TextureClipRegion(0, k * Interval, wday, Interval), new RGB(TransparentColor.R, TransparentColor.G, TransparentColor.B)), out tnight[k]);
 												}
 												for (int k = nnight; k < nday; k++) {
 													tnight[k] = null;
@@ -569,7 +569,7 @@ namespace OpenBve {
 											}
 											int j = -1;
 											for (int k = 0; k < tday.Length; k++) {
-												int l = CreateElement(Train, LocationX, LocationY, (double)wday, (double)Interval, 0.5, 0.5, (double)Layer * StackDistance, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, tday[k], tnight[k], new Color32(255, 255, 255, 255), k != 0);
+												int l = CreateElement(Train, LocationX, LocationY, (double)wday, (double)Interval, 0.5, 0.5, (double)Layer * StackDistance, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, tday[k], tnight[k], new RGBA(255, 255, 255, 255), k != 0);
 												if (k == 0) j = l;
 											}
 											string f = GetStackLanguageFromSubject(Train, Subject, Section + " in " + FileName);
@@ -582,7 +582,7 @@ namespace OpenBve {
 								{
 									string Subject = "true";
 									double LocationX = 0.0, LocationY = 0.0;
-									Color32 Color = new Color32(0, 0, 0, 255);
+									RGBA Color = new RGBA(0, 0, 0, 255);
 									double Radius = 0.0;
 									int Layer = 0;
 									double InitialAngle = -2.0943951023932, LastAngle = 2.0943951023932;
@@ -723,7 +723,7 @@ namespace OpenBve {
 								{
 									double LocationX = 0.0, LocationY = 0.0;
 									double Width = 0.0, Height = 0.0;
-									Color24 TransparentColor = new Color24(0, 0, 255);
+									RGB TransparentColor = new RGB(0, 0, 255);
 									double Layer = 0.0;
 									i++; while (i < Lines.Length && !(Lines[i].StartsWith("[", StringComparison.Ordinal) & Lines[i].EndsWith("]", StringComparison.Ordinal))) {
 										int j = Lines[i].IndexOf('=');
@@ -776,7 +776,7 @@ namespace OpenBve {
 										Interface.AddMessage(Interface.MessageType.Error, false, "Height is required to be specified in " + Section + " in " + FileName);
 									}
 									if (Width > 0.0 & Height > 0.0) {
-										int j = CreateElement(Train, LocationX, LocationY, Width, Height, 0.5, 0.5, (double)Layer * StackDistance, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, null, null, new Color32(255, 255, 255, 255), false);
+										int j = CreateElement(Train, LocationX, LocationY, Width, Height, 0.5, 0.5, (double)Layer * StackDistance, PanelResolution, PanelLeft, PanelRight, PanelTop, PanelBottom, PanelBitmapWidth, PanelBitmapHeight, PanelCenterX, PanelCenterY, PanelOriginX, PanelOriginY, DriverX, DriverY, DriverZ, null, null, new RGBA(255, 255, 255, 255), false);
 										Train.Cars[Train.DriverCar].CarSections[0].Elements[j].StateFunction = FunctionScripts.GetFunctionScriptFromPostfixNotation("timetable");
 										Timetable.AddObjectForCustomTimetable(Train.Cars[Train.DriverCar].CarSections[0].Elements[j]);
 									}
@@ -922,7 +922,7 @@ namespace OpenBve {
 		}
 
 		// create element
-		private static int CreateElement(TrainManager.Train Train, double Left, double Top, double Width, double Height, double RelativeRotationCenterX, double RelativeRotationCenterY, double Distance, double PanelResolution, double PanelLeft, double PanelRight, double PanelTop, double PanelBottom, double PanelBitmapWidth, double PanelBitmapHeight, double PanelCenterX, double PanelCenterY, double PanelOriginX, double PanelOriginY, double DriverX, double DriverY, double DriverZ, Textures.Texture DaytimeTexture, Textures.Texture NighttimeTexture, Color32 Color, bool AddStateToLastElement) {
+		private static int CreateElement(TrainManager.Train Train, double Left, double Top, double Width, double Height, double RelativeRotationCenterX, double RelativeRotationCenterY, double Distance, double PanelResolution, double PanelLeft, double PanelRight, double PanelTop, double PanelBottom, double PanelBitmapWidth, double PanelBitmapHeight, double PanelCenterX, double PanelCenterY, double PanelOriginX, double PanelOriginY, double DriverX, double DriverY, double DriverZ, Textures.Texture DaytimeTexture, Textures.Texture NighttimeTexture, RGBA Color, bool AddStateToLastElement) {
 			double WorldWidth, WorldHeight;
 			if (Screen.Width >= Screen.Height) {
 				WorldWidth = 2.0 * Math.Tan(0.5 * World.HorizontalViewingAngle) * EyeDistance;
@@ -961,7 +961,7 @@ namespace OpenBve {
 			Object.Mesh.Materials = new World.MeshMaterial[1];
 			Object.Mesh.Materials[0].Flags = (byte)(DaytimeTexture != null ? World.MeshMaterial.TransparentColorMask : 0);
 			Object.Mesh.Materials[0].Color = Color;
-			Object.Mesh.Materials[0].TransparentColor = new Color24(0, 0, 255);
+			Object.Mesh.Materials[0].TransparentColor = new RGB(0, 0, 255);
 			Object.Mesh.Materials[0].DaytimeTexture = DaytimeTexture;
 			Object.Mesh.Materials[0].NighttimeTexture = NighttimeTexture;
 			Object.Dynamic = true;

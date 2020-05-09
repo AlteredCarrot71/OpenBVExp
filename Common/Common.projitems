@@ -11,5 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Colors\RGB.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Colors\RGBA.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\RGBAf.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Colors\RGBf.cs" />
   </ItemGroup>
 </Project>

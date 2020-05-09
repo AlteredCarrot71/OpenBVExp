@@ -1,13 +1,12 @@
-﻿using System;
-using OpenBveApi.Colors;
+﻿using Common.Colors;
+using System;
 
-namespace OpenBveApi.Textures {
+namespace OpenBveApi.Textures 
+{
 	/// <summary>Provides functions for manipulating textures.</summary>
-	internal static class Functions {
-		
-		
+	internal static class Functions 
+	{
 		// --- apply parameters ---
-		
 		/// <summary>Applies parameters onto a texture.</summary>
 		/// <param name="texture">The original texture.</param>
 		/// <param name="parameters">The parameters, or a null reference.</param>
@@ -92,7 +91,7 @@ namespace OpenBveApi.Textures {
 		/// <param name="color">The transparent color, or a null reference.</param>
 		/// <returns>The texture with the transparent color applied.</returns>
 		/// <exception cref="System.NotSupportedException">Raised when the number of bits per pixel in the texture is not supported.</exception>
-		internal static Texture ApplyTransparentColor(Texture texture, Color24? color) {
+		internal static Texture ApplyTransparentColor(Texture texture, RGB? color) {
 			if (color == null) {
 				return texture;
 			} else if (texture.BitsPerPixel == 32) {
@@ -132,6 +131,5 @@ namespace OpenBveApi.Textures {
 				throw new NotSupportedException();
 			}
 		}
-		
 	}
 }

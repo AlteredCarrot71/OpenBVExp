@@ -111,8 +111,6 @@
     <Compile Include="BasicMaterial.cs">
       <DependentUpon>Objects.cs</DependentUpon>
     </Compile>
-    <Compile Include="Colors.cs">
-    </Compile>
     <Compile Include="Math.cs" />
     <Compile Include="Hosts.cs" />
     <Compile Include="Objects.cs" />
@@ -137,4 +135,5 @@
       <DependentUpon>Math.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <Import Project="..\Common\Common.projitems" Label="Shared" />
 </Project>

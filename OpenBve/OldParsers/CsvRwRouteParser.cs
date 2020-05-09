@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-
 using OpenBveApi;
-using OpenBveApi.Colors;
 using OpenBveApi.Math;
 
-namespace OpenBve {
-	internal class CsvRwRouteParser {
-
+namespace OpenBve 
+{
+	internal class CsvRwRouteParser 
+	{
 		// structures
 		private struct Rail {
 			internal bool RailStart;
@@ -249,7 +249,7 @@ namespace OpenBve {
 				Data.Blocks[0].Brightness = new Brightness[] { };
 				Data.Blocks[0].Fog.Start = Game.NoFogStart;
 				Data.Blocks[0].Fog.End = Game.NoFogEnd;
-				Data.Blocks[0].Fog.Color = new Color24(128, 128, 128);
+				Data.Blocks[0].Fog.Color = new RGB(128, 128, 128);
 				Data.Blocks[0].Cycle = new int[] { -1 };
 				Data.Blocks[0].Height = IsRW ? 0.3 : 0.0;
 				Data.Blocks[0].RailFreeObj = new FreeObj[][] { };
@@ -1730,7 +1730,7 @@ namespace OpenBve {
 											Interface.AddMessage(Interface.MessageType.Error, false, "BlueValue is required to be within the range from 0 to 255 in " + Command + " at line " + Expressions[j].Line.ToString(Culture) + ", column " + Expressions[j].Column.ToString(Culture) + " in file " + Expressions[j].File);
 											b = b < 0 ? 0 : 255;
 										}
-										Renderer.OptionAmbientColor = new Color24((byte)r, (byte)g, (byte)b);
+										Renderer.OptionAmbientColor = new RGB((byte)r, (byte)g, (byte)b);
 									} break;
 								case "route.directionallight":
 									{
@@ -1753,7 +1753,7 @@ namespace OpenBve {
 											Interface.AddMessage(Interface.MessageType.Error, false, "BlueValue is required to be within the range from 0 to 255 in " + Command + " at line " + Expressions[j].Line.ToString(Culture) + ", column " + Expressions[j].Column.ToString(Culture) + " in file " + Expressions[j].File);
 											b = b < 0 ? 0 : 255;
 										}
-										Renderer.OptionDiffuseColor = new Color24((byte)r, (byte)g, (byte)b);
+										Renderer.OptionDiffuseColor = new RGB((byte)r, (byte)g, (byte)b);
 									}
 									break;
 								case "route.lightdirection":
@@ -3059,7 +3059,7 @@ namespace OpenBve {
 												Data.Blocks[BlockIndex].Fog.Start = Game.NoFogStart;
 												Data.Blocks[BlockIndex].Fog.End = Game.NoFogEnd;
 											}
-											Data.Blocks[BlockIndex].Fog.Color = new Color24((byte)r, (byte)g, (byte)b);
+											Data.Blocks[BlockIndex].Fog.Color = new RGB((byte)r, (byte)g, (byte)b);
 											Data.Blocks[BlockIndex].FogDefined = true;
 										}
 									} break;
@@ -4181,7 +4181,7 @@ namespace OpenBve {
 													Array.Resize<Marker>(ref Data.Markers, n + 1);
 													Data.Markers[n].StartingPosition = start;
 													Data.Markers[n].EndingPosition = end;
-													Textures.RegisterTexture(f, new OpenBveApi.Textures.TextureParameters(null, new Color24(64, 64, 64)), out Data.Markers[n].Texture);
+													Textures.RegisterTexture(f, new OpenBveApi.Textures.TextureParameters(null, new RGB(64, 64, 64)), out Data.Markers[n].Texture);
 												}
 											}
 										}
@@ -4729,7 +4729,7 @@ namespace OpenBve {
 												Textures[j] = OpenBve.Textures.RegisterTexture(texture);
 											}
 										} else {
-											OpenBve.Textures.RegisterTexture(Files[i], new OpenBveApi.Textures.TextureParameters(null, Color24.Black), out Textures[j]);
+											OpenBve.Textures.RegisterTexture(Files[i], new OpenBveApi.Textures.TextureParameters(null, RGB.Black), out Textures[j]);
 										}
 										break;
 								}
@@ -4914,8 +4914,8 @@ namespace OpenBve {
 			int CurrentTrackLength = 0;
 			int PreviousFogElement = -1;
 			int PreviousFogEvent = -1;
-			Game.Fog PreviousFog = new Game.Fog(Game.NoFogStart, Game.NoFogEnd, new Color24(128, 128, 128), -Data.BlockInterval);
-			Game.Fog CurrentFog = new Game.Fog(Game.NoFogStart, Game.NoFogEnd, new Color24(128, 128, 128), 0.0);
+			Game.Fog PreviousFog = new Game.Fog(Game.NoFogStart, Game.NoFogEnd, new RGB(128, 128, 128), -Data.BlockInterval);
+			Game.Fog CurrentFog = new Game.Fog(Game.NoFogStart, Game.NoFogEnd, new RGB(128, 128, 128), 0.0);
 			// process blocks
 			double progressFactor = Data.Blocks.Length - Data.FirstUsedBlock == 0 ? 0.5 : 0.5 / (double)(Data.Blocks.Length - Data.FirstUsedBlock);
 			for (int i = Data.FirstUsedBlock; i < Data.Blocks.Length; i++) {
@@ -6389,6 +6389,5 @@ namespace OpenBve {
 				}
 			}
 		}
-
 	}
 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Common.Colors;
+using System;
 using System.Drawing;
-using OpenBveApi.Colors;
 using Tao.OpenGl;
 
 namespace OpenBve {
@@ -11,7 +11,7 @@ namespace OpenBve {
 		/// <param name="point">The top-left coordinates in pixels.</param>
 		/// <param name="size">The size in pixels.</param>
 		/// <param name="color">The color, or a null reference.</param>
-		internal static void DrawRectangle(Textures.Texture texture, Point point, Size size, Nullable<Color128> color) {
+		internal static void DrawRectangle(Textures.Texture texture, Point point, Size size, Nullable<RGBAf> color) {
 			// TODO: Remove Nullable<T> from color once RenderOverlayTexture and RenderOverlaySolid are fully replaced.
 			if (texture == null || !Textures.LoadTexture(texture, Textures.OpenGlTextureWrapMode.ClampClamp)) {
 				Gl.glDisable(Gl.GL_TEXTURE_2D);

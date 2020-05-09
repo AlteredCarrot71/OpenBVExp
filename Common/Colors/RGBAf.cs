@@ -1,24 +1,24 @@
 ﻿namespace Common.Colors
 {
-	/// <summary>Represents a 32-bit color with red, green, blue and alpha channels at 8 bits each.</summary>
-	public struct RGBA
+	/// <summary>Represents a 128-bit color with red, green, blue and alpha channels at 32 bits each.</summary>
+	public struct RGBAf
 	{
 		// --- members ---
 		/// <summary>The red component.</summary>
-		public byte R;
+		public float R;
 		/// <summary>The green component.</summary>
-		public byte G;
+		public float G;
 		/// <summary>The blue component.</summary>
-		public byte B;
+		public float B;
 		/// <summary>The alpha component.</summary>
-		public byte A;
+		public float A;
 		// --- constructors ---
 		/// <summary>Creates a new color.</summary>
 		/// <param name="r">The red component.</param>
 		/// <param name="g">The green component.</param>
 		/// <param name="b">The blue component.</param>
 		/// <param name="a">The alpha component.</param>
-		public RGBA(byte r, byte g, byte b, byte a)
+		public RGBAf(float r, float g, float b, float a)
 		{
 			this.R = r;
 			this.G = g;
@@ -30,17 +30,17 @@
 		/// <param name="g">The green component.</param>
 		/// <param name="b">The blue component.</param>
 		/// <remarks>The alpha component is set to full opacity.</remarks>
-		public RGBA(byte r, byte g, byte b)
+		public RGBAf(float r, float g, float b)
 		{
 			this.R = r;
 			this.G = g;
 			this.B = b;
-			this.A = 255;
+			this.A = 1.0f;
 		}
 		/// <summary>Creates a new color.</summary>
 		/// <param name="color">The solid color.</param>
 		/// <param name="a">The alpha component.</param>
-		public RGBA(RGB color, byte a)
+		public RGBAf(RGB color, float a)
 		{
 			this.R = color.R;
 			this.G = color.G;
@@ -50,19 +50,19 @@
 		/// <summary>Creates a new color.</summary>
 		/// <param name="color">The solid color.</param>
 		/// <remarks>The alpha component is set to full opacity.</remarks>
-		public RGBA(RGB color)
+		public RGBAf(RGB color)
 		{
 			this.R = color.R;
 			this.G = color.G;
 			this.B = color.B;
-			this.A = 255;
+			this.A = 1.0f;
 		}
 		// --- operators ---
 		/// <summary>Checks whether two colors are equal.</summary>
 		/// <param name="a">The first color.</param>
 		/// <param name="b">The second color.</param>
 		/// <returns>Whether the two colors are equal.</returns>
-		public static bool operator ==(RGBA a, RGBA b)
+		public static bool operator ==(RGBAf a, RGBAf b)
 		{
 			return a.R == b.R & a.G == b.G & a.B == b.B & a.A == b.A;
 		}
@@ -70,43 +70,43 @@
 		/// <param name="a">The first color.</param>
 		/// <param name="b">The second color.</param>
 		/// <returns>Whether the two colors are unequal.</returns>
-		public static bool operator !=(RGBA a, RGBA b)
+		public static bool operator !=(RGBAf a, RGBAf b)
 		{
 			return a.R != b.R | a.G != b.G | a.B != b.B | a.A != b.A;
 		}
 		// --- read-only fields ---
 		/// <summary>Represents a black color.</summary>
-		public static readonly RGBA Black = new RGBA(0, 0, 0);
+		public static readonly RGBAf Black = new RGBAf(0.0f, 0.0f, 0.0f);
 		/// <summary>Represents a red color.</summary>
-		public static readonly RGBA Red = new RGBA(255, 0, 0);
+		public static readonly RGBAf Red = new RGBAf(1.0f, 0.0f, 0.0f);
 		/// <summary>Represents a green color.</summary>
-		public static readonly RGBA Green = new RGBA(0, 255, 0);
+		public static readonly RGBAf Green = new RGBAf(0.0f, 1.0f, 0.0f);
 		/// <summary>Represents a blue color.</summary>
-		public static readonly RGBA Blue = new RGBA(0, 0, 255);
+		public static readonly RGBAf Blue = new RGBAf(0.0f, 0.0f, 1.0f);
 		/// <summary>Represents a cyan color.</summary>
-		public static readonly RGBA Cyan = new RGBA(0, 255, 255);
+		public static readonly RGBAf Cyan = new RGBAf(0.0f, 1.0f, 1.0f);
 		/// <summary>Represents a magenta color.</summary>
-		public static readonly RGBA Magenta = new RGBA(255, 0, 255);
+		public static readonly RGBAf Magenta = new RGBAf(1.0f, 0.0f, 1.0f);
 		/// <summary>Represents a yellow color.</summary>
-		public static readonly RGBA Yellow = new RGBA(255, 255, 0);
+		public static readonly RGBAf Yellow = new RGBAf(1.0f, 1.0f, 0.0f);
 		/// <summary>Represents a white color.</summary>
-		public static readonly RGBA White = new RGBA(255, 255, 255);
+		public static readonly RGBAf White = new RGBAf(1.0f, 1.0f, 1.0f);
 		/// <summary>Represents a transparent black color.</summary>
-		public static readonly RGBA Transparent = new RGBA(0, 0, 0, 0);
+		public static readonly RGBAf Transparent = new RGBAf(0.0f, 0.0f, 0.0f, 0.0f);
 		// --- conversions ---
-		/// <summary>Performs a widening conversion from Color24 to Color32.</summary>
-		/// <param name="value">The Color24 value.</param>
-		/// <returns>The Color32 value.</returns>
-		public static implicit operator RGBA(RGB value)
+		/// <summary>Performs a widening conversion from Color96 to Color128.</summary>
+		/// <param name="value">The Color96 value.</param>
+		/// <returns>The Color128 value.</returns>
+		public static implicit operator RGBAf(RGB value)
 		{
-			return new RGBA(value.R, value.G, value.B);
+			return new RGBAf(value.R, value.G, value.B);
 		}
-		/// <summary>Performs a narrowing conversion from Color32 to Color24.</summary>
-		/// <param name="value">The Color32 value.</param>
-		/// <returns>The Color24 value.</returns>
-		public static explicit operator RGB(RGBA value)
+		/// <summary>Performs a narrowing conversion from Color128 to Color96.</summary>
+		/// <param name="value">The Color128 value.</param>
+		/// <returns>The Color96 value.</returns>
+		public static explicit operator RGBf(RGBAf value)
 		{
-			return new RGB(value.R, value.G, value.B);
+			return new RGBf(value.R, value.G, value.B);
 		}
 	}
 }
