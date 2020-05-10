@@ -1768,7 +1768,7 @@ namespace OpenBve {
 										double dx = Math.Cos(theta) * Math.Sin(phi);
 										double dy = -Math.Sin(theta);
 										double dz = Math.Cos(theta) * Math.Cos(phi);
-										Renderer.OptionLightPosition = new World.Vector3Df((float)-dx, (float)-dy, (float)-dz);
+										Renderer.OptionLightPosition = new Vector3f((float)-dx, (float)-dy, (float)-dz);
 									} break;
 									// train
 								case "train.folder":
