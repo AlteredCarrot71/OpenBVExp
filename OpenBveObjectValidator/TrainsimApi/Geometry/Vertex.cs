@@ -18,7 +18,7 @@ namespace TrainsimApi.Geometry {
 		// --- constructors ---
 		public Vertex(Vector3f position) {
 			this.Position = position;
-			this.Normal = Vector3f.Zero;
+			this.Normal = Vector3f.Null;
 			this.Texture = Vector2f.Null;
 			this.Color = RGBf.White;
 		}

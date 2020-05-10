@@ -127,7 +127,7 @@ namespace TrainsimApi.Vectors {
 		}
 		
 		public static implicit operator Orientation3d(Orientation3f orientation) {
-			return new Orientation3d(orientation.X, orientation.Y, orientation.Z);
+			return new Orientation3d((Vector3d)orientation.X, (Vector3d)orientation.Y, (Vector3d)orientation.Z);
 		}
 		
 		public static explicit operator Orientation3f(Orientation3d orientation) {

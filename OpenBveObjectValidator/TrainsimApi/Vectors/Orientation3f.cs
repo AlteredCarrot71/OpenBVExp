@@ -27,7 +27,7 @@ namespace TrainsimApi.Vectors {
 		
 		public static readonly Orientation3f Default = new Orientation3f(Vector3f.Right, Vector3f.Up,   Vector3f.Forward);
 		
-		public static readonly Orientation3f Zero    = new Orientation3f(Vector3f.Zero,  Vector3f.Zero, Vector3f.Zero);
+		public static readonly Orientation3f Zero    = new Orientation3f(Vector3f.Null,  Vector3f.Null, Vector3f.Null);
 		
 		
 		// --- operators ---
