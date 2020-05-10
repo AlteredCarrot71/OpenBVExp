@@ -763,7 +763,7 @@ namespace OpenBve {
 			internal double DepartureTime;
 			internal Sounds.SoundBuffer DepartureSoundBuffer;
 			internal double StopTime;
-			internal Vector3 SoundOrigin;
+			internal Vector3d SoundOrigin;
 			internal StationStopMode StopMode;
 			internal StationType StationType;
 			internal bool ForceStopSignal;
@@ -1910,7 +1910,7 @@ namespace OpenBve {
 		// points of interest
 		internal struct PointOfInterest {
 			internal double TrackPosition;
-			internal Vector3 TrackOffset;
+			internal Vector3d TrackOffset;
 			internal double TrackYaw;
 			internal double TrackPitch;
 			internal double TrackRoll;

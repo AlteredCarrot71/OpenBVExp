@@ -1,6 +1,6 @@
 ﻿using Common.Colors;
+using Common.Geometry;
 using System;
-using OpenBveApi.Math;
 using Tao.OpenGl;
 
 namespace OpenBve 
@@ -95,13 +95,13 @@ namespace OpenBve
 			internal ObjectList List;
 			internal int OpenGlDisplayList;
 			internal bool OpenGlDisplayListAvailable;
-			internal Vector3 WorldPosition;
+			internal Vector3d WorldPosition;
 			internal bool Update;
 			internal ObjectGroup() {
 				this.List = new ObjectList();
 				this.OpenGlDisplayList = 0;
 				this.OpenGlDisplayListAvailable = false;
-				this.WorldPosition = new Vector3(0.0, 0.0, 0.0);
+				this.WorldPosition = new Vector3d(0.0, 0.0, 0.0);
 				this.Update = true;
 			}
 		}

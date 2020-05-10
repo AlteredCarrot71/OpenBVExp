@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 using System.Collections.Generic;
 using Tao.OpenAl;
 
@@ -22,13 +23,13 @@ namespace OpenBve {
 			/*
 			 * Set up the listener
 			 * */
-			OpenBveApi.Math.Vector3 listenerPosition = World.AbsoluteCameraPosition;
+			Vector3d listenerPosition = World.AbsoluteCameraPosition;
 			OpenBveApi.Math.Orientation3 listenerOrientation = new OpenBveApi.Math.Orientation3(World.AbsoluteCameraSide, World.AbsoluteCameraUp, World.AbsoluteCameraDirection);
-			OpenBveApi.Math.Vector3 listenerVelocity;
+			Vector3d listenerVelocity;
 			if (World.CameraMode == World.CameraViewMode.Interior | World.CameraMode == World.CameraViewMode.InteriorLookAhead | World.CameraMode == World.CameraViewMode.Exterior) {
 				TrainManager.Car car = TrainManager.PlayerTrain.Cars[TrainManager.PlayerTrain.DriverCar];
-				OpenBveApi.Math.Vector3 diff = car.FrontAxle.Follower.WorldPosition - car.RearAxle.Follower.WorldPosition;
-				listenerVelocity = car.Specs.CurrentSpeed * OpenBveApi.Math.Vector3.Normalize(diff) + World.CameraAlignmentSpeed.Position;
+				Vector3d diff = car.FrontAxle.Follower.WorldPosition - car.RearAxle.Follower.WorldPosition;
+				listenerVelocity = car.Specs.CurrentSpeed * Vector3d.Normalize(diff) + World.CameraAlignmentSpeed.Position;
 			} else {
 				listenerVelocity = World.CameraAlignmentSpeed.Position;
 			}
@@ -95,17 +96,17 @@ namespace OpenBve {
 					 * The sound is to be played or is already playing.
 					 * Calculate the sound gain.
 					 * */
-					OpenBveApi.Math.Vector3 position;
-					OpenBveApi.Math.Vector3 velocity;
+					Vector3d position;
+					Vector3d velocity;
 					if (Sources[i].Train != null) {
-						OpenBveApi.Math.Vector3 direction;
+						Vector3d direction;
 						TrainManager.CreateWorldCoordinates(Sources[i].Train, Sources[i].Car, Sources[i].Position.X, Sources[i].Position.Y, Sources[i].Position.Z, out position.X, out position.Y, out position.Z, out direction.X, out direction.Y, out direction.Z);
 						velocity = Sources[i].Train.Cars[Sources[i].Car].Specs.CurrentSpeed * direction;
 					} else {
 						position = Sources[i].Position;
-						velocity = OpenBveApi.Math.Vector3.Null;
+						velocity = Vector3d.Null;
 					}
-					OpenBveApi.Math.Vector3 positionDifference = position - listenerPosition;
+					Vector3d positionDifference = position - listenerPosition;
 					double gain;
 					if (GlobalMute) {
 						gain = 0.0;
@@ -268,19 +269,19 @@ namespace OpenBve {
 			/*
 			 * Set up the listener.
 			 * */
-			OpenBveApi.Math.Vector3 listenerPosition = World.AbsoluteCameraPosition;
+			Vector3d listenerPosition = World.AbsoluteCameraPosition;
 			OpenBveApi.Math.Orientation3 listenerOrientation = new OpenBveApi.Math.Orientation3(World.AbsoluteCameraSide, World.AbsoluteCameraUp, World.AbsoluteCameraDirection);
-			OpenBveApi.Math.Vector3 listenerVelocity;
+			Vector3d listenerVelocity;
 			if (World.CameraMode == World.CameraViewMode.Interior | World.CameraMode == World.CameraViewMode.InteriorLookAhead | World.CameraMode == World.CameraViewMode.Exterior) {
 				TrainManager.Car car = TrainManager.PlayerTrain.Cars[TrainManager.PlayerTrain.DriverCar];
-				OpenBveApi.Math.Vector3 diff = car.FrontAxle.Follower.WorldPosition - car.RearAxle.Follower.WorldPosition;
+				Vector3d diff = car.FrontAxle.Follower.WorldPosition - car.RearAxle.Follower.WorldPosition;
 				if (diff.IsNullVector()) {
-					listenerVelocity = car.Specs.CurrentSpeed * OpenBveApi.Math.Vector3.Forward;
+					listenerVelocity = car.Specs.CurrentSpeed * Vector3d.Forward;
 				} else {
-					listenerVelocity = car.Specs.CurrentSpeed * OpenBveApi.Math.Vector3.Normalize(diff);
+					listenerVelocity = car.Specs.CurrentSpeed * Vector3d.Normalize(diff);
 				}
 			} else {
-				listenerVelocity = OpenBveApi.Math.Vector3.Null;
+				listenerVelocity = Vector3d.Null;
 			}
 			Al.alListener3f(Al.AL_POSITION, 0.0f, 0.0f, 0.0f);
 			Al.alListener3f(Al.AL_VELOCITY, (float)listenerVelocity.X, (float)listenerVelocity.Y, (float)listenerVelocity.Z);
@@ -366,14 +367,14 @@ namespace OpenBve {
 					 * Calculate the gain, then add the sound
 					 * to the list of sounds to be played.
 					 * */
-					OpenBveApi.Math.Vector3 position;
+					Vector3d position;
 					if (Sources[i].Train != null) {
-						OpenBveApi.Math.Vector3 direction;
+						Vector3d direction;
 						TrainManager.CreateWorldCoordinates(Sources[i].Train, Sources[i].Car, Sources[i].Position.X, Sources[i].Position.Y, Sources[i].Position.Z, out position.X, out position.Y, out position.Z, out direction.X, out direction.Y, out direction.Z);
 					} else {
 						position = Sources[i].Position;
 					}
-					OpenBveApi.Math.Vector3 positionDifference = position - listenerPosition;
+					Vector3d positionDifference = position - listenerPosition;
 					double distance = positionDifference.Norm();
 					double radius = Sources[i].Radius;
 					if (World.CameraMode == World.CameraViewMode.Interior | World.CameraMode == World.CameraViewMode.InteriorLookAhead) {
@@ -497,15 +498,15 @@ namespace OpenBve {
 							continue;
 						}
 					}
-					OpenBveApi.Math.Vector3 position;
-					OpenBveApi.Math.Vector3 velocity;
+					Vector3d position;
+					Vector3d velocity;
 					if (source.Train != null) {
-						OpenBveApi.Math.Vector3 direction;
+						Vector3d direction;
 						TrainManager.CreateWorldCoordinates(source.Train, source.Car, source.Position.X, source.Position.Y, source.Position.Z, out position.X, out position.Y, out position.Z, out direction.X, out direction.Y, out direction.Z);
 						velocity = source.Train.Cars[source.Car].Specs.CurrentSpeed * direction;
 					} else {
 						position = source.Position;
-						velocity = OpenBveApi.Math.Vector3.Null;
+						velocity = Vector3d.Null;
 					}
 					position -= listenerPosition;
 					Al.alSource3f(source.OpenAlSourceName, Al.AL_POSITION, (float)position.X, (float)position.Y, (float)position.Z);

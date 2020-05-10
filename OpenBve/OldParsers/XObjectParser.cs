@@ -1107,7 +1107,7 @@ namespace OpenBve
 								double x = (double)vertices[j].Data[0];
 								double y = (double)vertices[j].Data[1];
 								double z = (double)vertices[j].Data[2];
-								Vertices[j].Coordinates = new Vector3(x, y, z);
+								Vertices[j].Coordinates = new Vector3d(x, y, z);
 							}
 							// collect faces
 							int[][] Faces = new int[nFaces][];
