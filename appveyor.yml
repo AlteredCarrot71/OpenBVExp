@@ -1,7 +1,7 @@
 version: '1.4.6.{build}'
 
 image:
-  - Visual Studio 2017
+  - Visual Studio 2019
 
 skip_commits:
   message: /\[ci skip\]/
@@ -28,10 +28,10 @@ install:
   - cmd: git submodule update --init --recursive
 
 before_build:
-  nuget restore OpenBVE.sln
+  nuget restore OpenBVExp.sln
 
 build:
-  project: C:\projects\OpenBVExp\OpenBVE.sln
+  project: OpenBVExp.sln
 
 after_build:
 
