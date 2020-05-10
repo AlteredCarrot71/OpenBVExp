@@ -338,6 +338,20 @@ namespace Common.Geometry
 		}
 
 		// --- static functions ---
+		public static Vector3d Sign(Vector3d vector)
+		{
+			double t = vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z;
+			if (t != 0.0)
+			{
+				t = 1.0 / Math.Sqrt(t);
+				return new Vector3d(vector.X * t, vector.Y * t, vector.Z * t);
+			}
+			else
+			{
+				return Vector3d.Null;
+			}
+		}
+
 		/// <summary>Gives the dot product of two vectors.</summary>
 		/// <param name="a">The first vector.</param>
 		/// <param name="b">The second vector.</param>
@@ -359,19 +373,9 @@ namespace Common.Geometry
 		/// <summary>Normalizes a vector.</summary>
 		/// <param name="vector">The vector.</param>
 		/// <returns>The normalized vector.</returns>
-		/// <exception cref="System.DivideByZeroException">Raised when the vector is a null vector.</exception>
 		public static Vector3d Normalize(Vector3d vector)
 		{
-			double norm = vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z;
-			if (norm == 0.0)
-			{
-				throw new DivideByZeroException();
-			}
-			else
-			{
-				double factor = 1.0 / System.Math.Sqrt(norm);
-				return new Vector3d(vector.X * factor, vector.Y * factor, vector.Z * factor);
-			}
+			return Vector3d.Sign(vector);
 		}
 
 		/// <summary>Translates a vector by a specified offset.</summary>
