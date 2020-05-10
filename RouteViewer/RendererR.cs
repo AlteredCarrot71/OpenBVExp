@@ -1,10 +1,4 @@
-﻿// ╔═════════════════════════════════════════════════════════════╗
-// ║ Renderer.cs for the Route Viewer                            ║
-// ╠═════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.       ║
-// ║ The file from the openBVE main program cannot be used here. ║
-// ╚═════════════════════════════════════════════════════════════╝
-using Common.Colors;
+﻿using Common.Colors;
 using Common.Geometry;
 using System;
 using Tao.OpenGl;
@@ -843,7 +837,7 @@ namespace OpenBve {
 				}
 			}
 		}
-		private static void RenderCube(World.Vector3D Position, World.Vector3D Direction, World.Vector3D Up, World.Vector3D Side, double Size, double CameraX, double CameraY, double CameraZ, int TextureIndex) {
+		private static void RenderCube(Vector3d Position, Vector3d Direction, Vector3d Up, Vector3d Side, double Size, double CameraX, double CameraY, double CameraZ, int TextureIndex) {
 			int OpenGlTextureIndex = TextureManager.UseTexture(TextureIndex, TextureManager.UseMode.LoadImmediately);
 			if (OpenGlTextureIndex > 0) {
 				if (!TexturingEnabled) {
@@ -857,15 +851,15 @@ namespace OpenBve {
 					TexturingEnabled = false;
 				}
 			}
-			World.Vector3D[] v = new World.Vector3D[8];
-			v[0] = new World.Vector3D(Size, Size, -Size);
-			v[1] = new World.Vector3D(Size, -Size, -Size);
-			v[2] = new World.Vector3D(-Size, -Size, -Size);
-			v[3] = new World.Vector3D(-Size, Size, -Size);
-			v[4] = new World.Vector3D(Size, Size, Size);
-			v[5] = new World.Vector3D(Size, -Size, Size);
-			v[6] = new World.Vector3D(-Size, -Size, Size);
-			v[7] = new World.Vector3D(-Size, Size, Size);
+			Vector3d[] v = new Vector3d[8];
+			v[0] = new Vector3d(Size, Size, -Size);
+			v[1] = new Vector3d(Size, -Size, -Size);
+			v[2] = new Vector3d(-Size, -Size, -Size);
+			v[3] = new Vector3d(-Size, Size, -Size);
+			v[4] = new Vector3d(Size, Size, Size);
+			v[5] = new Vector3d(Size, -Size, Size);
+			v[6] = new Vector3d(-Size, -Size, Size);
+			v[7] = new Vector3d(-Size, Size, Size);
 			for (int i = 0; i < 8; i++) {
 				World.Rotate(ref v[i].X, ref v[i].Y, ref v[i].Z, Direction.X, Direction.Y, Direction.Z, Up.X, Up.Y, Up.Z, Side.X, Side.Y, Side.Z);
 				v[i].X += Position.X - CameraX;

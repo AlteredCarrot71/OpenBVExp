@@ -1,17 +1,13 @@
-﻿// ╔═════════════════════════════════════════════════════════════╗
-// ║ TrackManager.cs for the Route Viewer                        ║
-// ╠═════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.       ║
-// ║ The file from the openBVE main program cannot be used here. ║
-// ╚═════════════════════════════════════════════════════════════╝
-
+﻿using Common.Geometry;
 using System;
 
-namespace OpenBve {
-    internal static class TrackManager {
-
+namespace OpenBve 
+{
+    internal static class TrackManager 
+    {
         // events
-        internal enum EventTriggerType {
+        internal enum EventTriggerType 
+        {
             None = 0,
             Camera = 1,
             FrontCarFrontAxle = 2,
@@ -239,9 +235,9 @@ namespace OpenBve {
             internal bool PlayerTrainOnly;
             internal bool Once;
             internal bool Dynamic;
-            internal World.Vector3D Position;
+            internal Vector3d Position;
             internal double Speed;
-            internal SoundEvent(double TrackPositionDelta, int SoundIndex, bool PlayerTrainOnly, bool Once, bool Dynamic, World.Vector3D Position, double Speed) {
+            internal SoundEvent(double TrackPositionDelta, int SoundIndex, bool PlayerTrainOnly, bool Once, bool Dynamic, Vector3d Position, double Speed) {
                 this.TrackPositionDelta = TrackPositionDelta;
                 this.DontTriggerAnymore = false;
                 this.SoundIndex = SoundIndex;
@@ -289,10 +285,10 @@ namespace OpenBve {
 			internal double CurveCantTangent;
 			internal double AdhesionMultiplier;
 			internal double CsvRwAccuracyLevel;
-			internal World.Vector3D WorldPosition;
-			internal World.Vector3D WorldDirection;
-			internal World.Vector3D WorldUp;
-			internal World.Vector3D WorldSide;
+			internal Vector3d WorldPosition;
+			internal Vector3d WorldDirection;
+			internal Vector3d WorldUp;
+			internal Vector3d WorldSide;
 			internal GeneralEvent[] Events;
 			internal TrackElement(double StartingTrackPosition) {
 				this.StartingTrackPosition = StartingTrackPosition;
@@ -301,10 +297,10 @@ namespace OpenBve {
 				this.CurveCantTangent = 0.0;
 				this.AdhesionMultiplier = 1.0;
 				this.CsvRwAccuracyLevel = 2.0;
-				this.WorldPosition = new World.Vector3D(0.0, 0.0, 0.0);
-				this.WorldDirection = new World.Vector3D(0.0, 0.0, 1.0);
-				this.WorldUp = new World.Vector3D(0.0, 1.0, 0.0);
-				this.WorldSide = new World.Vector3D(1.0, 0.0, 0.0);
+				this.WorldPosition = new Vector3d(0.0, 0.0, 0.0);
+				this.WorldDirection = new Vector3d(0.0, 0.0, 1.0);
+				this.WorldUp = new Vector3d(0.0, 1.0, 0.0);
+				this.WorldSide = new Vector3d(1.0, 0.0, 0.0);
 				this.Events = new GeneralEvent[] { };
 			}
 		}
@@ -319,10 +315,10 @@ namespace OpenBve {
 		internal struct TrackFollower {
 			internal int LastTrackElement;
 			internal double TrackPosition;
-			internal World.Vector3D WorldPosition;
-			internal World.Vector3D WorldDirection;
-			internal World.Vector3D WorldUp;
-			internal World.Vector3D WorldSide;
+			internal Vector3d WorldPosition;
+			internal Vector3d WorldDirection;
+			internal Vector3d WorldUp;
+			internal Vector3d WorldSide;
 			internal double CurveRadius;
 			internal double CurveCant;
 			internal double CantDueToInaccuracy;
@@ -366,7 +362,7 @@ namespace OpenBve {
 						double f = 2.0 * r * r * (1.0 - Math.Cos(b));
 						double c = (double)Math.Sign(db) * Math.Sqrt(f >= 0.0 ? f : 0.0);
 						double a = 0.5 * (double)Math.Sign(r) * b;
-						World.Vector3D D = new World.Vector3D(CurrentTrack.Elements[i].WorldDirection.X, 0.0, CurrentTrack.Elements[i].WorldDirection.Z);
+						Vector3d D = new Vector3d(CurrentTrack.Elements[i].WorldDirection.X, 0.0, CurrentTrack.Elements[i].WorldDirection.Z);
 						World.Normalize(ref D.X, ref D.Y, ref D.Z);
 						double cosa = Math.Cos(a);
 						double sina = Math.Sin(a);
@@ -519,6 +515,5 @@ namespace OpenBve {
                 }
             }
         }
-
     }
 }

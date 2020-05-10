@@ -1,20 +1,14 @@
-﻿// ╔═════════════════════════════════════════════════════════════╗
-// ║ Program.cs for the Route Viewer                             ║
-// ╠═════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.       ║
-// ║ The file from the openBVE main program cannot be used here. ║
-// ╚═════════════════════════════════════════════════════════════╝
-
+﻿using Common.Geometry;
 using System;
 using System.Globalization;
 using System.Windows.Forms;
-
 using Tao.OpenGl;
 using Tao.Sdl;
 
-namespace OpenBve {
-	internal static class Program {
-
+namespace OpenBve 
+{
+	internal static class Program 
+	{
 		// system
 		internal enum Platform { Windows, Linux, Mac }
 		internal static Platform CurrentPlatform = Platform.Windows;
@@ -219,9 +213,9 @@ namespace OpenBve {
 
 		// reset camera
 		private static void ResetCamera() {
-			World.AbsoluteCameraPosition = new World.Vector3D(0.0, 2.5, -5.0);
-			World.AbsoluteCameraDirection = new World.Vector3D(-World.AbsoluteCameraPosition.X, -World.AbsoluteCameraPosition.Y, -World.AbsoluteCameraPosition.Z);
-			World.AbsoluteCameraSide = new World.Vector3D(-World.AbsoluteCameraPosition.Z, 0.0, World.AbsoluteCameraPosition.X);
+			World.AbsoluteCameraPosition = new Vector3d(0.0, 2.5, -5.0);
+			World.AbsoluteCameraDirection = new Vector3d(-World.AbsoluteCameraPosition.X, -World.AbsoluteCameraPosition.Y, -World.AbsoluteCameraPosition.Z);
+			World.AbsoluteCameraSide = new Vector3d(-World.AbsoluteCameraPosition.Z, 0.0, World.AbsoluteCameraPosition.X);
 			World.Normalize(ref World.AbsoluteCameraDirection.X, ref World.AbsoluteCameraDirection.Y, ref World.AbsoluteCameraDirection.Z);
 			World.Normalize(ref World.AbsoluteCameraSide.X, ref World.AbsoluteCameraSide.Y, ref World.AbsoluteCameraSide.Z);
 			World.AbsoluteCameraUp = World.Cross(World.AbsoluteCameraDirection, World.AbsoluteCameraSide);
@@ -452,7 +446,7 @@ namespace OpenBve {
 								World.CameraCurrentAlignment.Yaw = 0.0;
 								World.CameraCurrentAlignment.Pitch = 0.0;
 								World.CameraCurrentAlignment.Roll = 0.0;
-								World.CameraCurrentAlignment.Position = new World.Vector3D(0.0, 2.5, 0.0);
+								World.CameraCurrentAlignment.Position = new Vector3d(0.0, 2.5, 0.0);
 								World.CameraCurrentAlignment.Zoom = 0.0;
 								World.CameraAlignmentDirection = new World.CameraAlignment();
 								World.CameraAlignmentSpeed = new World.CameraAlignment();
@@ -658,6 +652,5 @@ namespace OpenBve {
 			Array.Resize<string>(ref directories, count);
 			SetPackageLookupDirectoriesAuthentication = OpenBveApi.Path.SetPackageLookupDirectories(names, directories, SetPackageLookupDirectoriesAuthentication);
 		}
-
 	}
 }

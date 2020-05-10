@@ -1,10 +1,5 @@
-﻿// ╔═════════════════════════════════════════════════════════════╗
-// ║ Game.cs for the Route Viewer                                ║
-// ╠═════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.       ║
-// ║ The file from the openBVE main program cannot be used here. ║
-// ╚═════════════════════════════════════════════════════════════╝
-using Common.Colors;
+﻿using Common.Colors;
+using Common.Geometry;
 using System;
 
 namespace OpenBve {
@@ -209,7 +204,7 @@ namespace OpenBve {
 			internal double DepartureTime;
 			internal int DepartureSoundIndex;
 			internal double StopTime;
-			internal World.Vector3D SoundOrigin;
+			internal Vector3d SoundOrigin;
 			internal StationStopMode StopMode;
 			internal StationType StationType;
 			internal bool ForceStopSignal;
@@ -412,7 +407,7 @@ namespace OpenBve {
 		// points of interest
 		internal struct PointOfInterest {
 			internal double TrackPosition;
-			internal World.Vector3D TrackOffset;
+			internal Vector3d TrackOffset;
 			internal double TrackYaw;
 			internal double TrackPitch;
 			internal double TrackRoll;

@@ -1,15 +1,9 @@
-﻿// ╔═════════════════════════════════════════════════════════════╗
-// ║ TrainManager.cs for the Route Viewer                        ║
-// ╠═════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.       ║
-// ║ The file from the openBVE main program cannot be used here. ║
-// ╚═════════════════════════════════════════════════════════════╝
+﻿using Common.Geometry;
 
-using System;
-
-namespace OpenBve {
-	internal static class TrainManager {
-
+namespace OpenBve 
+{
+	internal static class TrainManager 
+	{
 		// structures
 		internal struct Axle {
 			internal TrackManager.TrackFollower Follower;
@@ -162,7 +156,7 @@ namespace OpenBve {
 		internal struct CarSound {
 			internal int SoundBufferIndex;
 			internal int SoundSourceIndex;
-			internal World.Vector3D Position;
+			internal Vector3d Position;
 		}
 		internal struct MotorSoundTableEntry {
 			internal int SoundBufferIndex;
@@ -176,7 +170,7 @@ namespace OpenBve {
 		}
 		internal struct MotorSound {
 			internal MotorSoundTable[] Tables;
-			internal World.Vector3D Position;
+			internal Vector3d Position;
 			internal double SpeedConversionFactor;
 			internal int SpeedDirection;
 			internal const int MotorP1 = 0;
@@ -247,7 +241,7 @@ namespace OpenBve {
 			internal Axle RearAxle;
 			internal double FrontAxlePosition;
 			internal double RearAxlePosition;
-			internal World.Vector3D Up;
+			internal Vector3d Up;
 			internal Section[] Sections;
 			internal int CurrentSection;
 			internal double DriverX;
@@ -432,6 +426,5 @@ namespace OpenBve {
 			posx = 0.0; posy = 0.0; posz = 0.0;
 			dirx = 0.0; diry = 0.0; dirz = 1.0;
 		}
-
 	}
 }
