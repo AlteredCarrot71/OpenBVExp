@@ -3,9 +3,10 @@ using Common.Geometry;
 using System;
 using Tao.OpenGl;
 
-namespace OpenBve {
-	internal static class Renderer {
-
+namespace OpenBve 
+{
+	internal static class Renderer 
+	{
 		// screen (output window)
 		internal static int ScreenWidth;
 		internal static int ScreenHeight;
@@ -70,7 +71,7 @@ namespace OpenBve {
 		internal static bool OptionLighting = true;
 		internal static RGBb OptionAmbientColor = new RGBb(160, 160, 160);
 		internal static RGBb OptionDiffuseColor = new RGBb(159, 159, 159);
-		internal static World.Vector3Df OptionLightPosition = new World.Vector3Df(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
+		internal static Vector3f OptionLightPosition = new Vector3f(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
 		internal static float OptionLightingResultingAmount = 1.0f;
 		internal static bool OptionFauxNighttime = true;
 		internal static bool OptionNormals = false;
@@ -133,7 +134,7 @@ namespace OpenBve {
 			OptionLighting = true;
 			OptionAmbientColor = new RGBb(160, 160, 160);
 			OptionDiffuseColor = new RGBb(160, 160, 160);
-			OptionLightPosition = new World.Vector3Df(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
+			OptionLightPosition = new Vector3f(0.215920077052065f, 0.875724044222352f, -0.431840154104129f);
 			OptionLightingResultingAmount = 1.0f;
 			Gl.glDisable(Gl.GL_FOG); FogEnabled = false;
 		}
@@ -990,6 +991,5 @@ namespace OpenBve {
 				return 1.0;
 			}
 		}
-
 	}
 }

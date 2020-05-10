@@ -2,7 +2,8 @@
 using Common.Geometry;
 using System;
 
-namespace OpenBve {
+namespace OpenBve 
+{
 	internal static class CsvB3dObjectParser 
 	{
 		// structures
@@ -69,7 +70,7 @@ namespace OpenBve {
 			string[] Lines = System.IO.File.ReadAllLines(FileName, Encoding);
 			// parse lines
 			MeshBuilder Builder = new MeshBuilder();
-			World.Vector3Df[] Normals = new World.Vector3Df[4];
+			Vector3f[] Normals = new Vector3f[4];
 			for (int i = 0; i < Lines.Length; i++) {
 				{
 					// strip away comments
@@ -131,7 +132,7 @@ namespace OpenBve {
 								}
 								ApplyMeshBuilder(ref Object, Builder, LoadMode, ForceTextureRepeatX, ForceTextureRepeatY);
 								Builder = new MeshBuilder();
-								Normals = new World.Vector3Df[4];
+								Normals = new Vector3f[4];
 							} break;
 						case "addvertex":
 						case "vertex":
@@ -173,10 +174,10 @@ namespace OpenBve {
 								World.Normalize(ref nx, ref ny, ref nz);
 								Array.Resize<World.Vertex>(ref Builder.Vertices, Builder.Vertices.Length + 1);
 								while (Builder.Vertices.Length >= Normals.Length) {
-									Array.Resize<World.Vector3Df>(ref Normals, Normals.Length << 1);
+									Array.Resize<Vector3f>(ref Normals, Normals.Length << 1);
 								}
 								Builder.Vertices[Builder.Vertices.Length - 1].Coordinates = new Vector3d(vx, vy, vz);
-								Normals[Builder.Vertices.Length - 1] = new World.Vector3Df((float)nx, (float)ny, (float)nz);
+								Normals[Builder.Vertices.Length - 1] = new Vector3f((float)nx, (float)ny, (float)nz);
 							} break;
 						case "addface":
 						case "addface2":
@@ -222,7 +223,7 @@ namespace OpenBve {
 										Builder.Faces[f] = new World.MeshFace();
 										Builder.Faces[f].Vertices = new World.MeshFaceVertex[Arguments.Length];
 										while (Builder.Vertices.Length > Normals.Length) {
-											Array.Resize<World.Vector3Df>(ref Normals, Normals.Length << 1);
+											Array.Resize<Vector3f>(ref Normals, Normals.Length << 1);
 										}
 										for (int j = 0; j < Arguments.Length; j++) {
 											Builder.Faces[f].Vertices[j].Index = (ushort)a[j];
@@ -746,7 +747,7 @@ namespace OpenBve {
 			// initialization
 			int v = Builder.Vertices.Length;
 			Array.Resize<World.Vertex>(ref Builder.Vertices, v + 2 * n);
-			World.Vector3Df[] Normals = new World.Vector3Df[2 * n];
+			Vector3f[] Normals = new Vector3f[2 * n];
 			double d = 2.0 * Math.PI / (double)n;
 			double g = 0.5 * h;
 			double t = 0.0;
@@ -767,8 +768,8 @@ namespace OpenBve {
 				double sx, sy, sz;
 				World.Cross(nx, ny, nz, 0.0, 1.0, 0.0, out sx, out sy, out sz);
 				World.Rotate(ref nx, ref ny, ref nz, sx, sy, sz, cosa, sina);
-				Normals[2 * i + 0] = new World.Vector3Df((float)nx, (float)ny, (float)nz);
-				Normals[2 * i + 1] = new World.Vector3Df((float)nx, (float)ny, (float)nz);
+				Normals[2 * i + 0] = new Vector3f((float)nx, (float)ny, (float)nz);
+				Normals[2 * i + 1] = new Vector3f((float)nx, (float)ny, (float)nz);
 				t += d;
 			}
 			// faces
@@ -1022,6 +1023,5 @@ namespace OpenBve {
 				}
 			}
 		}
-
 	}
 }
