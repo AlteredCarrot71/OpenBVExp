@@ -8,15 +8,6 @@ namespace OpenBve
 	internal static class World 
 	{
 		// vectors
-		/// <summary>Represents a 2D vector of System.Single coordinates.</summary>
-		internal struct Vector2Df {
-			internal float X;
-			internal float Y;
-			internal Vector2Df(float X, float Y) {
-				this.X = X;
-				this.Y = Y;
-			}
-		}
 //		/// <summary>Represents a 3D vector of System.Double coordinates.</summary>
 //		/// <remarks>This structure is outdated. Use OpenBveApi.Math.Vector3 instead.</remarks>
 //		internal struct Vector3D {
@@ -79,12 +70,12 @@ namespace OpenBve
 		/// <summary>Represents a vertex consisting of 3D coordinates and 2D texture coordinates.</summary>
 		internal struct Vertex {
 			internal Vector3 Coordinates;
-			internal Vector2Df TextureCoordinates;
+			internal Vector2f TextureCoordinates;
 			internal Vertex(double X, double Y, double Z) {
 				this.Coordinates = new Vector3(X, Y, Z);
-				this.TextureCoordinates = new Vector2Df(0.0f, 0.0f);
+				this.TextureCoordinates = new Vector2f(0.0f, 0.0f);
 			}
-			internal Vertex(Vector3 Coordinates, Vector2Df TextureCoordinates) {
+			internal Vertex(Vector3 Coordinates, Vector2f TextureCoordinates) {
 				this.Coordinates = Coordinates;
 				this.TextureCoordinates = TextureCoordinates;
 			}

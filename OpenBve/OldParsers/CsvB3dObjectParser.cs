@@ -1,4 +1,5 @@
 ﻿using Common.Colors;
+using Common.Geometry;
 using System;
 using OpenBveApi.Math;
 
@@ -698,7 +699,7 @@ namespace OpenBve
 									y = 0.0f;
 								}
 								if (j >= 0 & j < Builder.Vertices.Length) {
-									Builder.Vertices[j].TextureCoordinates = new World.Vector2Df(x, y);
+									Builder.Vertices[j].TextureCoordinates = new Vector2f(x, y);
 								} else {
 									Interface.AddMessage(Interface.MessageType.Error, false, "VertexIndex references a non-existing vertex in " + Command + " at line " + (i + 1).ToString(Culture) + " in file " + FileName);
 								}

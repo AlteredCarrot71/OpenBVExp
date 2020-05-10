@@ -1,4 +1,5 @@
 ﻿using Common.Colors;
+using Common.Geometry;
 using System;
 using System.IO;
 using System.IO.Compression;
@@ -1436,7 +1437,7 @@ namespace OpenBve
 												}
 												double u = (double)textureCoords[k].Data[0];
 												double v = (double)textureCoords[k].Data[1];
-												Vertices[k].TextureCoordinates = new World.Vector2Df((float)u, (float)v);
+												Vertices[k].TextureCoordinates = new Vector2f((float)u, (float)v);
 											}
 										} break;
 									case "MeshNormals":
