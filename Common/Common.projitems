@@ -15,5 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Colors\RGBf.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector2f.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector2d.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector3d.cs" />
   </ItemGroup>
 </Project>
