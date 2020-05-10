@@ -1,10 +1,5 @@
-﻿// ╔═════════════════════════════════════════════════════════════╗
-// ║ Renderer.cs for the Structure Viewer                        ║
-// ╠═════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.       ║
-// ║ The file from the openBVE main program cannot be used here. ║
-// ╚═════════════════════════════════════════════════════════════╝
-using Common.Colors;
+﻿using Common.Colors;
+using Common.Geometry;
 using System;
 using Tao.OpenGl;
 
@@ -241,11 +236,11 @@ namespace OpenBve {
 					Gl.glDisable(Gl.GL_LIGHTING);
 				}
 				Gl.glColor3d(1.0, 0.0, 0.0);
-				RenderBox(new World.Vector3D(0.0, 0.0, 0.0), new World.Vector3D(0.0, 0.0, 1.0), new World.Vector3D(0.0, 1.0, 0.0), new World.Vector3D(1.0, 0.0, 0.0), new World.Vector3D(100.0, 0.01, 0.01), cx, cy, cz);
+				RenderBox(new Vector3d(0.0, 0.0, 0.0), new Vector3d(0.0, 0.0, 1.0), new Vector3d(0.0, 1.0, 0.0), new Vector3d(1.0, 0.0, 0.0), new Vector3d(100.0, 0.01, 0.01), cx, cy, cz);
 				Gl.glColor3d(0.0, 1.0, 0.0);
-				RenderBox(new World.Vector3D(0.0, 0.0, 0.0), new World.Vector3D(0.0, 0.0, 1.0), new World.Vector3D(0.0, 1.0, 0.0), new World.Vector3D(1.0, 0.0, 0.0), new World.Vector3D(0.01, 100.0, 0.01), cx, cy, cz);
+				RenderBox(new Vector3d(0.0, 0.0, 0.0), new Vector3d(0.0, 0.0, 1.0), new Vector3d(0.0, 1.0, 0.0), new Vector3d(1.0, 0.0, 0.0), new Vector3d(0.01, 100.0, 0.01), cx, cy, cz);
 				Gl.glColor3d(0.0, 0.0, 1.0);
-				RenderBox(new World.Vector3D(0.0, 0.0, 0.0), new World.Vector3D(0.0, 0.0, 1.0), new World.Vector3D(0.0, 1.0, 0.0), new World.Vector3D(1.0, 0.0, 0.0), new World.Vector3D(0.01, 0.01, 100.0), cx, cy, cz);
+				RenderBox(new Vector3d(0.0, 0.0, 0.0), new Vector3d(0.0, 0.0, 1.0), new Vector3d(0.0, 1.0, 0.0), new Vector3d(1.0, 0.0, 0.0), new Vector3d(0.01, 0.01, 100.0), cx, cy, cz);
 				if (LightingEnabled) {
 					Gl.glEnable(Gl.GL_LIGHTING);
 				}
@@ -295,11 +290,11 @@ namespace OpenBve {
 				Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
 				Gl.glEnable(Gl.GL_BLEND);
 				Gl.glColor4d(1.0, 0.0, 0.0, 0.2);
-				RenderBox(new World.Vector3D(0.0, 0.0, 0.0), new World.Vector3D(0.0, 0.0, 1.0), new World.Vector3D(0.0, 1.0, 0.0), new World.Vector3D(1.0, 0.0, 0.0), new World.Vector3D(100.0, 0.01, 0.01), cx, cy, cz);
+				RenderBox(new Vector3d(0.0, 0.0, 0.0), new Vector3d(0.0, 0.0, 1.0), new Vector3d(0.0, 1.0, 0.0), new Vector3d(1.0, 0.0, 0.0), new Vector3d(100.0, 0.01, 0.01), cx, cy, cz);
 				Gl.glColor4d(0.0, 1.0, 0.0, 0.2);
-				RenderBox(new World.Vector3D(0.0, 0.0, 0.0), new World.Vector3D(0.0, 0.0, 1.0), new World.Vector3D(0.0, 1.0, 0.0), new World.Vector3D(1.0, 0.0, 0.0), new World.Vector3D(0.01, 100.0, 0.01), cx, cy, cz);
+				RenderBox(new Vector3d(0.0, 0.0, 0.0), new Vector3d(0.0, 0.0, 1.0), new Vector3d(0.0, 1.0, 0.0), new Vector3d(1.0, 0.0, 0.0), new Vector3d(0.01, 100.0, 0.01), cx, cy, cz);
 				Gl.glColor4d(0.0, 0.0, 1.0, 0.2);
-				RenderBox(new World.Vector3D(0.0, 0.0, 0.0), new World.Vector3D(0.0, 0.0, 1.0), new World.Vector3D(0.0, 1.0, 0.0), new World.Vector3D(1.0, 0.0, 0.0), new World.Vector3D(0.01, 0.01, 100.0), cx, cy, cz);
+				RenderBox(new Vector3d(0.0, 0.0, 0.0), new Vector3d(0.0, 0.0, 1.0), new Vector3d(0.0, 1.0, 0.0), new Vector3d(1.0, 0.0, 0.0), new Vector3d(0.01, 0.01, 100.0), cx, cy, cz);
 			}
 			RenderOverlays();
 			// finalize rendering
@@ -536,20 +531,20 @@ namespace OpenBve {
 		}
 
 		// render cube
-		private static void RenderBox(World.Vector3D Position, World.Vector3D Direction, World.Vector3D Up, World.Vector3D Side, World.Vector3D Size, double CameraX, double CameraY, double CameraZ) {
+		private static void RenderBox(Vector3d Position, Vector3d Direction, Vector3d Up, Vector3d Side, Vector3d Size, double CameraX, double CameraY, double CameraZ) {
 			if (TexturingEnabled) {
 				Gl.glDisable(Gl.GL_TEXTURE_2D);
 				TexturingEnabled = false;
 			}
-			World.Vector3D[] v = new World.Vector3D[8];
-			v[0] = new World.Vector3D(Size.X, Size.Y, -Size.Z);
-			v[1] = new World.Vector3D(Size.X, -Size.Y, -Size.Z);
-			v[2] = new World.Vector3D(-Size.X, -Size.Y, -Size.Z);
-			v[3] = new World.Vector3D(-Size.X, Size.Y, -Size.Z);
-			v[4] = new World.Vector3D(Size.X, Size.Y, Size.Z);
-			v[5] = new World.Vector3D(Size.X, -Size.Y, Size.Z);
-			v[6] = new World.Vector3D(-Size.X, -Size.Y, Size.Z);
-			v[7] = new World.Vector3D(-Size.X, Size.Y, Size.Z);
+			Vector3d[] v = new Vector3d[8];
+			v[0] = new Vector3d(Size.X, Size.Y, -Size.Z);
+			v[1] = new Vector3d(Size.X, -Size.Y, -Size.Z);
+			v[2] = new Vector3d(-Size.X, -Size.Y, -Size.Z);
+			v[3] = new Vector3d(-Size.X, Size.Y, -Size.Z);
+			v[4] = new Vector3d(Size.X, Size.Y, Size.Z);
+			v[5] = new Vector3d(Size.X, -Size.Y, Size.Z);
+			v[6] = new Vector3d(-Size.X, -Size.Y, Size.Z);
+			v[7] = new Vector3d(-Size.X, Size.Y, Size.Z);
 			for (int i = 0; i < 8; i++) {
 				World.Rotate(ref v[i].X, ref v[i].Y, ref v[i].Z, Direction.X, Direction.Y, Direction.Z, Up.X, Up.Y, Up.Z, Side.X, Side.Y, Side.Z);
 				v[i].X += Position.X - CameraX;

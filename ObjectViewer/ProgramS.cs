@@ -1,10 +1,4 @@
-﻿// ╔═════════════════════════════════════════════════════════════╗
-// ║ Program.cs for the Structure Viewer                         ║
-// ╠═════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.       ║
-// ║ The file from the openBVE main program cannot be used here. ║
-// ╚═════════════════════════════════════════════════════════════╝
-
+﻿using Common.Geometry;
 using System;
 using System.Windows.Forms;
 using Tao.Sdl;
@@ -44,10 +38,10 @@ namespace OpenBve {
 		// mouse
 		internal static short MouseCenterX = 0;
 		internal static short MouseCenterY = 0;
-		internal static World.Vector3D MouseCameraPosition = new World.Vector3D(0.0, 0.0, 0.0);
-		internal static World.Vector3D MouseCameraDirection = new World.Vector3D(0.0, 0.0, 1.0);
-		internal static World.Vector3D MouseCameraUp = new World.Vector3D(0.0, 1.0, 0.0);
-		internal static World.Vector3D MouseCameraSide = new World.Vector3D(1.0, 0.0, 0.0);
+		internal static Vector3d MouseCameraPosition = new Vector3d(0.0, 0.0, 0.0);
+		internal static Vector3d MouseCameraDirection = new Vector3d(0.0, 0.0, 1.0);
+		internal static Vector3d MouseCameraUp = new Vector3d(0.0, 1.0, 0.0);
+		internal static Vector3d MouseCameraSide = new Vector3d(1.0, 0.0, 0.0);
 		internal static byte MouseButton = 0;
 
 		// main
@@ -168,7 +162,7 @@ namespace OpenBve {
 					if (!SkipArgs[i] && System.IO.File.Exists(args[i])) {
 						try {
 							ObjectManager.UnifiedObject o = ObjectManager.LoadObject(args[i], System.Text.Encoding.UTF8, ObjectManager.ObjectLoadMode.Normal, false, false, false);
-							ObjectManager.CreateObject(o, new World.Vector3D(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), true, 0.0, 0.0, 25.0, 0.0);
+							ObjectManager.CreateObject(o, new Vector3d(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), true, 0.0, 0.0, 25.0, 0.0);
 						} catch (Exception ex) {
 							Interface.AddMessage(Interface.MessageType.Critical, false, "Unhandled error (" + ex.Message + ") encountered while processing the file " + args[i] + ".");
 						}
@@ -380,9 +374,9 @@ namespace OpenBve {
 
 		// reset camera
 		private static void ResetCamera() {
-			World.AbsoluteCameraPosition = new World.Vector3D(-5.0, 2.5, -25.0);
-			World.AbsoluteCameraDirection = new World.Vector3D(-World.AbsoluteCameraPosition.X, -World.AbsoluteCameraPosition.Y, -World.AbsoluteCameraPosition.Z);
-			World.AbsoluteCameraSide = new World.Vector3D(-World.AbsoluteCameraPosition.Z, 0.0, World.AbsoluteCameraPosition.X);
+			World.AbsoluteCameraPosition = new Vector3d(-5.0, 2.5, -25.0);
+			World.AbsoluteCameraDirection = new Vector3d(-World.AbsoluteCameraPosition.X, -World.AbsoluteCameraPosition.Y, -World.AbsoluteCameraPosition.Z);
+			World.AbsoluteCameraSide = new Vector3d(-World.AbsoluteCameraPosition.Z, 0.0, World.AbsoluteCameraPosition.X);
 			World.Normalize(ref World.AbsoluteCameraDirection.X, ref World.AbsoluteCameraDirection.Y, ref World.AbsoluteCameraDirection.Z);
 			World.Normalize(ref World.AbsoluteCameraSide.X, ref World.AbsoluteCameraSide.Y, ref World.AbsoluteCameraSide.Z);
 			World.AbsoluteCameraUp = World.Cross(World.AbsoluteCameraDirection, World.AbsoluteCameraSide);
@@ -497,7 +491,7 @@ namespace OpenBve {
 									try {
 										#endif
 										ObjectManager.UnifiedObject o = ObjectManager.LoadObject(Files[i], System.Text.Encoding.UTF8, ObjectManager.ObjectLoadMode.Normal, false, false, false);
-										ObjectManager.CreateObject(o, new World.Vector3D(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), true, 0.0, 0.0, 25.0, 0.0);
+										ObjectManager.CreateObject(o, new Vector3d(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), true, 0.0, 0.0, 25.0, 0.0);
 										#if !DEBUG
 									} catch (Exception ex) {
 										Interface.AddMessage(Interface.MessageType.Critical, false, "Unhandled error (" + ex.Message + ") encountered while processing the file " + Files[i] + ".");
@@ -533,7 +527,7 @@ namespace OpenBve {
 											try {
 												#endif
 												ObjectManager.UnifiedObject o = ObjectManager.LoadObject(Files[i], System.Text.Encoding.UTF8, ObjectManager.ObjectLoadMode.Normal, false, false, false);
-												ObjectManager.CreateObject(o, new World.Vector3D(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), true, 0.0, 0.0, 25.0, 0.0);
+												ObjectManager.CreateObject(o, new Vector3d(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), new World.Transformation(0.0, 0.0, 0.0), true, 0.0, 0.0, 25.0, 0.0);
 												#if !DEBUG
 											} catch (Exception ex) {
 												Interface.AddMessage(Interface.MessageType.Critical, false, "Unhandled error (" + ex.Message + ") encountered while processing the file " + Files[i] + ".");

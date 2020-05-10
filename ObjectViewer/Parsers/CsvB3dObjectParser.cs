@@ -3,8 +3,8 @@ using Common.Geometry;
 using System;
 
 namespace OpenBve {
-	internal static class CsvB3dObjectParser {
-
+	internal static class CsvB3dObjectParser 
+	{
 		// structures
 		private class Material {
 			internal RGBAb Color;
@@ -175,7 +175,7 @@ namespace OpenBve {
 								while (Builder.Vertices.Length >= Normals.Length) {
 									Array.Resize<World.Vector3Df>(ref Normals, Normals.Length << 1);
 								}
-								Builder.Vertices[Builder.Vertices.Length - 1].Coordinates = new World.Vector3D(vx, vy, vz);
+								Builder.Vertices[Builder.Vertices.Length - 1].Coordinates = new Vector3d(vx, vy, vz);
 								Normals[Builder.Vertices.Length - 1] = new World.Vector3Df((float)nx, (float)ny, (float)nz);
 							} break;
 						case "addface":
@@ -716,14 +716,14 @@ namespace OpenBve {
 		private static void CreateCube(ref MeshBuilder Builder, double sx, double sy, double sz) {
 			int v = Builder.Vertices.Length;
 			Array.Resize<World.Vertex>(ref Builder.Vertices, v + 8);
-			Builder.Vertices[v + 0].Coordinates = new World.Vector3D(sx, sy, -sz);
-			Builder.Vertices[v + 1].Coordinates = new World.Vector3D(sx, -sy, -sz);
-			Builder.Vertices[v + 2].Coordinates = new World.Vector3D(-sx, -sy, -sz);
-			Builder.Vertices[v + 3].Coordinates = new World.Vector3D(-sx, sy, -sz);
-			Builder.Vertices[v + 4].Coordinates = new World.Vector3D(sx, sy, sz);
-			Builder.Vertices[v + 5].Coordinates = new World.Vector3D(sx, -sy, sz);
-			Builder.Vertices[v + 6].Coordinates = new World.Vector3D(-sx, -sy, sz);
-			Builder.Vertices[v + 7].Coordinates = new World.Vector3D(-sx, sy, sz);
+			Builder.Vertices[v + 0].Coordinates = new Vector3d(sx, sy, -sz);
+			Builder.Vertices[v + 1].Coordinates = new Vector3d(sx, -sy, -sz);
+			Builder.Vertices[v + 2].Coordinates = new Vector3d(-sx, -sy, -sz);
+			Builder.Vertices[v + 3].Coordinates = new Vector3d(-sx, sy, -sz);
+			Builder.Vertices[v + 4].Coordinates = new Vector3d(sx, sy, sz);
+			Builder.Vertices[v + 5].Coordinates = new Vector3d(sx, -sy, sz);
+			Builder.Vertices[v + 6].Coordinates = new Vector3d(-sx, -sy, sz);
+			Builder.Vertices[v + 7].Coordinates = new Vector3d(-sx, sy, sz);
 			int f = Builder.Faces.Length;
 			Array.Resize<World.MeshFace>(ref Builder.Faces, f + 6);
 			Builder.Faces[f + 0].Vertices = new World.MeshFaceVertex[] { new World.MeshFaceVertex(v + 0), new World.MeshFaceVertex(v + 1), new World.MeshFaceVertex(v + 2), new World.MeshFaceVertex(v + 3) };
@@ -761,8 +761,8 @@ namespace OpenBve {
 				double lz = dz * r2;
 				double ux = dx * r1;
 				double uz = dz * r1;
-				Builder.Vertices[v + 2 * i + 0].Coordinates = new World.Vector3D(ux, g, uz);
-				Builder.Vertices[v + 2 * i + 1].Coordinates = new World.Vector3D(lx, -g, lz);
+				Builder.Vertices[v + 2 * i + 0].Coordinates = new Vector3d(ux, g, uz);
+				Builder.Vertices[v + 2 * i + 1].Coordinates = new Vector3d(lx, -g, lz);
 				double nx = dx * ns, ny = 0.0, nz = dz * ns;
 				double sx, sy, sz;
 				World.Cross(nx, ny, nz, 0.0, 1.0, 0.0, out sx, out sy, out sz);

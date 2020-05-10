@@ -1,14 +1,9 @@
-﻿// ╔══════════════════════════════════════════════════════════════╗
-// ║ Interface.cs and TrainManager.cs for the Structure Viewer    ║
-// ╠══════════════════════════════════════════════════════════════╣
-// ║ This file cannot be used in the openBVE main program.        ║
-// ║ The files from the openBVE main program cannot be used here. ║
-// ╚══════════════════════════════════════════════════════════════╝
-using Common.Colors;
+﻿using Common.Colors;
+using Common.Geometry;
 using System;
 
-namespace OpenBve {
-
+namespace OpenBve 
+{
 	// --- TimeTable.cs ---
 	internal static class Timetable {
 		internal static void AddObjectForCustomTimetable(ObjectManager.AnimatedObject obj) { }
@@ -71,13 +66,15 @@ namespace OpenBve {
 	}
 	
 	// --- TrackManager.cs ---
-	internal static class TrackManager {
-		internal struct TrackFollower {
+	internal static class TrackManager 
+	{
+		internal struct TrackFollower 
+		{
 			internal double TrackPosition;
-			internal World.Vector3D WorldPosition;
-			internal World.Vector3D WorldDirection;
-			internal World.Vector3D WorldUp;
-			internal World.Vector3D WorldSide;
+			internal Vector3d WorldPosition;
+			internal Vector3d WorldDirection;
+			internal Vector3d WorldUp;
+			internal Vector3d WorldSide;
 		}
 		internal static void UpdateTrackFollower(ref TrackFollower Follower, double NewTrackPosition, bool UpdateWorldCoordinates, bool AddTrackInaccurary) { }
 	}
@@ -368,6 +365,5 @@ namespace OpenBve {
 			}
 			return false;
 		}
-
 	}
 }

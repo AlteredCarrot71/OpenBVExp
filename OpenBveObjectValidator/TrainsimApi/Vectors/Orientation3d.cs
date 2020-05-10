@@ -22,16 +22,12 @@ namespace TrainsimApi.Vectors {
 			this.Z = z;
 		}
 		
-		
 		// --- read-only fields ---
-		
 		public static readonly Orientation3d Default = new Orientation3d(Vector3d.Right, Vector3d.Up,   Vector3d.Forward);
 		
-		public static readonly Orientation3d Zero    = new Orientation3d(Vector3d.Zero,  Vector3d.Zero, Vector3d.Zero);
-		
+		public static readonly Orientation3d Zero    = new Orientation3d(Vector3d.Null,  Vector3d.Null, Vector3d.Null);
 		
 		// --- operators ---
-		
 		public static Orientation3d operator +(Orientation3d a, Orientation3d b) {
 			return new Orientation3d(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
 		}

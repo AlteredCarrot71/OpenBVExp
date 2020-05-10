@@ -14,7 +14,7 @@ namespace TrainsimApi.Vectors {
 		public float Z;
 		
 		// --- constructors ---
-		public Vector3f(float x, float y, float z) 
+		public Vector3f(float x, float y, float z)
 		{
 			this.X = x;
 			this.Y = y;
@@ -104,10 +104,19 @@ namespace TrainsimApi.Vectors {
 			if (a.Z != b.Z) return true;
 			return false;
 		}
-		
-		
+
+		public static implicit operator Vector3d(Vector3f vector)
+		{
+			return new Vector3d(vector.X, vector.Y, vector.Z);
+		}
+
+		public static explicit operator Vector3f(Vector3d vector)
+		{
+			return new Vector3f((float)vector.X, (float)vector.Y, (float)vector.Z);
+		}
+
 		// --- static functions (mathematical) ---
-		
+
 		public static float Abs(Vector3f vector) {
 			return (float)Math.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
 		}

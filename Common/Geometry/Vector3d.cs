@@ -3,7 +3,7 @@
 namespace Common.Geometry
 {
 	/// <summary>Represents a three-dimensional vector.</summary>
-	public struct Vector3d
+	public struct Vector3d : IComparable<Vector3d>, IEquatable<Vector3d>
 	{
 		// --- members ---
 		/// <summary>The x-coordinate.</summary>
@@ -206,6 +206,11 @@ namespace Common.Geometry
 		}
 
 		// --- instance functions ---
+		public bool IsZero()
+		{
+			return this.X == 0.0 & this.Y == 0.0 & this.Z == 0.0;
+		}
+
 		/// <summary>Normalizes the vector.</summary>
 		/// <exception cref="System.DivideByZeroException">Raised when the vector is a null vector.</exception>
 		public void Normalize()
@@ -253,6 +258,48 @@ namespace Common.Geometry
 			double y = (cosineOfAngle + cosineComplement * direction.Y * direction.Y) * this.Y + (cosineComplement * direction.X * direction.Y + sineOfAngle * direction.Z) * this.X + (cosineComplement * direction.Y * direction.Z - sineOfAngle * direction.X) * this.Z;
 			double z = (cosineOfAngle + cosineComplement * direction.Z * direction.Z) * this.Z + (cosineComplement * direction.X * direction.Z - sineOfAngle * direction.Y) * this.X + (cosineComplement * direction.Y * direction.Z + sineOfAngle * direction.X) * this.Y;
 			this = new Vector3d(x, y, z);
+		}
+
+		public static Vector3d RotateXY(Vector3d vector, Vector2d angle)
+		{
+			double x = angle.X * vector.X - angle.Y * vector.Y;
+			double y = angle.Y * vector.X + angle.X * vector.Y;
+			double z = vector.Z;
+			return new Vector3d(x, y, z);
+		}
+
+		public static Vector3d RotateXZ(Vector3d vector, Vector2d angle)
+		{
+			double x = angle.X * vector.X + angle.Y * vector.Z;
+			double y = vector.Y;
+			double z = angle.X * vector.Z - angle.Y * vector.X;
+			return new Vector3d(x, y, z);
+		}
+
+		public static Vector3d RotateYZ(Vector3d vector, Vector2d angle)
+		{
+			double x = vector.X;
+			double y = angle.X * vector.Y - angle.Y * vector.Z;
+			double z = angle.Y * vector.Y + angle.X * vector.Z;
+			return new Vector3d(x, y, z);
+		}
+
+		public static Vector3d Rotate(Vector3d vector, Vector3d direction, Vector2d angle)
+		{
+			double versin = 1.0 - angle.X;
+			double x =
+				(angle.X + versin * direction.X * direction.X) * vector.X +
+				(versin * direction.X * direction.Y - angle.Y * direction.Z) * vector.Y +
+				(versin * direction.X * direction.Z + angle.Y * direction.Y) * vector.Z;
+			double y =
+				(versin * direction.X * direction.Y + angle.Y * direction.Z) * vector.X +
+				(angle.X + versin * direction.Y * direction.Y) * vector.Y +
+				(versin * direction.Y * direction.Z - angle.Y * direction.X) * vector.Z;
+			double z =
+				(versin * direction.X * direction.Z - angle.Y * direction.Y) * vector.X +
+				(versin * direction.Y * direction.Z + angle.Y * direction.X) * vector.Y +
+				(angle.X + versin * direction.Z * direction.Z) * vector.Z;
+			return new Vector3d(x, y, z);
 		}
 
 		/// <summary>Checks whether the vector is a null vector.</summary>
@@ -443,5 +490,52 @@ namespace Common.Geometry
 
 		/// <summary>Represents a vector pointing down.</summary>
 		public static readonly Vector3d Forward = new Vector3d(0.0, 0.0, 1.0);
+
+		// --- overrides and interface implementations ---
+		public int CompareTo(Vector3d other)
+		{
+			if (this.X < other.X) return -1;
+			if (this.X > other.X) return 1;
+			if (this.Y < other.Y) return -1;
+			if (this.Y > other.Y) return 1;
+			if (this.Z < other.Z) return -1;
+			if (this.Z > other.Z) return 1;
+			return 0;
+		}
+
+		public bool Equals(Vector3d other)
+		{
+			if (this.X != other.X) return false;
+			if (this.Y != other.Y) return false;
+			if (this.Z != other.Z) return false;
+			return true;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (!(obj is Vector3d)) return false;
+			Vector3d other = (Vector3d)obj;
+			if (this.X != other.X) return false;
+			if (this.Y != other.Y) return false;
+			if (this.Z != other.Z) return false;
+			return true;
+		}
+
+		public override int GetHashCode()
+		{
+			int hashCode = 0;
+			unchecked
+			{
+				hashCode += 1000000007 * X.GetHashCode();
+				hashCode += 1000000009 * Y.GetHashCode();
+				hashCode += 1000000021 * Z.GetHashCode();
+			}
+			return hashCode;
+		}
+
+		public override string ToString()
+		{
+			return '{' + this.X.ToString() + ',' + this.Y.ToString() + ',' + this.Z.ToString() + '}';
+		}
 	}
 }
