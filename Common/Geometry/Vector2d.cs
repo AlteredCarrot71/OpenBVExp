@@ -154,6 +154,11 @@ namespace Common.Geometry
 			}
 		}
 
+		public static implicit operator Vector2d(Vector2f vector)
+		{
+			return new Vector2d(vector.X, vector.Y);
+		}
+
 		/// <summary>Divides a scalar by a vector.</summary>
 		/// <param name="a">The scalar.</param>
 		/// <param name="b">The vector.</param>

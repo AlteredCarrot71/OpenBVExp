@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Geometry;
+using System;
 using System.Runtime.InteropServices;
 
 namespace TrainsimApi.Vectors {

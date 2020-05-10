@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using Common.Geometry;
+using System;
 using TrainsimApi.Codecs;
 using TrainsimApi.Geometry;
 using TrainsimApi.Vectors;
 
-namespace OpenBveObjectValidator {
-	internal static class Validator {
-		
-		
+namespace OpenBveObjectValidator 
+{
+	internal static class Validator 
+	{
 		internal static void CheckMeshFaces(Mesh mesh, ErrorLogger logger) {
 			for (int f = 0; f < mesh.Faces.Length; f++) {
 				if (mesh.Faces[f].Vertices.Length <= 2) {
@@ -55,7 +53,5 @@ namespace OpenBveObjectValidator {
 			float by = c.Y - b.Y;
 			return ax * by - ay * bx;
 		}
-		
-		
 	}
 }

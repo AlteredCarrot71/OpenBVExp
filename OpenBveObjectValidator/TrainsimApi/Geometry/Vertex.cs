@@ -1,4 +1,5 @@
 ﻿using Common.Colors;
+using Common.Geometry;
 using System;
 using TrainsimApi.Vectors;
 
@@ -18,14 +19,14 @@ namespace TrainsimApi.Geometry {
 		public Vertex(Vector3f position) {
 			this.Position = position;
 			this.Normal = Vector3f.Zero;
-			this.Texture = Vector2f.Zero;
+			this.Texture = Vector2f.Null;
 			this.Color = RGBf.White;
 		}
 		
 		public Vertex(Vector3f position, Vector3f normal) {
 			this.Position = position;
 			this.Normal = normal;
-			this.Texture = Vector2f.Zero;
+			this.Texture = Vector2f.Null;
 			this.Color = RGBf.White;
 		}
 		

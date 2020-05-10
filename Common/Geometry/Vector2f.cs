@@ -194,6 +194,11 @@ namespace Common.Geometry
 			return false;
 		}
 
+		public static explicit operator Vector2f(Vector2d vector)
+		{
+			return new Vector2f((float)vector.X, (float)vector.Y);
+		}
+
 		// --- instance functions ---
 		/// <summary>Normalizes the vector.</summary>
 		/// <exception cref="System.DivideByZeroException">Raised when the vector is a null vector.</exception>
@@ -365,6 +370,11 @@ namespace Common.Geometry
 		public static float NormSquared(Vector2f vector)
 		{
 			return (vector.X * vector.X) + (vector.Y * vector.Y);
+		}
+
+		public static Vector2f Cross(Vector2f a)
+		{
+			return new Vector2f(-a.Y, a.X);
 		}
 
 		// --- read-only fields ---
