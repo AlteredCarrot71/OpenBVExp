@@ -12,15 +12,6 @@ namespace OpenBve {
 	public static class World {
 
 		// vectors
-		/// <summary>Represents a 2D vector of System.Single coordinates.</summary>
-		public struct Vector2Df {
-			public float X;
-			public float Y;
-			public Vector2Df(float X, float Y) {
-				this.X = X;
-				this.Y = Y;
-			}
-		}
 		/// <summary>Represents a 3D vector of System.Double coordinates.</summary>
 		public struct Vector3D {
 			public double X;
@@ -71,12 +62,12 @@ namespace OpenBve {
 		/// <summary>Represents a vertex consisting of 3D coordinates and 2D texture coordinates.</summary>
 		internal struct Vertex {
 			internal Vector3D Coordinates;
-			internal Vector2Df TextureCoordinates;
+			internal Vector2f TextureCoordinates;
 			internal Vertex(double X, double Y, double Z) {
 				this.Coordinates = new Vector3D(X, Y, Z);
-				this.TextureCoordinates = new Vector2Df(0.0f, 0.0f);
+				this.TextureCoordinates = new Vector2f(0.0f, 0.0f);
 			}
-			internal Vertex(Vector3D Coordinates, Vector2Df TextureCoordinates) {
+			internal Vertex(Vector3D Coordinates, Vector2f TextureCoordinates) {
 				this.Coordinates = Coordinates;
 				this.TextureCoordinates = TextureCoordinates;
 			}
