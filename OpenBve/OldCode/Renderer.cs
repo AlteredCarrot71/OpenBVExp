@@ -137,7 +137,7 @@ namespace OpenBve
 		internal static bool OptionLighting = true;
 		internal static RGBb OptionAmbientColor = new RGBb(160, 160, 160);
 		internal static RGBb OptionDiffuseColor = new RGBb(160, 160, 160);
-		internal static World.Vector3Df OptionLightPosition = new World.Vector3Df(0.223606797749979f, 0.86602540378444f, -0.447213595499958f);
+		internal static Vector3f OptionLightPosition = new Vector3f(0.223606797749979f, 0.86602540378444f, -0.447213595499958f);
 		internal static float OptionLightingResultingAmount = 1.0f;
 		internal static bool OptionNormals = false;
 		internal static bool OptionWireframe = false;
@@ -173,7 +173,7 @@ namespace OpenBve
 			OptionLighting = true;
 			OptionAmbientColor = new RGBb(160, 160, 160);
 			OptionDiffuseColor = new RGBb(160, 160, 160);
-			OptionLightPosition = new World.Vector3Df(0.223606797749979f, 0.86602540378444f, -0.447213595499958f);
+			OptionLightPosition = new Vector3f(0.223606797749979f, 0.86602540378444f, -0.447213595499958f);
 			OptionLightingResultingAmount = 1.0f;
 			OptionClock = false;
 			OptionBrakeSystems = false;
@@ -892,8 +892,8 @@ namespace OpenBve
 					y1 = (float)(0.375 * World.BackgroundImageDistance);
 				}
 				const int n = 32;
-				World.Vector3Df[] bottom = new World.Vector3Df[n];
-				World.Vector3Df[] top = new World.Vector3Df[n];
+				Vector3f[] bottom = new Vector3f[n];
+				Vector3f[] top = new Vector3f[n];
 				double angleValue = 2.61799387799149 - 3.14159265358979 / (double)n;
 				double angleIncrement = 6.28318530717958 / (double)n;
 				/*
@@ -904,8 +904,8 @@ namespace OpenBve
 				for (int i = 0; i < n; i++) {
 					float x = (float)(World.BackgroundImageDistance * Math.Cos(angleValue));
 					float z = (float)(World.BackgroundImageDistance * Math.Sin(angleValue));
-					bottom[i] = new World.Vector3Df(scale * x, scale * y0, scale * z);
-					top[i] = new World.Vector3Df(scale * x, scale * y1, scale * z);
+					bottom[i] = new Vector3f(scale * x, scale * y0, scale * z);
+					top[i] = new Vector3f(scale * x, scale * y1, scale * z);
 					angleValue += angleIncrement;
 				}
 				float textureStart = 0.5f * (float)Data.Repetition / (float)n;

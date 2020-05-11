@@ -6,31 +6,6 @@ namespace OpenBve
 {
 	internal static class World 
 	{
-		/// <summary>Returns a normalized vector based on a 2D vector in the XZ plane and an additional Y-coordinate.</summary>
-		/// <param name="Vector">The vector in the XZ-plane. The X and Y components in Vector represent the X- and Z-coordinates, respectively.</param>
-		/// <param name="Y">The Y-coordinate.</param>
-		internal static Vector3d GetVector3(Vector2d Vector, double Y) {
-			double t = 1.0 / Math.Sqrt(Vector.X * Vector.X + Vector.Y * Vector.Y + Y * Y);
-			return new Vector3d(t * Vector.X, t * Y, t * Vector.Y);
-		}
-		/// <summary>Represents a 3D vector of System.Single coordinates.</summary>
-		internal struct Vector3Df {
-			internal float X;
-			internal float Y;
-			internal float Z;
-			internal Vector3Df(float X, float Y, float Z) {
-				this.X = X;
-				this.Y = Y;
-				this.Z = Z;
-			}
-			internal bool IsZero() {
-				if (this.X != 0.0f) return false;
-				if (this.Y != 0.0f) return false;
-				if (this.Z != 0.0f) return false;
-				return true;
-			}
-		}
-
 		// vertices
 		/// <summary>Represents a vertex consisting of 3D coordinates and 2D texture coordinates.</summary>
 		internal struct Vertex {
@@ -109,12 +84,12 @@ namespace OpenBve
 			/// <summary>A reference to an element in the Vertex array of the contained Mesh structure.</summary>
 			internal ushort Index;
 			/// <summary>The normal to be used at the vertex.</summary>
-			internal Vector3Df Normal;
+			internal Vector3f Normal;
 			internal MeshFaceVertex(int Index) {
 				this.Index = (ushort)Index;
-				this.Normal = new Vector3Df(0.0f, 0.0f, 0.0f);
+				this.Normal = new Vector3f(0.0f, 0.0f, 0.0f);
 			}
-			internal MeshFaceVertex(int Index, Vector3Df Normal) {
+			internal MeshFaceVertex(int Index, Vector3f Normal) {
 				this.Index = (ushort)Index;
 				this.Normal = Normal;
 			}
@@ -1132,7 +1107,7 @@ namespace OpenBve
 			Vector.X = u;
 			Vector.Z = v;
 		}
-		internal static void RotatePlane(ref Vector3Df Vector, double cosa, double sina) {
+		internal static void RotatePlane(ref Vector3f Vector, double cosa, double sina) {
 			double u = (double)Vector.X * cosa - (double)Vector.Z * sina;
 			double v = (double)Vector.X * sina + (double)Vector.Z * cosa;
 			Vector.X = (float)u;
@@ -1155,7 +1130,7 @@ namespace OpenBve
 			Vector.Y = y * cosa + v * sina;
 			Vector.Z = -dx * u + dy * v * cosa - dy * y * sina;
 		}
-		internal static void RotateUpDown(ref Vector3Df Vector, double dx, double dy, double cosa, double sina) {
+		internal static void RotateUpDown(ref Vector3f Vector, double dx, double dy, double cosa, double sina) {
 			double x = (double)Vector.X, y = (double)Vector.Y, z = (double)Vector.Z;
 			double u = dy * x - dx * z;
 			double v = dx * x + dy * z;
@@ -1219,13 +1194,13 @@ namespace OpenBve
 					float mz = (float)(nz * t);
 					for (int j = 0; j < Mesh.Faces[FaceIndex].Vertices.Length; j++) {
 						if (Mesh.Faces[FaceIndex].Vertices[j].Normal.IsZero()) {
-							Mesh.Faces[FaceIndex].Vertices[j].Normal = new Vector3Df(mx, my, mz);
+							Mesh.Faces[FaceIndex].Vertices[j].Normal = new Vector3f(mx, my, mz);
 						}
 					}
 				} else {
 					for (int j = 0; j < Mesh.Faces[FaceIndex].Vertices.Length; j++) {
 						if (Mesh.Faces[FaceIndex].Vertices[j].Normal.IsZero()) {
-							Mesh.Faces[FaceIndex].Vertices[j].Normal = new Vector3Df(0.0f, 1.0f, 0.0f);
+							Mesh.Faces[FaceIndex].Vertices[j].Normal = new Vector3f(0.0f, 1.0f, 0.0f);
 						}
 					}
 				}
