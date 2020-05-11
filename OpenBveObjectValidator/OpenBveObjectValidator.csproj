@@ -122,7 +122,6 @@
     <Compile Include="TrainsimApi\Vectors\Orientation2f.cs" />
     <Compile Include="TrainsimApi\Vectors\Orientation3d.cs" />
     <Compile Include="TrainsimApi\Vectors\Orientation3f.cs" />
-    <Compile Include="TrainsimApi\Vectors\Vector3b.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
