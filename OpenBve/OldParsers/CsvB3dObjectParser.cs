@@ -43,11 +43,11 @@ namespace OpenBve
 			}
 		}
 		private class MeshBuilder {
-			internal World.Vertex[] Vertices;
+			internal Vertex[] Vertices;
 			internal World.MeshFace[] Faces;
 			internal Material[] Materials;
 			internal MeshBuilder() {
-				this.Vertices = new World.Vertex[] { };
+				this.Vertices = new Vertex[] { };
 				this.Faces = new World.MeshFace[] { };
 				this.Materials = new Material[] { new Material() };
 			}
@@ -67,7 +67,7 @@ namespace OpenBve
 			ObjectManager.StaticObject Object = new ObjectManager.StaticObject();
 			Object.Mesh.Faces = new World.MeshFace[] { };
 			Object.Mesh.Materials = new World.MeshMaterial[] { };
-			Object.Mesh.Vertices = new World.Vertex[] { };
+			Object.Mesh.Vertices = new Vertex[] { };
 			// read lines
 			string[] Lines = System.IO.File.ReadAllLines(FileName, Encoding);
 			// parse lines
@@ -177,7 +177,7 @@ namespace OpenBve
 									nz = 0.0;
 								}
 								World.Normalize(ref nx, ref ny, ref nz);
-								Array.Resize<World.Vertex>(ref Builder.Vertices, Builder.Vertices.Length + 1);
+								Array.Resize<Vertex>(ref Builder.Vertices, Builder.Vertices.Length + 1);
 								while (Builder.Vertices.Length >= Normals.Length) {
 									Array.Resize<Vector3f>(ref Normals, Normals.Length << 1);
 								}
@@ -721,7 +721,7 @@ namespace OpenBve
 		// create cube
 		private static void CreateCube(ref MeshBuilder Builder, double sx, double sy, double sz) {
 			int v = Builder.Vertices.Length;
-			Array.Resize<World.Vertex>(ref Builder.Vertices, v + 8);
+			Array.Resize<Vertex>(ref Builder.Vertices, v + 8);
 			Builder.Vertices[v + 0].Coordinates = new Vector3d(sx, sy, -sz);
 			Builder.Vertices[v + 1].Coordinates = new Vector3d(sx, -sy, -sz);
 			Builder.Vertices[v + 2].Coordinates = new Vector3d(-sx, -sy, -sz);
@@ -751,7 +751,7 @@ namespace OpenBve
 			double ns = h >= 0.0 ? 1.0 : -1.0;
 			// initialization
 			int v = Builder.Vertices.Length;
-			Array.Resize<World.Vertex>(ref Builder.Vertices, v + 2 * n);
+			Array.Resize<Vertex>(ref Builder.Vertices, v + 2 * n);
 			Vector3f[] Normals = new Vector3f[2 * n];
 			double d = 2.0 * Math.PI / (double)n;
 			double g = 0.5 * h;
@@ -973,7 +973,7 @@ namespace OpenBve
 				int mv = Object.Mesh.Vertices.Length;
 				Array.Resize<World.MeshFace>(ref Object.Mesh.Faces, mf + Builder.Faces.Length);
 				Array.Resize<World.MeshMaterial>(ref Object.Mesh.Materials, mm + Builder.Materials.Length);
-				Array.Resize<World.Vertex>(ref Object.Mesh.Vertices, mv + Builder.Vertices.Length);
+				Array.Resize<Vertex>(ref Object.Mesh.Vertices, mv + Builder.Vertices.Length);
 				for (int i = 0; i < Builder.Vertices.Length; i++) {
 					Object.Mesh.Vertices[mv + i] = Builder.Vertices[i];
 				}
