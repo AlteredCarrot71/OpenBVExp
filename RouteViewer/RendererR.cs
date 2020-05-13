@@ -384,7 +384,7 @@ namespace OpenBve
 			int r = (int)ObjectManager.Objects[Face.ObjectIndex].Mesh.Faces[Face.FaceIndex].Material;
 			RenderFace(ref ObjectManager.Objects[Face.ObjectIndex].Mesh.Materials[r], ObjectManager.Objects[Face.ObjectIndex].Mesh.Vertices, ref ObjectManager.Objects[Face.ObjectIndex].Mesh.Faces[Face.FaceIndex], CameraX, CameraY, CameraZ);
 		}
-		private static void RenderFace(ref World.MeshMaterial Material, World.Vertex[] Vertices, ref World.MeshFace Face, double CameraX, double CameraY, double CameraZ) {
+		private static void RenderFace(ref World.MeshMaterial Material, Vertex[] Vertices, ref World.MeshFace Face, double CameraX, double CameraY, double CameraZ) {
 			// texture
 			int OpenGlNighttimeTextureIndex = Material.NighttimeTextureIndex >= 0 ? TextureManager.UseTexture(Material.NighttimeTextureIndex, TextureManager.UseMode.Normal) : 0;
 			int OpenGlDaytimeTextureIndex = Material.DaytimeTextureIndex >= 0 ? TextureManager.UseTexture(Material.DaytimeTextureIndex, TextureManager.UseMode.Normal) : 0;
@@ -1407,7 +1407,7 @@ namespace OpenBve
 		}
 
 		// get distance factor
-		private static double GetDistanceFactor(World.Vertex[] Vertices, ref World.MeshFace Face, ushort GlowAttenuationData, double CameraX, double CameraY, double CameraZ) {
+		private static double GetDistanceFactor(Vertex[] Vertices, ref World.MeshFace Face, ushort GlowAttenuationData, double CameraX, double CameraY, double CameraZ) {
 			if (Face.Vertices.Length != 0) {
 				World.GlowAttenuationMode mode; double halfdistance;
 				World.SplitGlowAttenuationData(GlowAttenuationData, out mode, out halfdistance);
