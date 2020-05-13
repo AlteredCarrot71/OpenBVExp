@@ -17,5 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector2d.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector3f.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector3d.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vertex.cs" />
   </ItemGroup>
 </Project>
