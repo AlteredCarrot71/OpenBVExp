@@ -1,7 +1,6 @@
 ﻿using Common.Colors;
 using Common.Geometry;
 using System;
-using TrainsimApi.Vectors;
 
 namespace TrainsimApi.Geometry {
 	public class Vertex : IComparable<Vertex>, IEquatable<Vertex> 

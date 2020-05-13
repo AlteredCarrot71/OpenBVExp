@@ -7,7 +7,6 @@ using System.Text;
 using TrainsimApi;
 using TrainsimApi.Codecs;
 using TrainsimApi.Geometry;
-using TrainsimApi.Vectors;
 
 namespace CsvB3dDecoder 
 {
@@ -445,9 +444,9 @@ namespace CsvB3dDecoder
 			currentMeshBuilder = null;
 			
 			// --- assemble mesh ---
-			Dictionary<Vertex, int> hashedVertices = new Dictionary<Vertex, int>();
+			Dictionary<TrainsimApi.Geometry.Vertex, int> hashedVertices = new Dictionary<TrainsimApi.Geometry.Vertex, int>();
 			Dictionary<Material, int> hashedMaterials = new Dictionary<Material, int>();
-			List<Vertex> vertices = new List<Vertex>();
+			List<TrainsimApi.Geometry.Vertex> vertices = new List<TrainsimApi.Geometry.Vertex>();
 			List<Material> materials = new List<Material>();
 			List<Face> faces = new List<Face>();
 			foreach (MeshBuilder meshBuilder in meshBuilders) {
@@ -464,12 +463,12 @@ namespace CsvB3dDecoder
 							normal = Vector3d.Up;
 						}
 					}
-					
+
 					// --- vertices ---
-					Vertex[] v = new Vertex[meshBuilderFace.Vertices.Length];
+					TrainsimApi.Geometry.Vertex[] v = new TrainsimApi.Geometry.Vertex[meshBuilderFace.Vertices.Length];
 					for (int i = 0; i < meshBuilderFace.Vertices.Length; i++) {
 						MeshBuilderVertex meshBuilderVertex = meshBuilder.Vertices[meshBuilderFace.Vertices[i]];
-						v[i] = new Vertex((Vector3f)meshBuilderVertex.Position, (Vector3f)meshBuilderVertex.Normal, (Vector2f)meshBuilderVertex.Texture);
+						v[i] = new TrainsimApi.Geometry.Vertex((Vector3f)meshBuilderVertex.Position, (Vector3f)meshBuilderVertex.Normal, (Vector2f)meshBuilderVertex.Texture);
 						if (meshBuilderFace.Normals == MeshBuilderFaceNormals.Generate || meshBuilderVertex.Normal.IsZero()) {
 							v[i].Normal = (Vector3f)normal;
 						} else if (meshBuilderFace.Normals == MeshBuilderFaceNormals.Inverse) {
