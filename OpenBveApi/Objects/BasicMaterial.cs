@@ -1,10 +1,11 @@
 ﻿using Common.Colors;
 using OpenBveApi.Textures;
 
-namespace OpenBveApi.Objects {
-
+namespace OpenBveApi.Objects
+{
 	/// <summary>Represents a material with basic properties such as colors and textures.</summary>
-	public class BasicMaterial : AbstractMaterial {
+	public class BasicMaterial : AbstractMaterial
+	{
 		// --- members ---
 		/// <summary>The reflective color.</summary>
 		public RGBAb ReflectiveColor;
@@ -19,5 +20,4 @@ namespace OpenBveApi.Objects {
 		/// <summary>The glow, or a null reference.</summary>
 		public AbstractGlow Glow;
 	}
-	
 }
