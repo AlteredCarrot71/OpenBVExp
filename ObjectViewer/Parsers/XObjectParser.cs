@@ -1,5 +1,6 @@
 ﻿using Common.Colors;
 using Common.Geometry;
+using Common.Mesh;
 using System;
 using System.IO;
 using System.IO.Compression;
@@ -1034,7 +1035,7 @@ namespace OpenBve {
 			System.Globalization.CultureInfo Culture = System.Globalization.CultureInfo.InvariantCulture;
 			Object = new ObjectManager.StaticObject();
 			Object.Mesh.Faces = new World.MeshFace[] { };
-			Object.Mesh.Materials = new World.MeshMaterial[] { };
+			Object.Mesh.Materials = new MeshMaterial[] { };
 			Object.Mesh.Vertices = new Vertex[] { };
 			// file
 			for (int i = 0; i < Structure.Data.Length; i++) {
@@ -1559,7 +1560,7 @@ namespace OpenBve {
 							int mm = Object.Mesh.Materials.Length;
 							int mv = Object.Mesh.Vertices.Length;
 							Array.Resize<World.MeshFace>(ref Object.Mesh.Faces, mf + nFaces);
-							Array.Resize<World.MeshMaterial>(ref Object.Mesh.Materials, mm + Materials.Length);
+							Array.Resize<MeshMaterial>(ref Object.Mesh.Materials, mm + Materials.Length);
 							Array.Resize<Vertex>(ref Object.Mesh.Vertices, mv + Vertices.Length);
 							for (int j = 0; j < Materials.Length; j++) {
 								bool emissive = Materials[j].emissiveColor.R != 0 | Materials[j].emissiveColor.G != 0 | Materials[j].emissiveColor.B != 0;
@@ -1595,12 +1596,12 @@ namespace OpenBve {
 									Object.Mesh.Materials[mm + j].DaytimeTextureIndex = -1;
 									transparent = false;
 								}
-								Object.Mesh.Materials[mm + j].Flags = (byte)((transparent ? World.MeshMaterial.TransparentColorMask : 0) | (emissive ? World.MeshMaterial.EmissiveColorMask : 0));
+								Object.Mesh.Materials[mm + j].Flags = (byte)((transparent ? MeshMaterial.TransparentColorMask : 0) | (emissive ? MeshMaterial.EmissiveColorMask : 0));
 								Object.Mesh.Materials[mm + j].Color = Materials[j].faceColor;
 								Object.Mesh.Materials[mm + j].TransparentColor = new RGBb(0, 0, 0);
 								Object.Mesh.Materials[mm + j].EmissiveColor = Materials[j].emissiveColor;
 								Object.Mesh.Materials[mm + j].NighttimeTextureIndex = -1;
-								Object.Mesh.Materials[mm + j].BlendMode = World.MeshMaterialBlendMode.Normal;
+								Object.Mesh.Materials[mm + j].BlendMode = MaterialBlendMode.Normal;
 								Object.Mesh.Materials[mm + j].GlowAttenuationData = 0;
 							}
 							for (int j = 0; j < nFaces; j++) {

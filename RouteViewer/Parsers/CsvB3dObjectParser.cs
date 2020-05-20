@@ -1,5 +1,6 @@
 ﻿using Common.Colors;
 using Common.Geometry;
+using Common.Mesh;
 using System;
 
 namespace OpenBve {
@@ -14,7 +15,7 @@ namespace OpenBve {
 			internal bool TransparentColorUsed;
 			internal string DaytimeTexture;
 			internal string NighttimeTexture;
-			internal World.MeshMaterialBlendMode BlendMode;
+			internal MaterialBlendMode BlendMode;
 			internal ushort GlowAttenuationData;
 			internal Material() {
 				this.Color = new RGBAb(255, 255, 255, 255);
@@ -24,7 +25,7 @@ namespace OpenBve {
 				this.TransparentColorUsed = false;
 				this.DaytimeTexture = null;
 				this.NighttimeTexture = null;
-				this.BlendMode = World.MeshMaterialBlendMode.Normal;
+				this.BlendMode = MaterialBlendMode.Normal;
 				this.GlowAttenuationData = 0;
 			}
 			internal Material(Material Prototype) {
@@ -63,7 +64,7 @@ namespace OpenBve {
 			// initialize object
 			ObjectManager.StaticObject Object = new ObjectManager.StaticObject();
 			Object.Mesh.Faces = new World.MeshFace[] { };
-			Object.Mesh.Materials = new World.MeshMaterial[] { };
+			Object.Mesh.Materials = new MeshMaterial[] { };
 			Object.Mesh.Vertices = new Vertex[] { };
 			// read lines
 			string[] Lines = System.IO.File.ReadAllLines(FileName, Encoding);
@@ -590,18 +591,18 @@ namespace OpenBve {
 								if (Arguments.Length > 3) {
 									Interface.AddMessage(Interface.MessageType.Warning, false, "At most 3 arguments are expected in " + Command + " at line " + (i + 1).ToString(Culture) + " in file " + FileName);
 								}
-								World.MeshMaterialBlendMode blendmode = World.MeshMaterialBlendMode.Normal;
+								MaterialBlendMode blendmode = MaterialBlendMode.Normal;
 								if (Arguments.Length >= 1 && Arguments[0].Length > 0) {
 									switch (Arguments[0].ToLowerInvariant()) {
 										case "normal":
-											blendmode = World.MeshMaterialBlendMode.Normal;
+											blendmode = MaterialBlendMode.Normal;
 											break;
 										case "additive":
-											blendmode = World.MeshMaterialBlendMode.Additive;
+											blendmode = MaterialBlendMode.Additive;
 											break;
 										default:
 											Interface.AddMessage(Interface.MessageType.Error, false, "The given BlendMode is not supported in " + Command + " at line " + (i + 1).ToString(Culture) + " in file " + FileName);
-											blendmode = World.MeshMaterialBlendMode.Normal;
+											blendmode = MaterialBlendMode.Normal;
 											break;
 									}
 								}
@@ -966,7 +967,7 @@ namespace OpenBve {
 				int mm = Object.Mesh.Materials.Length;
 				int mv = Object.Mesh.Vertices.Length;
 				Array.Resize<World.MeshFace>(ref Object.Mesh.Faces, mf + Builder.Faces.Length);
-				Array.Resize<World.MeshMaterial>(ref Object.Mesh.Materials, mm + Builder.Materials.Length);
+				Array.Resize<MeshMaterial>(ref Object.Mesh.Materials, mm + Builder.Materials.Length);
 				Array.Resize<Vertex>(ref Object.Mesh.Vertices, mv + Builder.Vertices.Length);
 				for (int i = 0; i < Builder.Vertices.Length; i++) {
 					Object.Mesh.Vertices[mv + i] = Builder.Vertices[i];
@@ -979,7 +980,7 @@ namespace OpenBve {
 					Object.Mesh.Faces[mf + i].Material += (ushort)mm;
 				}
 				for (int i = 0; i < Builder.Materials.Length; i++) {
-					Object.Mesh.Materials[mm + i].Flags = (byte)((Builder.Materials[i].EmissiveColorUsed ? World.MeshMaterial.EmissiveColorMask : 0) | (Builder.Materials[i].TransparentColorUsed ? World.MeshMaterial.TransparentColorMask : 0));
+					Object.Mesh.Materials[mm + i].Flags = (byte)((Builder.Materials[i].EmissiveColorUsed ? MeshMaterial.EmissiveColorMask : 0) | (Builder.Materials[i].TransparentColorUsed ? MeshMaterial.TransparentColorMask : 0));
 					Object.Mesh.Materials[mm + i].Color = Builder.Materials[i].Color;
 					Object.Mesh.Materials[mm + i].TransparentColor = Builder.Materials[i].TransparentColor;
 					TextureManager.TextureWrapMode WrapX, WrapY;

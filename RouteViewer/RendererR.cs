@@ -1,5 +1,6 @@
 ﻿using Common.Colors;
 using Common.Geometry;
+using Common.Mesh;
 using System;
 using Tao.OpenGl;
 
@@ -308,7 +309,7 @@ namespace OpenBve
 				bool depthMask = true;
 				for (int i = 0; i < AlphaListCount; i++) {
 					int r = (int)ObjectManager.Objects[AlphaList[i].ObjectIndex].Mesh.Faces[AlphaList[i].FaceIndex].Material;
-					if (ObjectManager.Objects[AlphaList[i].ObjectIndex].Mesh.Materials[r].BlendMode == World.MeshMaterialBlendMode.Additive) {
+					if (ObjectManager.Objects[AlphaList[i].ObjectIndex].Mesh.Materials[r].BlendMode == MaterialBlendMode.Additive) {
 						if (depthMask) {
 							Gl.glDepthMask(Gl.GL_FALSE);
 							depthMask = false;
@@ -384,7 +385,7 @@ namespace OpenBve
 			int r = (int)ObjectManager.Objects[Face.ObjectIndex].Mesh.Faces[Face.FaceIndex].Material;
 			RenderFace(ref ObjectManager.Objects[Face.ObjectIndex].Mesh.Materials[r], ObjectManager.Objects[Face.ObjectIndex].Mesh.Vertices, ref ObjectManager.Objects[Face.ObjectIndex].Mesh.Faces[Face.FaceIndex], CameraX, CameraY, CameraZ);
 		}
-		private static void RenderFace(ref World.MeshMaterial Material, Vertex[] Vertices, ref World.MeshFace Face, double CameraX, double CameraY, double CameraZ) {
+		private static void RenderFace(ref MeshMaterial Material, Vertex[] Vertices, ref World.MeshFace Face, double CameraX, double CameraY, double CameraZ) {
 			// texture
 			int OpenGlNighttimeTextureIndex = Material.NighttimeTextureIndex >= 0 ? TextureManager.UseTexture(Material.NighttimeTextureIndex, TextureManager.UseMode.Normal) : 0;
 			int OpenGlDaytimeTextureIndex = Material.DaytimeTextureIndex >= 0 ? TextureManager.UseTexture(Material.DaytimeTextureIndex, TextureManager.UseMode.Normal) : 0;
@@ -419,7 +420,7 @@ namespace OpenBve
 			}
 			// blend mode
 			float factor;
-			if (Material.BlendMode == World.MeshMaterialBlendMode.Additive) {
+			if (Material.BlendMode == MaterialBlendMode.Additive) {
 				factor = 1.0f;
 				if (!BlendEnabled) Gl.glEnable(Gl.GL_BLEND);
 				Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE);
@@ -469,7 +470,7 @@ namespace OpenBve
 			} else {
 				Gl.glColor4f(inv255 * (float)Material.Color.R * factor, inv255 * Material.Color.G * factor, inv255 * (float)Material.Color.B * factor, inv255 * (float)Material.Color.A);
 			}
-			if ((Material.Flags & World.MeshMaterial.EmissiveColorMask) != 0) {
+			if ((Material.Flags & MeshMaterial.EmissiveColorMask) != 0) {
 				Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION, new float[] { inv255 * (float)Material.EmissiveColor.R, inv255 * (float)Material.EmissiveColor.G, inv255 * (float)Material.EmissiveColor.B, 1.0f });
 				EmissiveEnabled = true;
 			} else if (EmissiveEnabled) {
@@ -542,7 +543,7 @@ namespace OpenBve
 					if (alphafactor > 1.0f) alphafactor = 1.0f;
 				}
 				Gl.glColor4f(inv255 * (float)Material.Color.R * factor, inv255 * Material.Color.G * factor, inv255 * (float)Material.Color.B * factor, inv255 * (float)Material.Color.A * alphafactor);
-				if ((Material.Flags & World.MeshMaterial.EmissiveColorMask) != 0) {
+				if ((Material.Flags & MeshMaterial.EmissiveColorMask) != 0) {
 					Gl.glMaterialfv(Gl.GL_FRONT_AND_BACK, Gl.GL_EMISSION, new float[] { inv255 * (float)Material.EmissiveColor.R, inv255 * (float)Material.EmissiveColor.G, inv255 * (float)Material.EmissiveColor.B, 1.0f });
 					EmissiveEnabled = true;
 				} else if (EmissiveEnabled) {
@@ -580,7 +581,7 @@ namespace OpenBve
 				}
 			}
 			// finalize
-			if (Material.BlendMode == World.MeshMaterialBlendMode.Additive) {
+			if (Material.BlendMode == MaterialBlendMode.Additive) {
 				Gl.glBlendFunc(Gl.GL_SRC_ALPHA, Gl.GL_ONE_MINUS_SRC_ALPHA);
 				if (!BlendEnabled) Gl.glDisable(Gl.GL_BLEND);
 				if (FogEnabled) {
@@ -1231,7 +1232,7 @@ namespace OpenBve
 						bool transparentcolor = false, alpha = false;
 						if (ObjectManager.Objects[ObjectIndex].Mesh.Materials[k].Color.A != 255) {
 							alpha = true;
-						} else if (ObjectManager.Objects[ObjectIndex].Mesh.Materials[k].BlendMode == World.MeshMaterialBlendMode.Additive) {
+						} else if (ObjectManager.Objects[ObjectIndex].Mesh.Materials[k].BlendMode == MaterialBlendMode.Additive) {
 							alpha = true;
 						} else if (ObjectManager.Objects[ObjectIndex].Mesh.Materials[k].GlowAttenuationData != 0) {
 							alpha = true;

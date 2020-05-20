@@ -18,5 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector3f.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector3d.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vertex.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mesh\MeshMaterial.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mesh\MaterialBlendMode.cs" />
   </ItemGroup>
 </Project>

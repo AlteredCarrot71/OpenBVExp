@@ -1,63 +1,12 @@
 ﻿using Common.Colors;
 using Common.Geometry;
+using Common.Mesh;
 using System;
 
 namespace OpenBve 
 {
 	public static class World 
 	{
-		// mesh material
-		/// <summary>Represents material properties.</summary>
-		internal struct MeshMaterial {
-			/// <summary>A bit mask combining constants of the MeshMaterial structure.</summary>
-			internal byte Flags;
-			internal RGBAb Color;
-			internal RGBb TransparentColor;
-			internal RGBb EmissiveColor;
-			internal int DaytimeTextureIndex;
-			internal int NighttimeTextureIndex;
-			/// <summary>A value between 0 (daytime) and 255 (nighttime).</summary>
-			internal byte DaytimeNighttimeBlend;
-			internal MeshMaterialBlendMode BlendMode;
-			/// <summary>A bit mask specifying the glow properties. Use GetGlowAttenuationData to create valid data for this field.</summary>
-			internal ushort GlowAttenuationData;
-			internal const int EmissiveColorMask = 1;
-			internal const int TransparentColorMask = 2;
-			// operators
-			public static bool operator ==(MeshMaterial A, MeshMaterial B) {
-				if (A.Flags != B.Flags) return false;
-				if (A.Color.R != B.Color.R | A.Color.G != B.Color.G | A.Color.B != B.Color.B | A.Color.A != B.Color.A) return false;
-				if (A.TransparentColor.R != B.TransparentColor.R | A.TransparentColor.G != B.TransparentColor.G | A.TransparentColor.B != B.TransparentColor.B) return false;
-				if (A.EmissiveColor.R != B.EmissiveColor.R | A.EmissiveColor.G != B.EmissiveColor.G | A.EmissiveColor.B != B.EmissiveColor.B) return false;
-				if (A.DaytimeTextureIndex != B.DaytimeTextureIndex) return false;
-				if (A.NighttimeTextureIndex != B.NighttimeTextureIndex) return false;
-				if (A.BlendMode != B.BlendMode) return false;
-				if (A.GlowAttenuationData != B.GlowAttenuationData) return false;
-				return true;
-			}
-			public static bool operator !=(MeshMaterial A, MeshMaterial B) {
-				if (A.Flags != B.Flags) return true;
-				if (A.Color.R != B.Color.R | A.Color.G != B.Color.G | A.Color.B != B.Color.B | A.Color.A != B.Color.A) return true;
-				if (A.TransparentColor.R != B.TransparentColor.R | A.TransparentColor.G != B.TransparentColor.G | A.TransparentColor.B != B.TransparentColor.B) return true;
-				if (A.EmissiveColor.R != B.EmissiveColor.R | A.EmissiveColor.G != B.EmissiveColor.G | A.EmissiveColor.B != B.EmissiveColor.B) return true;
-				if (A.DaytimeTextureIndex != B.DaytimeTextureIndex) return true;
-				if (A.NighttimeTextureIndex != B.NighttimeTextureIndex) return true;
-				if (A.BlendMode != B.BlendMode) return true;
-				if (A.GlowAttenuationData != B.GlowAttenuationData) return true;
-				return false;
-			}
-			public override int GetHashCode() {
-				return base.GetHashCode();
-			}
-			public override bool Equals(object obj) {
-				return base.Equals(obj);
-			}
-		}
-		internal enum MeshMaterialBlendMode : byte {
-			Normal = 0,
-			Additive = 1
-		}
-		
 		// mesh face vertex
 		/// <summary>Represents a reference to a vertex and the normal to be used for that vertex.</summary>
 		internal struct MeshFaceVertex {

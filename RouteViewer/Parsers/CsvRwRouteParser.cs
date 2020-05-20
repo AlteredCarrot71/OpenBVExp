@@ -1,5 +1,6 @@
 ﻿using Common.Colors;
 using Common.Geometry;
+using Common.Mesh;
 using System;
 using System.Globalization;
 
@@ -2444,7 +2445,7 @@ namespace OpenBve {
 																	Signal.GlowTextures = LoadAllTextures(f, new RGBb(0, 0, 0), 1, TextureManager.TextureLoadMode.Bve4SignalGlow);
 																	if (Signal.GlowObject != null) {
 																		for (int p = 0; p < Signal.GlowObject.Mesh.Materials.Length; p++) {
-																			Signal.GlowObject.Mesh.Materials[p].BlendMode = World.MeshMaterialBlendMode.Additive;
+																			Signal.GlowObject.Mesh.Materials[p].BlendMode = MaterialBlendMode.Additive;
 																			Signal.GlowObject.Mesh.Materials[p].GlowAttenuationData = World.GetGlowAttenuationData(200.0, World.GlowAttenuationMode.DivisionExponent4);
 																		}
 																	}

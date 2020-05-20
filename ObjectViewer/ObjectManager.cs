@@ -1,4 +1,5 @@
 ﻿using Common.Geometry;
+using Common.Mesh;
 using System;
 
 namespace OpenBve {
@@ -192,7 +193,7 @@ namespace OpenBve {
 				ObjectManager.Objects[i] = null;
 				ObjectManager.Objects[i] = new StaticObject();
 				ObjectManager.Objects[i].Mesh.Faces = new World.MeshFace[] { };
-				ObjectManager.Objects[i].Mesh.Materials = new World.MeshMaterial[] { };
+				ObjectManager.Objects[i].Mesh.Materials = new MeshMaterial[] { };
 				ObjectManager.Objects[i].Mesh.Vertices = new Vertex[] { };
 			}
 			Object.CurrentState = StateIndex;
@@ -725,7 +726,7 @@ namespace OpenBve {
 				if (AnimatedWorldObjects[a].Object.States[i].Object == null) {
 					AnimatedWorldObjects[a].Object.States[i].Object = new StaticObject();
 					AnimatedWorldObjects[a].Object.States[i].Object.Mesh.Faces = new World.MeshFace[] { };
-					AnimatedWorldObjects[a].Object.States[i].Object.Mesh.Materials = new World.MeshMaterial[] { };
+					AnimatedWorldObjects[a].Object.States[i].Object.Mesh.Materials = new MeshMaterial[] { };
 					AnimatedWorldObjects[a].Object.States[i].Object.Mesh.Vertices = new Vertex[] { };
 					AnimatedWorldObjects[a].Object.States[i].Object.RendererIndex = -1;
 				}
@@ -1344,7 +1345,7 @@ namespace OpenBve {
 				Array.Resize<Vertex>(ref Prototype.Mesh.Vertices, v);
 			}
 			if (m != Prototype.Mesh.Materials.Length) {
-				Array.Resize<World.MeshMaterial>(ref Prototype.Mesh.Materials, m);
+				Array.Resize<MeshMaterial>(ref Prototype.Mesh.Materials, m);
 			}
 			if (f != Prototype.Mesh.Faces.Length) {
 				Array.Resize<World.MeshFace>(ref Prototype.Mesh.Faces, f);
@@ -1362,7 +1363,7 @@ namespace OpenBve {
 				int mm = Base.Mesh.Materials.Length;
 				int mv = Base.Mesh.Vertices.Length;
 				Array.Resize<World.MeshFace>(ref Base.Mesh.Faces, mf + Add.Mesh.Faces.Length);
-				Array.Resize<World.MeshMaterial>(ref Base.Mesh.Materials, mm + Add.Mesh.Materials.Length);
+				Array.Resize<MeshMaterial>(ref Base.Mesh.Materials, mm + Add.Mesh.Materials.Length);
 				Array.Resize<Vertex>(ref Base.Mesh.Vertices, mv + Add.Mesh.Vertices.Length);
 				for (int i = 0; i < Add.Mesh.Faces.Length; i++) {
 					Base.Mesh.Faces[mf + i] = Add.Mesh.Faces[i];
@@ -1473,7 +1474,7 @@ namespace OpenBve {
 				}
 			}
 			// materials
-			Object.Mesh.Materials = new World.MeshMaterial[Prototype.Mesh.Materials.Length];
+			Object.Mesh.Materials = new MeshMaterial[Prototype.Mesh.Materials.Length];
 			for (int j = 0; j < Prototype.Mesh.Materials.Length; j++) {
 				Object.Mesh.Materials[j] = Prototype.Mesh.Materials[j];
 				Object.Mesh.Materials[j].Color.R = (byte)Math.Round((double)Prototype.Mesh.Materials[j].Color.R * Brightness);
@@ -1515,7 +1516,7 @@ namespace OpenBve {
 			}
 			Objects[a] = new StaticObject();
 			Objects[a].Mesh.Faces = new World.MeshFace[] { };
-			Objects[a].Mesh.Materials = new World.MeshMaterial[] { };
+			Objects[a].Mesh.Materials = new MeshMaterial[] { };
 			Objects[a].Mesh.Vertices = new Vertex[] { };
 			Objects[a].Dynamic = true;
 			ObjectsUsed++;
@@ -1549,7 +1550,7 @@ namespace OpenBve {
 				}
 			}
 			// materials
-			Result.Mesh.Materials = new World.MeshMaterial[Prototype.Mesh.Materials.Length];
+			Result.Mesh.Materials = new MeshMaterial[Prototype.Mesh.Materials.Length];
 			for (int j = 0; j < Prototype.Mesh.Materials.Length; j++) {
 				Result.Mesh.Materials[j] = Prototype.Mesh.Materials[j];
 				if (DaytimeTextureIndex >= 0) {
