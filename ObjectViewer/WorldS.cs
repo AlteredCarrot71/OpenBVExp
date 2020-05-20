@@ -405,21 +405,11 @@ namespace OpenBve
 		}
 
 		// ================================
-
 		// cross
 		internal static void Cross(double ax, double ay, double az, double bx, double by, double bz, out double cx, out double cy, out double cz) {
 			cx = ay * bz - az * by;
 			cy = az * bx - ax * bz;
 			cz = ax * by - ay * bx;
-		}
-		internal static Vector3d Cross(Vector3d A, Vector3d B) {
-			Vector3d C; Cross(A.X, A.Y, A.Z, B.X, B.Y, B.Z, out C.X, out C.Y, out C.Z);
-			return C;
-		}
-
-		// translate
-		internal static Vector3d Translate(Vector3d A, Vector3d B) {
-			return new Vector3d(A.X + B.X, A.Y + B.Y, A.Z + B.Z);
 		}
 
 		// transformation
@@ -650,6 +640,5 @@ namespace OpenBve
 				}
 			}
 		}
-
 	}
 }

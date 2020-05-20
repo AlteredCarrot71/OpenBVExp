@@ -5,7 +5,7 @@ namespace Common.Geometry
 	/// <summary>Represents a three-dimensional vector.</summary>
 	public struct Vector3d : IComparable<Vector3d>, IEquatable<Vector3d>
 	{
-		// --- members ---
+		#region members
 		/// <summary>The x-coordinate.</summary>
 		public double X;
 
@@ -14,8 +14,9 @@ namespace Common.Geometry
 
 		/// <summary>The z-coordinate.</summary>
 		public double Z;
+		#endregion
 
-		// --- constructors ---
+		#region constructors
 		/// <summary>Creates a new three-dimensional vector.</summary>
 		/// <param name="x">The x-coordinate.</param>
 		/// <param name="y">The y-coordinate.</param>
@@ -37,8 +38,9 @@ namespace Common.Geometry
 			this.Y = t * Y;
 			this.Z = t * Vector.Y;
 		}
+		#endregion
 
-		// --- arithmetic operators ---
+		#region arithmetic operators
 		/// <summary>Adds two vectors.</summary>
 		/// <param name="a">The first vector.</param>
 		/// <param name="b">The second vector.</param>
@@ -179,8 +181,9 @@ namespace Common.Geometry
 				return new Vector3d(a / b.X, a / b.Y, a / b.Z);
 			}
 		}
+		#endregion
 
-		// --- comparisons ---
+		#region comparisons
 		/// <summary>Checks whether the two specified vectors are equal.</summary>
 		/// <param name="a">The first vector.</param>
 		/// <param name="b">The second vector.</param>
@@ -204,8 +207,9 @@ namespace Common.Geometry
 			if (a.Z != b.Z) return true;
 			return false;
 		}
+		#endregion
 
-		// --- instance functions ---
+		#region instance functions
 		public bool IsZero()
 		{
 			return this.X == 0.0 & this.Y == 0.0 & this.Z == 0.0;
@@ -336,8 +340,9 @@ namespace Common.Geometry
 		{
 			return this.X * this.X + this.Y * this.Y + this.Z * this.Z;
 		}
+		#endregion
 
-		// --- static functions ---
+		#region static functions
 		public static Vector3d Sign(Vector3d vector)
 		{
 			double t = vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z;
@@ -472,8 +477,9 @@ namespace Common.Geometry
 		{
 			return vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z;
 		}
+		#endregion
 
-		// --- read-only fields ---
+		#region  read-only fields
 		/// <summary>Represents a null vector.</summary>
 		public static readonly Vector3d Null = new Vector3d(0.0, 0.0, 0.0);
 
@@ -494,9 +500,10 @@ namespace Common.Geometry
 
 		/// <summary>Represents a vector pointing down.</summary>
 		public static readonly Vector3d Forward = new Vector3d(0.0, 0.0, 1.0);
+        #endregion
 
-		// --- overrides and interface implementations ---
-		public int CompareTo(Vector3d other)
+        #region overrides and interface implementations
+        public int CompareTo(Vector3d other)
 		{
 			if (this.X < other.X) return -1;
 			if (this.X > other.X) return 1;
@@ -541,5 +548,6 @@ namespace Common.Geometry
 		{
 			return '{' + this.X.ToString() + ',' + this.Y.ToString() + ',' + this.Z.ToString() + '}';
 		}
-	}
+        #endregion
+    }
 }

@@ -5254,7 +5254,7 @@ namespace OpenBve {
 								RailTransformation.Z = new Vector3d(rx, ry, rz);
 								RailTransformation.X = new Vector3d(rz, 0.0, -rx);
 								World.Normalize(ref RailTransformation.X.X, ref RailTransformation.X.Z);
-								RailTransformation.Y = World.Cross(RailTransformation.Z, RailTransformation.X);
+								RailTransformation.Y = Vector3d.Cross(RailTransformation.Z, RailTransformation.X);
 								double dx = Data.Blocks[i + 1].Rail[j].RailEndX - Data.Blocks[i].Rail[j].RailStartX;
 								double dy = Data.Blocks[i + 1].Rail[j].RailEndY - Data.Blocks[i].Rail[j].RailStartY;
 								planar = Math.Atan(dx / c);

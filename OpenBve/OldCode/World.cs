@@ -942,7 +942,7 @@ namespace OpenBve
 		}
 
 		// ================================
-		
+		// cross
 		internal static void Cross(double ax, double ay, double az, double bx, double by, double bz, out double cx, out double cy, out double cz) {
 			cx = ay * bz - az * by;
 			cy = az * bx - ax * bz;
