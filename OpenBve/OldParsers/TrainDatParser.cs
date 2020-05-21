@@ -7,7 +7,7 @@ namespace OpenBve {
 		internal static void ParseTrainData(string TrainPath, System.Text.Encoding Encoding, TrainManager.Train Train) {
 			System.Globalization.CultureInfo Culture = System.Globalization.CultureInfo.InvariantCulture;
 			// load file
-			string FileName = OpenBveApi.Path.CombineFile(TrainPath, "train.dat");
+			string FileName = Common.Path.CombineFile(TrainPath, "train.dat");
 			string[] Lines = System.IO.File.ReadAllLines(FileName, Encoding);
 			for (int i = 0; i < Lines.Length; i++) {
 				int j = Lines[i].IndexOf(';');
@@ -24,7 +24,7 @@ namespace OpenBve {
 					if (t == "bve1220000") {
 						ver1220000 = true;
 					} else if (t != "bve2000000" & t != "openbve") {
-						Interface.AddMessage(Interface.MessageType.Error, false, "The train.dat format " + Lines[0].ToLowerInvariant() + " is not supported in " + OpenBveApi.Path.CombineFile(TrainPath, "train.dat"));
+						Interface.AddMessage(Interface.MessageType.Error, false, "The train.dat format " + Lines[0].ToLowerInvariant() + " is not supported in " + Common.Path.CombineFile(TrainPath, "train.dat"));
 					}
 					break;
 				}

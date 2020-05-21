@@ -59,7 +59,7 @@ namespace OpenBve {
 			Interface.LoadControls(null, out Interface.CurrentControls);
 			{
 				string folder = Program.FileSystem.GetDataFolder("Controls");
-				string file = OpenBveApi.Path.CombineFile(folder, "Default keyboard assignment.controls");
+				string file = Common.Path.CombineFile(folder, "Default keyboard assignment.controls");
 				Interface.Control[] controls;
 				Interface.LoadControls(file, out controls);
 				Interface.AddControls(ref Interface.CurrentControls, controls);
@@ -67,9 +67,9 @@ namespace OpenBve {
 			// --- load language ---
 			{
 				string folder = Program.FileSystem.GetDataFolder("Languages");
-				string file = OpenBveApi.Path.CombineFile(folder, Interface.CurrentOptions.LanguageCode + ".cfg");
+				string file = Common.Path.CombineFile(folder, Interface.CurrentOptions.LanguageCode + ".cfg");
 				if (!System.IO.File.Exists(file)) {
-					file = OpenBveApi.Path.CombineFile(folder, "en-US.cfg");
+					file = Common.Path.CombineFile(folder, "en-US.cfg");
 				}
 				Interface.LoadLanguage(file);
 			}
@@ -114,11 +114,11 @@ namespace OpenBve {
 				if (Game.TrainName != null && Game.TrainName.Length != 0) {
 					string folder = System.IO.Path.GetDirectoryName(result.RouteFile);
 					while (true) {
-						string trainFolder = OpenBveApi.Path.CombineDirectory(folder, "Train");
+						string trainFolder = Common.Path.CombineDirectory(folder, "Train");
 						if (System.IO.Directory.Exists(trainFolder)) {
-							folder = OpenBveApi.Path.CombineDirectory(trainFolder, Game.TrainName);
+							folder = Common.Path.CombineDirectory(trainFolder, Game.TrainName);
 							if (System.IO.Directory.Exists(folder)) {
-								string file = OpenBveApi.Path.CombineFile(folder, "train.dat");
+								string file = Common.Path.CombineFile(folder, "train.dat");
 								if (System.IO.File.Exists(file)) {
 									result.TrainFolder = folder;
 									result.TrainEncoding = System.Text.Encoding.UTF8;
@@ -257,7 +257,7 @@ namespace OpenBve {
 			}
 			Array.Resize<string>(ref names, count);
 			Array.Resize<string>(ref directories, count);
-			SetPackageLookupDirectoriesAuthentication = OpenBveApi.Path.SetPackageLookupDirectories(names, directories, SetPackageLookupDirectoriesAuthentication);
+			SetPackageLookupDirectoriesAuthentication = Common.Path.SetPackageLookupDirectories(names, directories, SetPackageLookupDirectoriesAuthentication);
 		}
 		
 		/// <summary>Clears the log file.</summary>

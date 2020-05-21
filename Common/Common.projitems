@@ -20,5 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vertex.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mesh\MeshMaterial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mesh\MaterialBlendMode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Path.cs" />
   </ItemGroup>
 </Project>

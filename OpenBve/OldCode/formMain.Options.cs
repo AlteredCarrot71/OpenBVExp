@@ -30,9 +30,9 @@ namespace OpenBve {
 				try {
 					#endif
 					string Flag = Interface.GetInterfaceString("language_flag");
-					string File = OpenBveApi.Path.CombineFile(Folder, Flag);
+					string File = Common.Path.CombineFile(Folder, Flag);
 					if (!System.IO.File.Exists(File)) {
-						File = OpenBveApi.Path.CombineFile(Folder, "unknown.png");
+						File = Common.Path.CombineFile(Folder, "unknown.png");
 					}
 					if (System.IO.File.Exists(File)) {
 						pictureboxLanguage.Image = Image.FromFile(File);

@@ -62,7 +62,7 @@ namespace OpenBve {
 			System.Globalization.CultureInfo Culture = System.Globalization.CultureInfo.InvariantCulture;
 			// form icon
 			try {
-				string File = OpenBveApi.Path.CombineFile(Program.FileSystem.GetDataFolder(), "icon.ico");
+				string File = Common.Path.CombineFile(Program.FileSystem.GetDataFolder(), "icon.ico");
 				this.Icon = new Icon(File);
 			} catch { }
 			// use button-style radio buttons on non-Mono
@@ -331,7 +331,7 @@ namespace OpenBve {
 				string Folder = Program.FileSystem.GetDataFolder("Languages");
 				int j;
 				for (j = 0; j < LanguageFiles.Length; j++) {
-					string File = OpenBveApi.Path.CombineFile(Folder, Interface.CurrentOptions.LanguageCode + ".cfg");
+					string File = Common.Path.CombineFile(Folder, Interface.CurrentOptions.LanguageCode + ".cfg");
 					if (string.Compare(File, LanguageFiles[j], StringComparison.OrdinalIgnoreCase) == 0) {
 						comboboxLanguages.SelectedIndex = j;
 						break;
@@ -341,7 +341,7 @@ namespace OpenBve {
 					#if !DEBUG
 					try {
 						#endif
-						string File = OpenBveApi.Path.CombineFile(Folder, "en-US.cfg");
+						string File = Common.Path.CombineFile(Folder, "en-US.cfg");
 						Interface.LoadLanguage(File);
 						ApplyLanguage();
 						#if !DEBUG
@@ -988,7 +988,7 @@ namespace OpenBve {
 		
 		// load image
 		private Image LoadImage(string Folder, string Title) {
-			string File = OpenBveApi.Path.CombineFile(Folder, Title);
+			string File = Common.Path.CombineFile(Folder, Title);
 			if (System.IO.File.Exists(File)) {
 				try {
 					return Image.FromFile(File);
@@ -1000,7 +1000,7 @@ namespace OpenBve {
 		// try load image
 		private bool TryLoadImage(PictureBox Box, string Title) {
 			string Folder = Program.FileSystem.GetDataFolder("Menu");
-			string File = OpenBveApi.Path.CombineFile(Folder, Title);
+			string File = Common.Path.CombineFile(Folder, Title);
 			if (System.IO.File.Exists(File)) {
 				try {
 					Box.Image = Image.FromFile(File);

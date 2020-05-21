@@ -18,7 +18,7 @@ namespace OpenBve {
 			foreach (string lookupDirectory in Program.FileSystem.ManagedContentFolders) {
 				string[] packageDirectories = Directory.GetDirectories(lookupDirectory);
 				foreach (string packageDirectory in packageDirectories) {
-					string file = OpenBveApi.Path.CombineFile(packageDirectory, "package.cfg");
+					string file = Common.Path.CombineFile(packageDirectory, "package.cfg");
 					if (File.Exists(file)) {
 						string[] lines = File.ReadAllLines(file, Encoding.UTF8);
 						List<ManagedContent.KeyValuePair> pairsList = new List<ManagedContent.KeyValuePair>();
@@ -40,7 +40,7 @@ namespace OpenBve {
 							string caption = ManagedContent.GetMetadata(pairs, "caption", CurrentLanguageCode, System.IO.Path.GetFileName(packageDirectory));
 							string[] metadata = new string[] { country, city, operatorx, caption };
 							string entry = ManagedContent.GetMetadata(pairs, "entry", null, string.Empty);
-							string path = OpenBveApi.Path.CombineDirectory(packageDirectory, entry);
+							string path = Common.Path.CombineDirectory(packageDirectory, entry);
 							TreeNode node = treeviewRouteAddOns.Nodes.Add(country);
 							node.ImageKey = flag;
 							node.SelectedImageKey = flag;
@@ -139,7 +139,7 @@ namespace OpenBve {
 			foreach (string lookupDirectory in Program.FileSystem.ManagedContentFolders) {
 				string[] packageDirectories = Directory.GetDirectories(lookupDirectory);
 				foreach (string packageDirectory in packageDirectories) {
-					string file = OpenBveApi.Path.CombineFile(packageDirectory, "package.cfg");
+					string file = Common.Path.CombineFile(packageDirectory, "package.cfg");
 					if (File.Exists(file)) {
 						string[] lines = File.ReadAllLines(file, Encoding.UTF8);
 						List<ManagedContent.KeyValuePair> pairsList = new List<ManagedContent.KeyValuePair>();
@@ -174,7 +174,7 @@ namespace OpenBve {
 							node = node.Nodes.Add(caption);
 							node.ImageKey = "folder";
 							node.SelectedImageKey = "folder";
-							string path = OpenBveApi.Path.CombineDirectory(packageDirectory, entry);
+							string path = Common.Path.CombineDirectory(packageDirectory, entry);
 							AddTrains(node.Nodes, path, keywords, metadata);
 						}
 					}
@@ -196,7 +196,7 @@ namespace OpenBve {
 			if (Directory.Exists(path)) {
 				string[] directories = Directory.GetDirectories(path);
 				foreach (string directory in directories) {
-					if (File.Exists(OpenBveApi.Path.CombineFile(directory, "train.dat"))) {
+					if (File.Exists(Common.Path.CombineFile(directory, "train.dat"))) {
 						string title = Path.GetFileName(directory);
 						bool add = true;
 						foreach (string keyword in keywords) {
@@ -507,7 +507,7 @@ namespace OpenBve {
 								if ((info.Attributes & System.IO.FileAttributes.Hidden) == 0) {
 									string Name = System.IO.Path.GetFileName(Folders[i]);
 									if (Name.Length != 0 && Name[0] != '.') {
-										string File = OpenBveApi.Path.CombineFile(Folders[i], "train.dat");
+										string File = Common.Path.CombineFile(Folders[i], "train.dat");
 										ListViewItem Item = listviewTrainFolders.Items.Add(Name);
 										if (System.IO.File.Exists(File)) {
 											Item.ImageKey = "train";
@@ -531,7 +531,7 @@ namespace OpenBve {
 				string t = listviewTrainFolders.SelectedItems[0].Tag as string;
 				if (t != null) {
 					if (System.IO.Directory.Exists(t)) {
-						string File = OpenBveApi.Path.CombineFile(t, "train.dat");
+						string File = Common.Path.CombineFile(t, "train.dat");
 						if (System.IO.File.Exists(File)) {
 							Result.TrainFolder = t;
 							ShowTrain(false);
@@ -572,7 +572,7 @@ namespace OpenBve {
 				string t = listviewTrainRecently.SelectedItems[0].Tag as string;
 				if (t != null) {
 					if (System.IO.Directory.Exists(t)) {
-						string File = OpenBveApi.Path.CombineFile(t, "train.dat");
+						string File = Common.Path.CombineFile(t, "train.dat");
 						if (System.IO.File.Exists(File)) {
 							Result.TrainFolder = t;
 							ShowTrain(false);
@@ -775,7 +775,7 @@ namespace OpenBve {
 						string[] e = new string[] { ".png", ".bmp", ".gif", ".tiff", ".tif", ".jpeg", ".jpg" };
 						int i;
 						for (i = 0; i < e.Length; i++) {
-							string g = OpenBveApi.Path.CombineFile(System.IO.Path.GetDirectoryName(Result.RouteFile), System.IO.Path.GetFileNameWithoutExtension(Result.RouteFile) + e[i]);
+							string g = Common.Path.CombineFile(System.IO.Path.GetDirectoryName(Result.RouteFile), System.IO.Path.GetFileNameWithoutExtension(Result.RouteFile) + e[i]);
 							if (System.IO.File.Exists(g)) {
 								try {
 									pictureboxRouteImage.Image = Image.FromFile(g);
@@ -879,9 +879,9 @@ namespace OpenBve {
 			}
 			{
 				// train image
-				string File = OpenBveApi.Path.CombineFile(Result.TrainFolder, "train.png");
+				string File = Common.Path.CombineFile(Result.TrainFolder, "train.png");
 				if (!System.IO.File.Exists(File)) {
-					File = OpenBveApi.Path.CombineFile(Result.TrainFolder, "train.bmp");
+					File = Common.Path.CombineFile(Result.TrainFolder, "train.bmp");
 				}
 				if (System.IO.File.Exists(File)) {
 					try {
@@ -896,7 +896,7 @@ namespace OpenBve {
 			}
 			{
 				// train description
-				string File = OpenBveApi.Path.CombineFile(Result.TrainFolder, "train.txt");
+				string File = Common.Path.CombineFile(Result.TrainFolder, "train.txt");
 				if (System.IO.File.Exists(File)) {
 					try {
 						string Text = System.IO.File.ReadAllText(File, Result.TrainEncoding);
@@ -931,9 +931,9 @@ namespace OpenBve {
 			try {
 				Folder = System.IO.Path.GetDirectoryName(Result.RouteFile);
 				if (Game.TrainName[0] == '$') {
-					Folder = OpenBveApi.Path.CombineDirectory(Folder, Game.TrainName);
+					Folder = Common.Path.CombineDirectory(Folder, Game.TrainName);
 					if (System.IO.Directory.Exists(Folder)) {
-						string File = OpenBveApi.Path.CombineFile(Folder, "train.dat");
+						string File = Common.Path.CombineFile(Folder, "train.dat");
 						if (System.IO.File.Exists(File)) {
 							Result.TrainFolder = Folder;
 							ShowTrain(false);
@@ -946,15 +946,15 @@ namespace OpenBve {
 			}
 			try {
 				while (true) {
-					string TrainFolder = OpenBveApi.Path.CombineDirectory(Folder, "Train");
+					string TrainFolder = Common.Path.CombineDirectory(Folder, "Train");
 					if (System.IO.Directory.Exists(TrainFolder)) {
 						try {
-							Folder = OpenBveApi.Path.CombineDirectory(TrainFolder, Game.TrainName);
+							Folder = Common.Path.CombineDirectory(TrainFolder, Game.TrainName);
 						} catch {
 							Folder = null;
 						}
 						if (Folder != null && System.IO.Directory.Exists(Folder)) {
-							string File = OpenBveApi.Path.CombineFile(Folder, "train.dat");
+							string File = Common.Path.CombineFile(Folder, "train.dat");
 							if (System.IO.File.Exists(File)) {
 								/// train found
 								Result.TrainFolder = Folder;

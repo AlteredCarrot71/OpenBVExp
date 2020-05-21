@@ -465,7 +465,7 @@ namespace OpenBve {
 
 		// parse panel config
 		internal static void ParsePanelConfig(string TrainPath, System.Text.Encoding Encoding, TrainManager.Train Train) {
-			string File = OpenBveApi.Path.CombineFile(TrainPath, "panel.animated");
+			string File = Common.Path.CombineFile(TrainPath, "panel.animated");
 			if (System.IO.File.Exists(File)) {
 				ObjectManager.AnimatedObjectCollection a = AnimatedObjectParser.ReadObject(File, Encoding, ObjectManager.ObjectLoadMode.DontAllowUnloadOfTextures);
 				for (int i = 0; i < a.Objects.Length; i++) {
@@ -474,12 +474,12 @@ namespace OpenBve {
 				Train.Cars[Train.DriverCar].CarSections[0].Elements = a.Objects;
 				World.CameraRestriction = World.CameraRestrictionMode.NotAvailable;
 			} else {
-				File = OpenBveApi.Path.CombineFile(TrainPath, "panel2.cfg");
+				File = Common.Path.CombineFile(TrainPath, "panel2.cfg");
 				if (System.IO.File.Exists(File)) {
 					Panel2CfgParser.ParsePanel2Config(TrainPath, Encoding, Train);
 					World.CameraRestriction = World.CameraRestrictionMode.On;
 				} else {
-					File = OpenBveApi.Path.CombineFile(TrainPath, "panel.cfg");
+					File = Common.Path.CombineFile(TrainPath, "panel.cfg");
 					if (System.IO.File.Exists(File)) {
 						PanelCfgParser.ParsePanelConfig(TrainPath, Encoding, Train);
 						World.CameraRestriction = World.CameraRestrictionMode.On;

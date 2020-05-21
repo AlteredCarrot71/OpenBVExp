@@ -44,10 +44,10 @@ namespace OpenBve {
 				// --- window caption and icon ---
 				Sdl.SDL_WM_SetCaption(Application.ProductName, null);
 				{
-					string bitmapFile = OpenBveApi.Path.CombineFile(Program.FileSystem.DataFolder, "icon.bmp");
+					string bitmapFile = Common.Path.CombineFile(Program.FileSystem.DataFolder, "icon.bmp");
 					IntPtr bitmap = Sdl.SDL_LoadBMP(bitmapFile);
 					if (bitmap != null) {
-						string maskFile = OpenBveApi.Path.CombineFile(Program.FileSystem.DataFolder, "mask.bin");
+						string maskFile = Common.Path.CombineFile(Program.FileSystem.DataFolder, "mask.bin");
 						byte[] mask = System.IO.File.ReadAllBytes(maskFile);
 						Sdl.SDL_WM_SetIcon(bitmap, mask);
 					}

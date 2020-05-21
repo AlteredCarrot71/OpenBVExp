@@ -46,7 +46,7 @@ namespace OpenBve
 			try {
 				string Folder = System.IO.Path.GetDirectoryName(RouteFile);
 				while (true) {
-					string Subfolder = OpenBveApi.Path.CombineDirectory(Folder, "Railway");
+					string Subfolder = Common.Path.CombineDirectory(Folder, "Railway");
 					if (System.IO.Directory.Exists(Subfolder)) {
 						return Subfolder;
 					}
@@ -86,8 +86,8 @@ namespace OpenBve
 //				Interface.AddMessage(Interface.MessageType.Critical, false, "The Railway folder could not be found. Please check your folder structure.");
 //				return;
 //			}
-			string ObjectFolder = OpenBveApi.Path.CombineDirectory(RailwayFolder, "Object");
-			string SoundFolder = OpenBveApi.Path.CombineDirectory(RailwayFolder, "Sound");
+			string ObjectFolder = Common.Path.CombineDirectory(RailwayFolder, "Object");
+			string SoundFolder = Common.Path.CombineDirectory(RailwayFolder, "Sound");
 			// reset
 			Game.Reset(true);
 			Game.MinimalisticSimulation = true;
@@ -232,7 +232,7 @@ namespace OpenBve
 					for (int i = 0; i < TrainManager.Trains[k].Cars.Length; i++) {
 						if (CarObjects[i] == null) {
 							// load default exterior object
-							string file = OpenBveApi.Path.CombineFile(Program.FileSystem.GetDataFolder("Compatibility"), "exterior.csv");
+							string file = Common.Path.CombineFile(Program.FileSystem.GetDataFolder("Compatibility"), "exterior.csv");
 							ObjectManager.StaticObject so = ObjectManager.LoadStaticObject(file, System.Text.Encoding.UTF8, ObjectManager.ObjectLoadMode.Normal, false, false, false);
 							if (so == null) {
 								CarObjects[i] = null;

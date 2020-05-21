@@ -173,7 +173,7 @@ namespace OpenBve {
 		internal static void LoadOptions() {
 			CurrentOptions = new Options();
 			CultureInfo Culture = CultureInfo.InvariantCulture;
-			string File = OpenBveApi.Path.CombineFile(Program.FileSystem.SettingsFolder, "options.cfg");
+			string File = Common.Path.CombineFile(Program.FileSystem.SettingsFolder, "options.cfg");
 			if (System.IO.File.Exists(File)) {
 				// load options
 				string[] Lines = System.IO.File.ReadAllLines(File, new System.Text.UTF8Encoding());
@@ -488,7 +488,7 @@ namespace OpenBve {
 				// file not found
 				string Code = CultureInfo.CurrentUICulture.Name;
 				if (Code == null || Code.Length == 0) Code = "en-US";
-				File = OpenBveApi.Path.CombineFile(Program.FileSystem.GetDataFolder("Languages"), Code + ".cfg");
+				File = Common.Path.CombineFile(Program.FileSystem.GetDataFolder("Languages"), Code + ".cfg");
 				if (System.IO.File.Exists(File)) {
 					CurrentOptions.LanguageCode = Code;
 				} else {
@@ -496,7 +496,7 @@ namespace OpenBve {
 						int i = Code.IndexOf("-", StringComparison.Ordinal);
 						if (i > 0) {
 							Code = Code.Substring(0, i);
-							File = OpenBveApi.Path.CombineFile(Program.FileSystem.GetDataFolder("Languages"), Code + ".cfg");
+							File = Common.Path.CombineFile(Program.FileSystem.GetDataFolder("Languages"), Code + ".cfg");
 							if (System.IO.File.Exists(File)) {
 								CurrentOptions.LanguageCode = Code;
 							}
@@ -632,7 +632,7 @@ namespace OpenBve {
 			for (int i = 0; i < CurrentOptions.TrainEncodings.Length; i++) {
 				Builder.AppendLine(CurrentOptions.TrainEncodings[i].Codepage.ToString(Culture) + " = " + CurrentOptions.TrainEncodings[i].Value);
 			}
-			string File = OpenBveApi.Path.CombineFile(Program.FileSystem.SettingsFolder, "options.cfg");
+			string File = Common.Path.CombineFile(Program.FileSystem.SettingsFolder, "options.cfg");
 			System.IO.File.WriteAllText(File, Builder.ToString(), new System.Text.UTF8Encoding(true));
 		}
 
@@ -640,7 +640,7 @@ namespace OpenBve {
 
 		// load logs
 		internal static void LoadLogs() {
-			string File = OpenBveApi.Path.CombineFile(Program.FileSystem.SettingsFolder, "logs.bin");
+			string File = Common.Path.CombineFile(Program.FileSystem.SettingsFolder, "logs.bin");
 			try {
 				using (System.IO.FileStream Stream = new System.IO.FileStream(File, System.IO.FileMode.Open, System.IO.FileAccess.Read)) {
 					using (System.IO.BinaryReader Reader = new System.IO.BinaryReader(Stream, System.Text.Encoding.UTF8)) {
@@ -703,7 +703,7 @@ namespace OpenBve {
 
 		// save logs
 		internal static void SaveLogs() {
-			string File = OpenBveApi.Path.CombineFile(Program.FileSystem.SettingsFolder, "logs.bin");
+			string File = Common.Path.CombineFile(Program.FileSystem.SettingsFolder, "logs.bin");
 			using (System.IO.FileStream Stream = new System.IO.FileStream(File, System.IO.FileMode.Create, System.IO.FileAccess.Write)) {
 				using (System.IO.BinaryWriter Writer = new System.IO.BinaryWriter(Stream, System.Text.Encoding.UTF8)) {
 					byte[] Identifier = new byte[] { 111, 112, 101, 110, 66, 86, 69, 95, 76, 79, 71, 83 };
@@ -1601,7 +1601,7 @@ namespace OpenBve {
 			}
 			string File;
 			if (FileOrNull == null) {
-				File = OpenBveApi.Path.CombineFile(Program.FileSystem.SettingsFolder, "controls.cfg");
+				File = Common.Path.CombineFile(Program.FileSystem.SettingsFolder, "controls.cfg");
 			} else {
 				File = FileOrNull;
 			}
@@ -1612,9 +1612,9 @@ namespace OpenBve {
 		internal static void LoadControls(string FileOrNull, out Control[] Controls) {
 			string File;
 			if (FileOrNull == null) {
-				File = OpenBveApi.Path.CombineFile(Program.FileSystem.SettingsFolder, "controls.cfg");
+				File = Common.Path.CombineFile(Program.FileSystem.SettingsFolder, "controls.cfg");
 				if (!System.IO.File.Exists(File)) {
-					File = OpenBveApi.Path.CombineFile(Program.FileSystem.GetDataFolder("Controls"), "Default keyboard assignment.controls");
+					File = Common.Path.CombineFile(Program.FileSystem.GetDataFolder("Controls"), "Default keyboard assignment.controls");
 				}
 			} else {
 				File = FileOrNull;
@@ -1830,7 +1830,7 @@ namespace OpenBve {
 		internal static void LoadHUD() {
 			CultureInfo Culture = CultureInfo.InvariantCulture;
 			string Folder = Program.FileSystem.GetDataFolder("In-game", CurrentOptions.UserInterfaceFolder);
-			string File = OpenBveApi.Path.CombineFile(Folder, "interface.cfg");
+			string File = Common.Path.CombineFile(Folder, "interface.cfg");
 			CurrentHudElements = new HudElement[16];
 			int Length = 0;
 			if (System.IO.File.Exists(File)) {
@@ -1898,10 +1898,10 @@ namespace OpenBve {
 										case "topleft":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].TopLeft.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].TopLeft.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].TopLeft.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].TopLeft.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1909,10 +1909,10 @@ namespace OpenBve {
 										case "topmiddle":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].TopMiddle.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].TopMiddle.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].TopMiddle.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].TopMiddle.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1920,10 +1920,10 @@ namespace OpenBve {
 										case "topright":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].TopRight.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].TopRight.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].TopRight.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].TopRight.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1931,10 +1931,10 @@ namespace OpenBve {
 										case "centerleft":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].CenterLeft.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].CenterLeft.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].CenterLeft.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].CenterLeft.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1942,10 +1942,10 @@ namespace OpenBve {
 										case "centermiddle":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].CenterMiddle.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].CenterMiddle.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].CenterMiddle.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].CenterMiddle.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1953,10 +1953,10 @@ namespace OpenBve {
 										case "centerright":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].CenterRight.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].CenterRight.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].CenterRight.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].CenterRight.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1964,10 +1964,10 @@ namespace OpenBve {
 										case "bottomleft":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].BottomLeft.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].BottomLeft.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].BottomLeft.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].BottomLeft.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1975,10 +1975,10 @@ namespace OpenBve {
 										case "bottommiddle":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].BottomMiddle.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].BottomMiddle.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].BottomMiddle.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].BottomMiddle.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -1986,10 +1986,10 @@ namespace OpenBve {
 										case "bottomright":
 											if (Arguments.Length == 2) {
 												if (Arguments[0].Length != 0 & !Arguments[0].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].BottomRight.BackgroundTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[0]), out CurrentHudElements[Length - 1].BottomRight.BackgroundTexture);
 												}
 												if (Arguments[1].Length != 0 & !Arguments[1].Equals("null", StringComparison.OrdinalIgnoreCase)) {
-													Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].BottomRight.OverlayTexture);
+													Textures.RegisterTexture(Common.Path.CombineFile(Folder, Arguments[1]), out CurrentHudElements[Length - 1].BottomRight.OverlayTexture);
 												}
 											} else {
 												System.Windows.Forms.MessageBox.Show("Incorrect number of arguments supplied in " + Command + " at line " + (i + 1).ToString(Culture) + " in " + File);
@@ -2212,7 +2212,7 @@ namespace OpenBve {
 			}
 		}
 		internal static Encoding GetEncodingFromFile(string Folder, string File) {
-			return GetEncodingFromFile(OpenBveApi.Path.CombineFile(Folder, File));
+			return GetEncodingFromFile(Common.Path.CombineFile(Folder, File));
 		}
 
 		// ================================
@@ -2600,12 +2600,12 @@ namespace OpenBve {
 //		}
 
 //		// get combined file name
-//		internal static string OpenBveApi.Path.CombineFile(string SafeFolderPart, string UnsafeFilePart) {
+//		internal static string Common.Path.CombineFile(string SafeFolderPart, string UnsafeFilePart) {
 //			return GetCorrectedFileName(System.IO.Path.Combine(SafeFolderPart, GetCorrectedPathSeparation(UnsafeFilePart)));
 //		}
 		
 //		// get combined folder name
-//		internal static string OpenBveApi.Path.CombineDirectory(string SafeFolderPart, string UnsafeFolderPart) {
+//		internal static string Common.Path.CombineDirectory(string SafeFolderPart, string UnsafeFolderPart) {
 //			return GetCorrectedFolderName(System.IO.Path.Combine(SafeFolderPart, GetCorrectedPathSeparation(UnsafeFolderPart)));
 //		}
 		

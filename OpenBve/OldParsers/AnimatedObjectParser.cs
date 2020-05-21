@@ -76,7 +76,7 @@ namespace OpenBve {
 											if (Interface.ContainsInvalidPathChars(Lines[i])) {
 												Interface.AddMessage(Interface.MessageType.Error, false, Lines[i] + " contains illegal characters at line " + (i + 1).ToString(Culture) + " in file " + FileName);
 											} else {
-												string file = OpenBveApi.Path.CombineFile(Folder, Lines[i]);
+												string file = Common.Path.CombineFile(Folder, Lines[i]);
 												if (System.IO.File.Exists(file)) {
 													if (obj.Length == objCount) {
 														Array.Resize<ObjectManager.UnifiedObject>(ref obj, obj.Length << 1);
@@ -190,7 +190,7 @@ namespace OpenBve {
 																	Interface.AddMessage(Interface.MessageType.Error, false, "File" + k.ToString(Culture) + " contains illegal characters in " + a + " at line " + (i + 1).ToString(Culture) + " in file " + FileName);
 																	StateFiles[k] = null;
 																} else {
-																	StateFiles[k] = OpenBveApi.Path.CombineFile(Folder, s[k]);
+																	StateFiles[k] = Common.Path.CombineFile(Folder, s[k]);
 																	if (!System.IO.File.Exists(StateFiles[k])) {
 																		Interface.AddMessage(Interface.MessageType.Error, true, "File " + StateFiles[k] + " not found in " + a + " at line " + (i + 1).ToString(Culture) + " in file " + FileName);
 																		StateFiles[k] = null;

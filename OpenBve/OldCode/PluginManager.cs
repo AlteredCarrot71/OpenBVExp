@@ -432,7 +432,7 @@ namespace OpenBve {
 		/// <param name="encoding">The encoding to be used.</param>
 		/// <returns>Whether the plugin was loaded successfully.</returns>
 		internal static bool LoadCustomPlugin(TrainManager.Train train, string trainFolder, System.Text.Encoding encoding) {
-			string config = OpenBveApi.Path.CombineFile(trainFolder, "ats.cfg");
+			string config = Common.Path.CombineFile(trainFolder, "ats.cfg");
 			if (!System.IO.File.Exists(config)) {
 				return false;
 			}
@@ -440,7 +440,7 @@ namespace OpenBve {
 			if (lines.Length == 0) {
 				return false;
 			}
-			string file = OpenBveApi.Path.CombineFile(trainFolder, lines[0]);
+			string file = Common.Path.CombineFile(trainFolder, lines[0]);
 			string title = System.IO.Path.GetFileName(file);
 			if (!System.IO.File.Exists(file)) {
 				Interface.AddMessage(Interface.MessageType.Error, true, "The train plugin " + title + " could not be found in " + config);
@@ -454,7 +454,7 @@ namespace OpenBve {
 		/// <param name="trainFolder">The train folder.</param>
 		/// <returns>Whether the plugin was loaded successfully.</returns>
 		internal static bool LoadDefaultPlugin(TrainManager.Train train, string trainFolder) {
-			string file = OpenBveApi.Path.CombineFile(Program.FileSystem.GetDataFolder("Plugins"), "OpenBveAts.dll");
+			string file = Common.Path.CombineFile(Program.FileSystem.GetDataFolder("Plugins"), "OpenBveAts.dll");
 			bool success = LoadPlugin(train, file, trainFolder);
 			if (success) {
 				train.Plugin.IsDefault = true;

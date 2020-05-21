@@ -15,7 +15,7 @@ namespace OpenBve
 		internal static void ParsePanelConfig(string TrainPath, System.Text.Encoding Encoding, TrainManager.Train Train) {
 			// read lines
 			System.Globalization.CultureInfo Culture = System.Globalization.CultureInfo.InvariantCulture;
-			string FileName = OpenBveApi.Path.CombineFile(TrainPath, "panel.cfg");
+			string FileName = Common.Path.CombineFile(TrainPath, "panel.cfg");
 			string[] Lines = System.IO.File.ReadAllLines(FileName, Encoding);
 			for (int i = 0; i < Lines.Length; i++) {
 				Lines[i] = Lines[i].Trim();
@@ -43,7 +43,7 @@ namespace OpenBve
 			const double UpDownAngleConstant = -0.191986217719376;
 			double PanelYaw = 0.0;
 			double PanelPitch = UpDownAngleConstant;
-			string PanelBackground = OpenBveApi.Path.CombineFile(TrainPath, "panel.bmp");
+			string PanelBackground = Common.Path.CombineFile(TrainPath, "panel.bmp");
 			// parse lines for panel and view
 			for (int i = 0; i < Lines.Length; i++) {
 				if (Lines[i].Length > 0) {
@@ -63,7 +63,7 @@ namespace OpenBve
 													Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 												} else {
 													if (!System.IO.Path.HasExtension(Value)) Value += ".bmp";
-													PanelBackground = OpenBveApi.Path.CombineFile(TrainPath, Value);
+													PanelBackground = Common.Path.CombineFile(TrainPath, Value);
 													if (!System.IO.File.Exists(PanelBackground)) {
 														Interface.AddMessage(Interface.MessageType.Error, true, "FileName " + PanelBackground + "could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													}
@@ -245,7 +245,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														Background = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														Background = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(Background)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName " + Background + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															Background = null;
@@ -258,7 +258,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														Cover = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														Cover = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(Cover)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName " + Cover + "could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															Cover = null;
@@ -336,7 +336,7 @@ namespace OpenBve
 										for (int k = 0; k < 2; k++) {
 											if (NeedleType[k] != 0) {
 												string Folder = Program.FileSystem.GetDataFolder("Compatibility");
-												string File = OpenBveApi.Path.CombineFile(Folder, k == 0 ? "needle_pressuregauge_lower.png" : "needle_pressuregauge_upper.png");
+												string File = Common.Path.CombineFile(Folder, k == 0 ? "needle_pressuregauge_lower.png" : "needle_pressuregauge_upper.png");
 												Textures.Texture t;
 												Textures.RegisterTexture(File, out t);
 												Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
@@ -444,7 +444,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														Background = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														Background = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(Background)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName " + Background + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															Background = null;
@@ -483,14 +483,14 @@ namespace OpenBve
 												case "cover":
 												case "ふた":
 													if (!System.IO.Path.HasExtension(Value)) Value += ".bmp";
-													Cover = OpenBveApi.Path.CombineFile(TrainPath, Value);
+													Cover = Common.Path.CombineFile(TrainPath, Value);
 													if (!System.IO.File.Exists(Cover)) {
 														Interface.AddMessage(Interface.MessageType.Error, true, "FileName" + Cover + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 														Cover = null;
 													} break;
 												case "atc":
 													if (!System.IO.Path.HasExtension(Value)) Value += ".bmp";
-													Atc = OpenBveApi.Path.CombineFile(TrainPath, Value);
+													Atc = Common.Path.CombineFile(TrainPath, Value);
 													if (!System.IO.File.Exists(Atc)) {
 														Interface.AddMessage(Interface.MessageType.Error, true, "FileName" + Atc + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 														Atc = null;
@@ -597,7 +597,7 @@ namespace OpenBve
 									if (Type == 0) {
 										// needle
 										string Folder = Program.FileSystem.GetDataFolder("Compatibility");
-										string File = OpenBveApi.Path.CombineFile(Folder, "needle_speedometer.png");
+										string File = Common.Path.CombineFile(Folder, "needle_speedometer.png");
 										Textures.Texture t;
 										Textures.RegisterTexture(File, out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
@@ -671,7 +671,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														Number = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														Number = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(Number)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName " + Number + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															Number = null;
@@ -795,7 +795,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														TurnOn = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														TurnOn = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(TurnOn)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName" + TurnOn + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															TurnOn = null;
@@ -808,7 +808,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														TurnOff = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														TurnOff = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(TurnOff)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName" + TurnOff + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															TurnOff = null;
@@ -861,7 +861,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														Background = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														Background = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(Background)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName" + Background + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															Background = null;
@@ -924,7 +924,7 @@ namespace OpenBve
 									}
 									string Folder = Program.FileSystem.GetDataFolder("Compatibility");
 									{ // hour
-										string File = OpenBveApi.Path.CombineFile(Folder, "needle_hour.png");
+										string File = Common.Path.CombineFile(Folder, "needle_hour.png");
 										Textures.Texture t;
 										Textures.RegisterTexture(File, out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
@@ -938,7 +938,7 @@ namespace OpenBve
 										Train.Cars[Train.DriverCar].CarSections[0].Elements[j].RotateZDamping = new ObjectManager.Damping(20.0, 0.4);
 									}
 									{ // minute
-										string File = OpenBveApi.Path.CombineFile(Folder, "needle_minute.png");
+										string File = Common.Path.CombineFile(Folder, "needle_minute.png");
 										Textures.Texture t;
 										Textures.RegisterTexture(File, out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
@@ -952,7 +952,7 @@ namespace OpenBve
 										Train.Cars[Train.DriverCar].CarSections[0].Elements[j].RotateZDamping = new ObjectManager.Damping(20.0, 0.4);
 									}
 									{ // second
-										string File = OpenBveApi.Path.CombineFile(Folder, "needle_second.png");
+										string File = Common.Path.CombineFile(Folder, "needle_second.png");
 										Textures.Texture t;
 										Textures.RegisterTexture(File, out t);
 										Textures.LoadTexture(t, Textures.OpenGlTextureWrapMode.ClampClamp);
@@ -983,7 +983,7 @@ namespace OpenBve
 													if (Interface.ContainsInvalidPathChars(Value)) {
 														Interface.AddMessage(Interface.MessageType.Error, false, "FileName contains illegal characters in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 													} else {
-														Image = OpenBveApi.Path.CombineFile(TrainPath, Value);
+														Image = Common.Path.CombineFile(TrainPath, Value);
 														if (!System.IO.File.Exists(Image)) {
 															Interface.AddMessage(Interface.MessageType.Error, true, "FileName " + Image + " could not be found in " + Key + " in " + Section + " at line " + (i + 1).ToString(Culture) + " in " + FileName);
 															Image = null;

@@ -42,7 +42,7 @@ namespace OpenBve {
 			try {
 				string Folder = System.IO.Path.GetDirectoryName(RouteFile);
 				while (true) {
-					string Subfolder = OpenBveApi.Path.CombineDirectory(Folder, "Railway");
+					string Subfolder = Common.Path.CombineDirectory(Folder, "Railway");
 					if (System.IO.Directory.Exists(Subfolder)) {
 						return Subfolder;
 					}
@@ -69,9 +69,9 @@ namespace OpenBve {
 		}
 		private static void LoadEverythingThreaded() {
 			string RailwayFolder = GetRailwayFolder(CurrentRouteFile);
-			string ObjectFolder = OpenBveApi.Path.CombineDirectory(RailwayFolder, "Object");
-			string SoundFolder = OpenBveApi.Path.CombineDirectory(RailwayFolder, "Sound");
-			string CompatibilityFolder = OpenBveApi.Path.CombineDirectory(Application.StartupPath, "Compatibility");
+			string ObjectFolder = Common.Path.CombineDirectory(RailwayFolder, "Object");
+			string SoundFolder = Common.Path.CombineDirectory(RailwayFolder, "Sound");
+			string CompatibilityFolder = Common.Path.CombineDirectory(Application.StartupPath, "Compatibility");
 			// reset
 			Game.Reset();
 			Game.MinimalisticSimulation = true;

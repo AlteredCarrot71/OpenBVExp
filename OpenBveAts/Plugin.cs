@@ -22,7 +22,7 @@ namespace Plugin {
 			properties.AISupport = AISupport.Basic;
 			this.Train = new Train(properties.Panel, properties.PlaySound);
 			try {
-				string file = OpenBveApi.Path.CombineFile(properties.TrainFolder, "train.dat");
+				string file = Common.Path.CombineFile(properties.TrainFolder, "train.dat");
 				if (!this.Train.LoadTrainDatFile(file)) {
 					this.Train.AtsSx = new AtsSx(this.Train);
 					this.Train.Devices = new Device[] { this.Train.AtsSx };

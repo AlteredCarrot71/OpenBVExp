@@ -202,7 +202,7 @@ namespace OpenBve
 			// hud
 			Interface.LoadHUD();
 			string Path = Program.FileSystem.GetDataFolder("In-game");
-			Textures.RegisterTexture(OpenBveApi.Path.CombineFile(Path, "logo.png"), out TextureLogo);
+			Textures.RegisterTexture(Common.Path.CombineFile(Path, "logo.png"), out TextureLogo);
 			// opengl
 			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT | Gl.GL_DEPTH_BUFFER_BIT);
 			Gl.glPushMatrix();

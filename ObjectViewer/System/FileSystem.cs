@@ -38,12 +38,12 @@ namespace OpenBve {
 		internal FileSystem() {
 			string assemblyFile = Assembly.GetExecutingAssembly().Location;
 			string assemblyFolder = Path.GetDirectoryName(assemblyFile);
-			string userDataFolder = OpenBveApi.Path.CombineDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "openBVE");
-			this.DataFolder = OpenBveApi.Path.CombineDirectory(assemblyFolder, "Data");
-			this.ManagedContentFolders = new string[] { OpenBveApi.Path.CombineDirectory(userDataFolder, "ManagedContent") };
-			this.SettingsFolder = OpenBveApi.Path.CombineDirectory(userDataFolder, "Settings");
-			this.InitialRouteFolder = OpenBveApi.Path.CombineDirectory(OpenBveApi.Path.CombineDirectory(OpenBveApi.Path.CombineDirectory(userDataFolder, "LegacyContent"), "Railway"), "Route");
-			this.InitialTrainFolder = OpenBveApi.Path.CombineDirectory(OpenBveApi.Path.CombineDirectory(userDataFolder, "LegacyContent"), "Train");
+			string userDataFolder = Common.Path.CombineDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "openBVE");
+			this.DataFolder = Common.Path.CombineDirectory(assemblyFolder, "Data");
+			this.ManagedContentFolders = new string[] { Common.Path.CombineDirectory(userDataFolder, "ManagedContent") };
+			this.SettingsFolder = Common.Path.CombineDirectory(userDataFolder, "Settings");
+			this.InitialRouteFolder = Common.Path.CombineDirectory(Common.Path.CombineDirectory(Common.Path.CombineDirectory(userDataFolder, "LegacyContent"), "Railway"), "Route");
+			this.InitialTrainFolder = Common.Path.CombineDirectory(Common.Path.CombineDirectory(userDataFolder, "LegacyContent"), "Train");
 			this.RestartProcess = assemblyFile;
 			this.RestartArguments = string.Empty;
 		}
@@ -61,7 +61,7 @@ namespace OpenBve {
 				}
 			}
 			string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-			string configFile = OpenBveApi.Path.CombineFile(OpenBveApi.Path.CombineDirectory(OpenBveApi.Path.CombineDirectory(assemblyFolder, "UserData"), "Settings"), "filesystem.cfg");
+			string configFile = Common.Path.CombineFile(Common.Path.CombineDirectory(Common.Path.CombineDirectory(assemblyFolder, "UserData"), "Settings"), "filesystem.cfg");
 			if (File.Exists(configFile)) {
 				return FromConfigurationFile(configFile);
 			} else {
@@ -93,7 +93,7 @@ namespace OpenBve {
 		internal string GetDataFolder(params string[] subfolders) {
 			string folder = this.DataFolder;
 			foreach (string subfolder in subfolders) {
-				folder = OpenBveApi.Path.CombineDirectory(folder, subfolder);
+				folder = Common.Path.CombineDirectory(folder, subfolder);
 			}
 			return folder;
 		}

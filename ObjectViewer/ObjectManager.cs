@@ -810,17 +810,17 @@ namespace OpenBve {
 				if (!System.IO.Path.HasExtension(FileName)) {
 					while (true) {
 						string f;
-						f = OpenBveApi.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".x");
+						f = Common.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".x");
 						if (System.IO.File.Exists(f)) {
 							FileName = f;
 							break;
 						}
-						f = OpenBveApi.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".csv");
+						f = Common.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".csv");
 						if (System.IO.File.Exists(f)) {
 							FileName = f;
 							break;
 						}
-						f = OpenBveApi.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".b3d");
+						f = Common.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".b3d");
 						if (System.IO.File.Exists(f)) {
 							FileName = f;
 							break;
@@ -860,17 +860,17 @@ namespace OpenBve {
 			if (!System.IO.Path.HasExtension(FileName)) {
 					while (true) {
 						string f;
-						f = OpenBveApi.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".x");
+						f = Common.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".x");
 						if (System.IO.File.Exists(f)) {
 							FileName = f;
 							break;
 						}
-						f = OpenBveApi.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".csv");
+						f = Common.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".csv");
 						if (System.IO.File.Exists(f)) {
 							FileName = f;
 							break;
 						}
-						f = OpenBveApi.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".b3d");
+						f = Common.Path.CombineFile(System.IO.Path.GetDirectoryName(FileName), System.IO.Path.GetFileName(FileName) + ".b3d");
 						if (System.IO.File.Exists(f)) {
 							FileName = f;
 							break;

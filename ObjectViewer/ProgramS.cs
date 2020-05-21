@@ -112,7 +112,7 @@ namespace OpenBve {
 			Sdl.SDL_ShowCursor(Sdl.SDL_ENABLE);
 			// icon
 			{
-				string File = OpenBveApi.Path.CombineFile(Program.FileSystem.GetDataFolder(), "icon.bmp");
+				string File = Common.Path.CombineFile(Program.FileSystem.GetDataFolder(), "icon.bmp");
 				if (System.IO.File.Exists(File)) {
 					IntPtr Bitmap = Sdl.SDL_LoadBMP(File);
 					if (Bitmap != null) {
@@ -723,7 +723,7 @@ namespace OpenBve {
 			}
 			Array.Resize<string>(ref names, count);
 			Array.Resize<string>(ref directories, count);
-			SetPackageLookupDirectoriesAuthentication = OpenBveApi.Path.SetPackageLookupDirectories(names, directories, SetPackageLookupDirectoriesAuthentication);
+			SetPackageLookupDirectoriesAuthentication = Common.Path.SetPackageLookupDirectories(names, directories, SetPackageLookupDirectoriesAuthentication);
 		}
 
 	}
