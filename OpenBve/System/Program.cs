@@ -21,7 +21,7 @@ namespace OpenBve {
 		internal static Host CurrentHost = null;
 
 		/// <summary>Information about the file system organization.</summary>
-		internal static FileSystem FileSystem = null;
+		internal static Common.FileSystem FileSystem = null;
 		
 		/// <summary>The object that serves as an authentication for the SetPackageLookupDirectories call.</summary>
 		private static object SetPackageLookupDirectoriesAuthentication = null;
@@ -46,7 +46,7 @@ namespace OpenBve {
 			CurrentlyRunningOnWindows = Environment.OSVersion.Platform == PlatformID.Win32S | Environment.OSVersion.Platform == PlatformID.Win32Windows | Environment.OSVersion.Platform == PlatformID.Win32NT;
 			CurrentHost = new Host();
 			try {
-				FileSystem = FileSystem.FromCommandLineArgs(args);
+				FileSystem = Common.FileSystem.FromCommandLineArgs(args);
 				FileSystem.CreateFileSystem();
 			} catch (Exception ex) {
 				MessageBox.Show("The file system configuration could not be accessed or is invalid due to the following reason:\n\n" + ex.Message, "openBVE", MessageBoxButtons.OK, MessageBoxIcon.Hand);

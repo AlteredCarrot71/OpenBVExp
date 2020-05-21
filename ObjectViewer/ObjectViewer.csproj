@@ -121,7 +121,6 @@
     <Compile Include="ProgramS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RendererS.cs" />
-    <Compile Include="System\FileSystem.cs" />
     <Compile Include="TextureManager.cs" />
     <Compile Include="TrainManagerS.cs" />
     <Compile Include="WorldS.cs" />

@@ -463,7 +463,6 @@
     <Compile Include="OldParsers\WaveParser.cs" />
     <Compile Include="OldParsers\XObjectParser.cs" />
     <Compile Include="OldParsers\PanelCfgParser.cs" />
-    <Compile Include="System\FileSystem.cs" />
     <Compile Include="System\ManagedContent.cs" />
     <Compile Include="System\Host.cs" />
     <Compile Include="System\Joysticks.cs" />

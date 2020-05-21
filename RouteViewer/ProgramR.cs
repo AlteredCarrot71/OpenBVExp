@@ -13,7 +13,7 @@ namespace OpenBve
 		internal enum Platform { Windows, Linux, Mac }
 		internal static Platform CurrentPlatform = Platform.Windows;
 		internal static bool CurrentlyRunOnMono = false;
-		internal static FileSystem FileSystem = null;
+		internal static Common.FileSystem FileSystem = null;
 		internal enum ProgramType { OpenBve, ObjectViewer, RouteViewer, Other }
 		internal const ProgramType CurrentProgramType = ProgramType.RouteViewer;
 
@@ -54,7 +54,7 @@ namespace OpenBve
 			}
 			CurrentlyRunOnMono = Type.GetType("Mono.Runtime") != null;
 			// file system
-			FileSystem = FileSystem.FromCommandLineArgs(args);
+			FileSystem = Common.FileSystem.FromCommandLineArgs(args);
 			FileSystem.CreateFileSystem();
 			SetPackageLookupDirectories();
 			// command line arguments

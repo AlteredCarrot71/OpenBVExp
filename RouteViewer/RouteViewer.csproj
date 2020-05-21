@@ -144,7 +144,6 @@
     <Compile Include="Parsers\XObjectParser.cs" />
     <Compile Include="RendererR.cs" />
     <Compile Include="SoundManager.cs" />
-    <Compile Include="System\FileSystem.cs" />
     <Compile Include="TextureManager.cs" />
     <Compile Include="ProgramR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
